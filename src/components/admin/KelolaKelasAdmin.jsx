@@ -88,7 +88,9 @@ function KelolaKelasAdmin({ Toggle }) {
       </div>
     <div className='container mt-3'>
       <h2>Kelola Kelas</h2>
-      <button navigate to={<CreateCourse/>} variant="success" className="mb-3" >Tambah Course</button>
+      <button variant="success" className="mb-3" >
+        <a href='/admin/add-course'>Tambah Course</a>
+        </button>
       </div>
       <table className="table">
         <thead>

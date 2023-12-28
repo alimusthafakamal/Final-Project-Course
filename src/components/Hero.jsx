@@ -13,13 +13,13 @@ const Hero = () => {
         </div>
         <div className="col-md d-flex align-items-center justify-content-md-start fw-bold">
           <div className="">
-            <span className="text-white " style={{ fontSize: "24px" }}>
+            <span className="text-black " style={{ fontSize: "24px" }}>
               Belajar
               <br /> dari Praktisi Terbaik!
             </span>
             <div className="">
               <button
-                className="btn bg-white btn-sm fw-bold text-center dark-blue100 my-3 rounded-pill "
+                className="btn bg-black btn-sm fw-bold text-center text-white my-3 rounded-pill "
                 style={{ fontSize: "16px", width: "240px", radius: "10px" }}
                 onClick={() => navigate("/kelas-saya")}
               >
