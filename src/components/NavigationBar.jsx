@@ -83,6 +83,7 @@ const NavigationBar = () => {
         boxShadow: "0px 0px 10px 0px #00000026",
         height: "100px",
         alignContent: "center",
+      
       }}
     >
       <Container className="d-flex">
@@ -98,7 +99,7 @@ const NavigationBar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           {/* <div className=" ">
@@ -139,7 +140,7 @@ const NavigationBar = () => {
             id="navbarTogglerDemo02"
           >
             <li className="nav-item d-flex align-items-center gap-4">
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
@@ -160,10 +161,10 @@ const NavigationBar = () => {
                   />
                   Kelas
                 </button>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
+                <ul className="dropdown-menu dropdown-menu-lg-end">
                   <li style={{ cursor: "pointer" }} className="">
                     <a
-                      class="dropdown-item fw-bold "
+                      className="dropdown-item fw-bold "
                       aria-current="true"
                       style={{ color: "#6148ff" }}
                       onClick={() => navigate("/kelas-saya")}
@@ -172,7 +173,7 @@ const NavigationBar = () => {
                     </a>
 
                     <a
-                      class="dropdown-item fw-bold"
+                      className="dropdown-item fw-bold"
                       style={{ color: "#6148ff" }}
                       onClick={() => navigate("/topik-kelas")}
                     >
