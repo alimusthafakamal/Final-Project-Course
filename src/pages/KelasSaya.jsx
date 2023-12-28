@@ -48,7 +48,48 @@ const KelasSaya = () => {
           style={{ width: "1000px", padding: "5px 0px 5px 0px" }}
         >
           <div className="filter">
-            <Filter />
+            <FilterFunction
+              // variabel dikiri namanya bebas,
+              // variabel dikanan harus sesuai dengan nama useStatenya
+              filterData={filter}
+              setFilterData={setFilter}
+              kategoriData={kategori}
+              setKategoriData={(e) => {
+                setKategori(e);
+                if (e.length === 0 && level.length === 0) {
+                  fetchData();
+                } else {
+                  // e = KATEGORI
+                  // FILTER COURSE (KATEGORI, LEVEL) <==== V
+                  FilterCourse(e, level);
+                  // FILTER COURSE (LEVEL, KATEGORI) <==== X
+                }
+              }}
+              levelData={level}
+              setLevelData={(e) => {
+                // LEVEL = [""]
+                // e = ["UIX"]
+                // e = LEVEL
+                setLevel(e); // ASYNC
+                // LEVEL = [""] FAKTA
+                // LEVEL = ["UIX"] HARAPAN
+                if (e.length === 0 && kategori.length === 0) {
+                  fetchData();
+                } else {
+                  FilterCourse(kategori, e); // ["UIX"]
+                }
+              }}
+              // namaFunctionYangDiPassing={()=>{
+              // LOGIC HAPUS SEMUA FILTER
+              // LOGIC FETCH SEMUA DATA
+              // }}
+              buttonHapusFilter={() => {
+                console.log("RUN THIS");
+                setKategori([]);
+                setLevel([]);
+                fetchData();
+              }}
+            />
           </div>
           <div className="">
             <div className=" row kategori-header d-flex gap-5 fw-bold">

@@ -49,9 +49,7 @@ const PilihGratis = () => {
           className="container d-flex mt-4 gap-5"
           style={{ width: "1000px", padding: "5px 0px 5px 0px" }}
         >
-          <div className="filter">
-            <Filter />
-          </div>
+          <div className="filter">{/* <Filter /> */}</div>
           <div className="">
             <div className=" row kategori-header d-flex gap-4">
               <button className="btn-kategori-header-1 col btn btn-light rounded-4 text-secondary">
