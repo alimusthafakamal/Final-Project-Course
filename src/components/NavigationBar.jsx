@@ -14,7 +14,7 @@ const NavigationBar = () => {
         backgroundColor: "#6148ff",
         boxShadow: "0px 0px 10px 0px #00000026",
         height: "100px",
-        alignContent:"center"
+        alignContent: "center",
       }}
     >
       <Container className="d-flex">
@@ -30,13 +30,17 @@ const NavigationBar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon" ></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <div className=" ">
             <div
               className="input-group border border-0 "
-              style={{ width: "526px", height: "70px", padding: "12px 24px 12px 24px" }}
+              style={{
+                width: "526px",
+                height: "70px",
+                padding: "12px 24px 12px 24px",
+              }}
               id="navbarTogglerDemo02"
             >
               <input
@@ -65,7 +69,7 @@ const NavigationBar = () => {
             id="navbarTogglerDemo02"
           >
             <li className="nav-item d-flex align-items-center gap-4">
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
@@ -86,10 +90,10 @@ const NavigationBar = () => {
                   />
                   Kelas
                 </button>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
+                <ul className="dropdown-menu dropdown-menu-lg-end">
                   <li style={{ cursor: "pointer" }} className="">
                     <a
-                      class="dropdown-item fw-bold "
+                      className="dropdown-item fw-bold "
                       aria-current="true"
                       style={{ color: "#6148ff" }}
                       onClick={() => navigate("/kelas-saya")}
@@ -98,7 +102,7 @@ const NavigationBar = () => {
                     </a>
 
                     <a
-                      class="dropdown-item fw-bold"
+                      className="dropdown-item fw-bold"
                       style={{ color: "#6148ff" }}
                       onClick={() => navigate("/pilih-premium")}
                     >
@@ -129,33 +133,31 @@ const NavigationBar = () => {
                   />
                   Notifikasi
                 </button>
-
               </div>
               <div className="dropdown">
-              <a className="nav-link" href="/akunprofil">
-        <button 
-                
-                  className="btn fw-bold text-white align-items-center "
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{
-                    background: "#489CFF",
-                    borderRadius: "10px",
-                    padding: "5px 25px 5px 25px",
-                    fontSize: "16px",
-                  }}
-                >
-                  <Icon
-                    icon="ep:user"
-                    width="24"
-                    height="24"
-                    color="white"
-                    className="me-2"
-                  />
-                  Akun
-                </button>
-                 </a>
+                <a className="nav-link" href="/akunprofil">
+                  <button
+                    className="btn fw-bold text-white align-items-center "
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{
+                      background: "#489CFF",
+                      borderRadius: "10px",
+                      padding: "5px 25px 5px 25px",
+                      fontSize: "16px",
+                    }}
+                  >
+                    <Icon
+                      icon="ep:user"
+                      width="24"
+                      height="24"
+                      color="white"
+                      className="me-2"
+                    />
+                    Akun
+                  </button>
+                </a>
               </div>
             </li>
 

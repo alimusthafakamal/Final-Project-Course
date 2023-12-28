@@ -36,7 +36,10 @@ const DetailKelas = () => {
             <div className="col-6">
               <div className="d-grid">
                 <Card className="border border-0 bg-transparent">
-                  <Card.Body className="row d-flex" onClick={() => setModalShow(true)}>
+                  <Card.Body
+                    className="row d-flex"
+                    onClick={() => setModalShow(true)}
+                  >
                     <div className="col-md-6 d-flex align-items-center justify-content-between">
                       <div
                         className="dark-blue100 fw-bold"
@@ -243,14 +246,14 @@ const DetailKelas = () => {
                   <div className="jenis-materi">
                     <div className="chapter">
                       <div>
-                        <ul class="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
+                        <ul className="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
                           <div className="header-chapter d-flex justify-content-between">
                             <div className="intro-chapter">
                               Chapter 1 - Pendahuluan
                             </div>
                             <div className="durasi-chapter">60 menit</div>
                           </div>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               tujuan mengikuti kelas design system
                             </span>
@@ -262,7 +265,7 @@ const DetailKelas = () => {
                               style={{ color: "#73CA5C" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               pengenalan Design System
                             </span>
@@ -274,7 +277,7 @@ const DetailKelas = () => {
                               style={{ color: "#73CA5C" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               Contoh dalam membangun design system
                             </span>
@@ -292,7 +295,7 @@ const DetailKelas = () => {
                             </div>
                             <div className="durasi-chapter">120 menit</div>
                           </div>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">color pallete</span>
                             <Icon
                               icon="bxs:lock"
@@ -302,7 +305,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               Typography, layout, dan grid
                             </span>
@@ -314,7 +317,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -324,7 +327,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -334,7 +337,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -344,7 +347,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -354,7 +357,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -364,7 +367,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi underline">
+                          <li className="list-group-item row d-flex align-items-center list-materi underline">
                             <span className="col-10">membuat assets </span>
                             <Icon
                               icon="bxs:lock"
