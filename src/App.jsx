@@ -22,6 +22,7 @@ import KelolaKelas from "./pages/admin/KelolaKelas";
 import ForgetPassword from "./pages/ForgetPassword";
 import RegisterAdmin from "./pages/admin/RegisterAdmin";
 import ResetPassword from "./pages/ResetPassword";
+import CreateCourse from "./components/admin/createCourse";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <Route path="/admin/login-admin" element={<LoginAdmin />} />
           <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
           <Route path="/admin/register-admin" element={<RegisterAdmin />} />
+          <Route path="/admin/add-course" element={<CreateCourse/>}/>
           
     </Routes>
 

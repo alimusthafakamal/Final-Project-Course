@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
+import CreateCourse from './createCourse';
+import { Link, Navigate } from 'react-router-dom';
+
+
 
 
 
@@ -82,7 +86,10 @@ function KelolaKelasAdmin({ Toggle }) {
           </div>
         </div>
       </div>
+    <div className='container mt-3'>
       <h2>Kelola Kelas</h2>
+      <button navigate to={<CreateCourse/>} variant="success" className="mb-3" >Tambah Course</button>
+      </div>
       <table className="table">
         <thead>
           <tr>
