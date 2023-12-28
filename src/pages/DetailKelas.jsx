@@ -154,7 +154,7 @@ const DetailKelas = () => {
                       >
                         Tentang Kelas
                       </span>
-                      <p className="" style={{ fontSize: "10px" }}>
+                      <p className="" style={{ fontSize: "14px" }}>
                         Design system adalah kumpulan komponen design, code,
                         ataupun dokumentasi yang dapat digunakan sebagai panduan
                         utama yang memunginkan designer serta developer memiliki
@@ -184,7 +184,7 @@ const DetailKelas = () => {
                       </span>
                       <ol
                         className="list-group-numbered ps-2"
-                        style={{ fontSize: "12px" }}
+                        style={{ fontSize: "14px" }}
                       >
                         <li className="list-group-item mb-2">
                           anda ingin memahami poin penting design system{" "}
@@ -376,7 +376,6 @@ const DetailKelas = () => {
                               className="col "
                               style={{ color: "#D9D9D9" }}
                             />
-                            <hr />
                           </li>
                         </ul>
                       </div>

@@ -1,11 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link, useNavigate } from "react-router-dom";
 import BelajarWhite from "../../public/belajar-white.svg";
-import { Container } from "react-bootstrap";
+import { Container, Toast } from "react-bootstrap";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
+
+  // const searchHandler = async (e) => {
+  //   try {
+  //     let data = JSON.stringify({
+  //       courseCode,
+  //       courseName,
+  //       courseCategory,
+  //       courseLevel,
+  //       coursePrice,
+  //       courseAbout,
+  //       courseFor,
+  //       urlTele,
+  //       teacher,
+  //       numberOfModule,
+  //       typePremium,
+  //     });
+
+  //     const token = localStorage.getItem("token");
+  //     console.log(token);
+
+  //     let config = {
+  //       method: "",
+  //       url: "",
+  //       headers: {
+  //         "Content-type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //       data: data,
+  //     };
+
+  //     const response = await axios.request(config);
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error)) {
+  //       Toast.error(error.response.data.message);
+  //       return;
+  //     }
+  //     toast.error(error.message);
+  //   }
+  // };
+
+  const [input, setInput] = useState("");
+  const fetchData = (value) => {
+    fetch("https://mooc.code69.my.id/course")
+      .then((Response) => Response.json())
+      .then((json) => {
+        const results = json.filter((data) => {
+          return {
+            courseCode,
+            courseName,
+            courseCategory,
+            courseLevel,
+            coursePrice,
+            courseAbout,
+            courseFor,
+            urlTele,
+            teacher,
+            numberOfModule,
+            typePremium,
+          };
+        });
+        console.log(results);
+      });
+  };
+
+  const handleChange = (value) => {
+    setInput(value);
+    fetchData(value);
+  };
 
   return (
     <div
@@ -15,6 +83,7 @@ const NavigationBar = () => {
         boxShadow: "0px 0px 10px 0px #00000026",
         height: "100px",
         alignContent: "center",
+      
       }}
     >
       <Container className="d-flex">
@@ -33,9 +102,9 @@ const NavigationBar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <div className=" ">
+          {/* <div className=" ">
             <div
-              className="input-group border border-0 "
+              className="input-group border border-0 text-danger "
               style={{
                 width: "526px",
                 height: "70px",
@@ -47,6 +116,8 @@ const NavigationBar = () => {
                 type="text"
                 className="form-control border border-0"
                 placeholder="Cari Kursus Terbaik ...."
+                value={input}
+                onChange={(e) => handleChange(e.target.value)}
               />
               <span
                 className="input-group-text border border-0 bg-white"
@@ -63,7 +134,7 @@ const NavigationBar = () => {
                 />
               </span>
             </div>
-          </div>
+          </div> */}
           <ul
             className="navbar-nav me-auto w-100 d-flex align-items-center justify-content-lg-end "
             id="navbarTogglerDemo02"
@@ -104,7 +175,7 @@ const NavigationBar = () => {
                     <a
                       className="dropdown-item fw-bold"
                       style={{ color: "#6148ff" }}
-                      onClick={() => navigate("/pilih-premium")}
+                      onClick={() => navigate("/topik-kelas")}
                     >
                       Topik Kelas
                     </a>
@@ -112,6 +183,30 @@ const NavigationBar = () => {
                 </ul>
               </div>
               <div className="dropdown">
+                {/* <button
+                  className="btn fw-bold text-white align-items-center "
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style={{
+                    background: "#489CFF",
+                    borderRadius: "10px",
+                    padding: "5px 25px 5px 25px",
+                    fontSize: "16px",
+                  }} */}
+                {/* > */}
+                <Icon
+                  icon="system-uicons:bell"
+                  width="24"
+                  height="24"
+                  color="white"
+                  className="me-2"
+                  onClick={() => navigate("/notif")}
+                />
+                {/* Notifikasi */}
+                {/* </button> */}
+              </div>
+              {/* <div className="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
@@ -123,42 +218,18 @@ const NavigationBar = () => {
                     padding: "5px 25px 5px 25px",
                     fontSize: "16px",
                   }}
-                >
-                  <Icon
-                    icon="system-uicons:bell"
-                    width="24"
-                    height="24"
-                    color="white"
-                    className="me-2"
-                  />
-                  Notifikasi
-                </button>
-              </div>
-              <div className="dropdown">
-                <a className="nav-link" href="/akunprofil">
-                  <button
-                    className="btn fw-bold text-white align-items-center "
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                    style={{
-                      background: "#489CFF",
-                      borderRadius: "10px",
-                      padding: "5px 25px 5px 25px",
-                      fontSize: "16px",
-                    }}
-                  >
-                    <Icon
-                      icon="ep:user"
-                      width="24"
-                      height="24"
-                      color="white"
-                      className="me-2"
-                    />
-                    Akun
-                  </button>
-                </a>
-              </div>
+                > */}
+              <Icon
+                icon="ep:user"
+                width="24"
+                height="24"
+                color="white"
+                className="me-2"
+                onClick={() => navigate("/akunprofil")}
+              />
+              {/* Akun */}
+              {/* </button>
+              </div> */}
             </li>
 
             {/* <li className="nav-item ">
