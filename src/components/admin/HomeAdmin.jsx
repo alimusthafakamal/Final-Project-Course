@@ -17,7 +17,14 @@ function HomeAdmin({ Toggle }) {
         setPremiumClassCount (activeUserResponse.data.data.premiumClass)
         
         const paymentResponse = await axios.get('https://mooc.code69.my.id/admin/payment-status')
-        setPaymentData (paymentResponse.data.paymentStatusResponse)
+        setPaymentData (paymentResponse.data.paymentStatusResponse ,{
+          id :'',
+          category:'',
+          premiumCourse:'',
+          status:'',
+          paymentMethod:'',
+          paymentDate:'',
+        })
 
         console.log('activeUserResponse', activeUserResponse)
         console.log('paymentResponse', paymentResponse)
@@ -81,7 +88,7 @@ function HomeAdmin({ Toggle }) {
           </tr>
         </thead>
         <tbody>
-          {paymentData?.map((payment, index) => (
+          {paymentData.map((payment, index) => (
             <tr key={index}>
               <th scope="row">{payment.id}</th>
               <td>{payment.category}</td>
