@@ -1,5 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+
 
 function LoginAdmin() {
 
@@ -39,7 +43,7 @@ function LoginAdmin() {
       toast.error(error.message);
     }
   };
-
+  
   return (
     <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
       <div className='row align-items-center'>
@@ -73,7 +77,9 @@ function LoginAdmin() {
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
               />
             </div>
-            <button type='submit' className='btn btn-primary rounded-pill' style={{ width: '452px', height: '48px', top: '8px', left: '0px' }}>Login</button>
+            <button type='submit' className='btn btn-primary rounded-pill' style={{width: '452px', height: '48px', top: '8px', left: '0px'}}>
+              <a href='/admin/dashboard'>Login</a></button>
+            <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
           </form>
         </div>
       </div>

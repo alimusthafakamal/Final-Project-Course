@@ -19,7 +19,6 @@ function RegisterAdmin() {
         email: email,
         phoneNumber: phone,
         password: password,
-        
       });
       let config = {
         method: "post",
@@ -31,11 +30,16 @@ function RegisterAdmin() {
       };
 
       const response = await axios.request(config);
-      if(response.status == 200){
+      if (response.status == 200) {
+        toast.success("Registrasi berhasil!");
+        navigate(`/admin/otp-admin/${email}`);
         console.log(response.status);
-      console.log(response.message)}
-      else{console.log(response.status);
-        console.log(response.message)}
+        console.log(response.message);
+      } else {
+        toast.error("Registrasi gagal.");
+        console.log(response.status);
+        console.log(response.message);
+      }
       const { token } = response.data.data;
 
       localStorage.setItem("token", token);
