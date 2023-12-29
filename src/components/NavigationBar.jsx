@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link, useNavigate } from "react-router-dom";
 import BelajarWhite from "../../public/belajar-white.svg";
@@ -45,6 +45,10 @@ const NavigationBar = () => {
   //     toast.error(error.message);
   //   }
   // };
+  const [cekToken, setCekToken] = useState(false);
+  // useEffect(() => {
+  //   localStorage.getItem("token");
+  // }, []);
 
   const [input, setInput] = useState("");
   const fetchData = (value) => {
@@ -98,14 +102,9 @@ const NavigationBar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-          {/* {isLoggedin ? (
-
-        ) : (
-
-        )} */}
           {/* <div className=" ">
             <div
               className="input-group border border-0 text-danger "
@@ -139,55 +138,69 @@ const NavigationBar = () => {
               </span>
             </div>
           </div> */}
+
           <ul
             className="navbar-nav me-auto w-100 d-flex align-items-center justify-content-lg-end "
             id="navbarTogglerDemo02"
           >
-            <li className="nav-item d-flex align-items-center gap-4">
-              <div class="dropdown">
-                <button
-                  className="btn fw-bold text-white align-items-center "
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  style={{
-                    background: "#489CFF",
-                    borderRadius: "10px",
-                    padding: "5px 25px 5px 25px",
-                    fontSize: "16px",
-                  }}
-                >
-                  <Icon
-                    icon="ic:round-list"
-                    width="24"
-                    height="24"
-                    className="me-2"
-                  />
-                  Kelas
-                </button>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
-                  <li style={{ cursor: "pointer" }} className="">
-                    <a
-                      class="dropdown-item fw-bold "
-                      aria-current="true"
-                      style={{ color: "#6148ff" }}
-                      onClick={() => navigate("/kelas-saya")}
-                    >
-                      Kelas Berjalan
-                    </a>
+            {localStorage.getItem("token") === null ? (
+              <li className="nav-item ">
+                <span className="nav-link">
+                  <Icon className="icon " icon="material-symbols:login" />
+                  <button
+                    className="btn text-white"
+                    onClick={() => navigate("/login")}
+                  >
+                    Masuk
+                  </button>
+                </span>
+              </li>
+            ) : (
+              <li className="nav-item d-flex align-items-center gap-2">
+                <div class="dropdown">
+                  <button
+                    className="btn fw-bold text-white align-items-center "
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{
+                      background: "#489CFF",
+                      borderRadius: "10px",
+                      padding: "5px 25px 5px 25px",
+                      fontSize: "16px",
+                    }}
+                  >
+                    <Icon
+                      icon="ic:round-list"
+                      width="24"
+                      height="24"
+                      className="me-2"
+                    />
+                    Kelas
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-lg-end">
+                    <li style={{ cursor: "pointer" }} className="">
+                      <a
+                        class="dropdown-item fw-bold "
+                        aria-current="true"
+                        style={{ color: "#6148ff" }}
+                        onClick={() => navigate("/kelas-saya")}
+                      >
+                        Kelas Berjalan
+                      </a>
 
-                    <a
-                      class="dropdown-item fw-bold"
-                      style={{ color: "#6148ff" }}
-                      onClick={() => navigate("/topik-kelas")}
-                    >
-                      Topik Kelas
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="dropdown">
-                {/* <button
+                      <a
+                        class="dropdown-item fw-bold"
+                        style={{ color: "#6148ff" }}
+                        onClick={() => navigate("/topik-kelas")}
+                      >
+                        Topik Kelas
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="dropdown">
+                  {/* <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
                   data-bs-toggle="dropdown"
@@ -198,19 +211,19 @@ const NavigationBar = () => {
                     padding: "5px 25px 5px 25px",
                     fontSize: "16px",
                   }} */}
-                {/* > */}
-                <Icon
-                  icon="system-uicons:bell"
-                  width="24"
-                  height="24"
-                  color="white"
-                  className="me-2"
-                  onClick={() => navigate("/notif")}
-                />
-                {/* Notifikasi */}
-                {/* </button> */}
-              </div>
-              {/* <div className="dropdown">
+                  {/* > */}
+                  <Icon
+                    icon="system-uicons:bell"
+                    width="24"
+                    height="24"
+                    color="white"
+                    className="me-2"
+                    onClick={() => navigate("/notif")}
+                  />
+                  {/* Notifikasi */}
+                  {/* </button> */}
+                </div>
+                {/* <div className="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
@@ -223,30 +236,19 @@ const NavigationBar = () => {
                     fontSize: "16px",
                   }}
                 > */}
-              <Icon
-                icon="ep:user"
-                width="24"
-                height="24"
-                color="white"
-                className="me-2"
-                onClick={() => navigate("/akunprofil")}
-              />
-              {/* Akun */}
-              {/* </button>
+                <Icon
+                  icon="ep:user"
+                  width="24"
+                  height="24"
+                  color="white"
+                  className="me-2"
+                  onClick={() => navigate("/akunprofil")}
+                />
+                {/* Akun */}
+                {/* </button>
               </div> */}
-            </li>
-
-            {/* <li className="nav-item ">
-              <span className="nav-link">
-                <Icon className="icon " icon="material-symbols:login" />
-                <button
-                  className="btn text-white"
-                  onClick={() => navigate("/login")}
-                >
-                  Masuk
-                </button>
-              </span>
-            </li> */}
+              </li>
+            )}
           </ul>
         </div>
       </Container>

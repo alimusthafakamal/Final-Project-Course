@@ -36,12 +36,11 @@ const Akun_Profil = () => {
     },
     profileImagePlaceholder: {
       justifyContent: "center",
-      marginRight: "50px",
       width: "7rem",
       height: "7rem",
       borderRadius: "50%",
-      marginBottom: "1rem",
-      border: "1px solid #6148FF",
+      marginBottom: "2rem",
+      border: "2px solid #6148FF",
     },
     iconback: {
       marginRight: "10px",
@@ -160,8 +159,8 @@ const Akun_Profil = () => {
     },
 
     uploadarea: {
-      paddingTop: "120px",
-      paddingLeft: "120px",
+      paddingTop: "20px",
+      paddingLeft: "130px",
     },
     borderBottom: {
       borderBottom: "2px solid #E5E5E5",
@@ -404,8 +403,7 @@ const Akun_Profil = () => {
                   <div style={styles.sidebarright}>
                     <div style={styles.profileContent}>
                       <div style={styles.profileImagePlaceholder}>
-                        {" "}
-                        <img src={datauser.imageUrl} alt="" />
+                        <img src={datauser.imageUrl} />
                         <div className="custom-file" style={styles.uploadarea}>
                           <input
                             onChange={(e) => setImageUrl(e.target.files[0])}
