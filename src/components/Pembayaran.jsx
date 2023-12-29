@@ -2,7 +2,7 @@ import React from "react";
 import NavigationBar from "./NavigationBar";
 import { Button, Container } from "react-bootstrap";
 import { Icon } from "@iconify/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import KursusPopulerImage from "../../public/kursus-populer-image.svg";
 import MasterCard from "../../public/master-card.svg";
@@ -12,6 +12,44 @@ import Paypal from "../../public/paypal.svg";
 
 const Pembayaran = () => {
   const navigate = useNavigate();
+  const { code } = useParams();
+  console.log(code);
+  const handleprofil = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      let config = {
+        method: "post",
+        url: `https://mooc.code69.my.id/order`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await axios.request(config);
+      if (response.status == 200) {
+        console.log(response.data);
+      } else {
+        console.log(response.status);
+        console.log(response.message);
+      }
+
+      // navigate("/");
+
+      // Temporary solution
+      // window.location.href = "/";
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+        return;
+      }
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       <NavigationBar />
@@ -49,11 +87,11 @@ const Pembayaran = () => {
           <Container>
             <div className="row ms-3">
               <div className="col-md-6 mx-5">
-                <div className= "accordion" id="accordionExample">
-                  <div className= "accordion-item">
-                    <h2 className= "accordion-header">
+                <div className="accordion" id="accordionExample">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header">
                       <button
-                        className= "accordion-button text-white"
+                        className="accordion-button text-white"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
@@ -66,10 +104,10 @@ const Pembayaran = () => {
                     </h2>
                     <div
                       id="collapseOne"
-                      className= "accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className= "accordion-body">
+                      <div className="accordion-body">
                         <strong>
                           This is the first item's accordion body.
                         </strong>{" "}
@@ -85,10 +123,10 @@ const Pembayaran = () => {
                       </div>
                     </div>
                   </div>
-                  <div className= "accordion-item">
+                  <div className="accordion-item">
                     <h2 className="accordion-header ">
                       <button
-                        className= "accordion-button collapsed text-white bg-dark-blue100 mt-3"
+                        className="accordion-button collapsed text-white bg-dark-blue100 mt-3"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo"
@@ -100,10 +138,10 @@ const Pembayaran = () => {
                     </h2>
                     <div
                       id="collapseTwo"
-                      className= "accordion-collapse collapse show"
+                      className="accordion-collapse collapse show"
                       data-bs-parent="#accordionExample"
                     >
-                      <div className= "accordion-body align-items-center justify-content-center">
+                      <div className="accordion-body align-items-center justify-content-center">
                         <div className="payment-options gap-3 d-flex mt-3 justify-content-center">
                           <img src={MasterCard} />
                           <img src={Visa} />
@@ -118,7 +156,10 @@ const Pembayaran = () => {
                             >
                               Card Number
                             </label>
-                            <input className="form-control border border-0 text-secondary" placeholder="4488 0000 0000 0000" />
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="4488 0000 0000 0000"
+                            />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
                           <div className="card-holdername d-grid justify-content-center mt-1">
@@ -128,7 +169,10 @@ const Pembayaran = () => {
                             >
                               Card holdername
                             </label>
-                            <input className="form-control border border-0 text-secondary" placeholder="John Doe" />
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="John Doe"
+                            />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
                           <div>
@@ -140,7 +184,10 @@ const Pembayaran = () => {
                                 >
                                   CVV
                                 </label>
-                                <input className="form-control border border-0 text-secondary" placeholder="000" />
+                                <input
+                                  className="form-control border border-0 text-secondary"
+                                  placeholder="000"
+                                />
                                 <hr width="130" style={{ marginTop: "-4px" }} />
                               </div>
                               <div className="col-3  ">
@@ -150,7 +197,10 @@ const Pembayaran = () => {
                                 >
                                   Expiry Date
                                 </label>
-                                <input className="form-control border border-0 text-secondary" placeholder="07/24"/>
+                                <input
+                                  className="form-control border border-0 text-secondary"
+                                  placeholder="07/24"
+                                />
                                 <hr width="130" style={{ marginTop: "-4px" }} />
                               </div>
                             </div>

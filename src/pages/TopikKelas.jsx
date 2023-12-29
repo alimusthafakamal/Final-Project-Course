@@ -16,7 +16,7 @@ const TopikKelas = () => {
   const [kategori, setKategori] = useState([]);
   const [level, setLevel] = useState([]);
   const [premium, setPremium] = useState(["PREMIUM", "FREE"]);
-
+  console.log(course);
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -67,7 +67,7 @@ const TopikKelas = () => {
             <Card
               className="card border border-0"
               style={{ borderRadius: "1.3rem", cursor: "pointer" }}
-              onClick={() => navigate("/detail-kelas")}
+              onClick={() => navigate(`/detail-kelas/${data.courseCode}`)}
             >
               <Card.Img className="card-img" src={KursusPopulerImage} />
               <Card.Body className="row">

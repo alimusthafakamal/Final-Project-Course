@@ -7,8 +7,8 @@ import KursusPopulerImage from "../../public/kursus-populer-image.svg";
 import { useNavigate } from "react-router-dom";
 
 function BeliPremium(props) {
-    const navigate = useNavigate();
-    
+  const navigate = useNavigate();
+  console.log(props.code);
   return (
     <>
       <Modal
@@ -158,7 +158,7 @@ function BeliPremium(props) {
                 gap: "8px",
                 boxShadow: "0px 4px 4px 0px #00000026",
               }}
-              onClick={() => navigate("/pembayaran")}
+              onClick={() => navigate(`/pembayaran/${props.code}`)}
             >
               <span className="">Beli Sekarang</span>
               <Icon icon="carbon:next-filled" width="24" height="24" />

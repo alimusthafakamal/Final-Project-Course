@@ -89,7 +89,7 @@ const IsiRiwayat = () => {
       fontFamily: "Montserrat",
       fontSize: "14px",
       fontStyle: "normal",
-      fontWeight: "500",
+      
     },
 
     icons: {
