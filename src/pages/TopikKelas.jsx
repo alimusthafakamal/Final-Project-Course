@@ -143,7 +143,7 @@ const TopikKelas = () => {
                       width="14"
                       height="14"
                     />{" "}
-                    <a>{data.courseFor} </a>
+                    <a>{data.courseAbout} </a>
                   </span>
                 </Card.Text>
                 {btnPremium ? (
