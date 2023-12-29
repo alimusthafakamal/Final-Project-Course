@@ -40,7 +40,7 @@ function App() {
 
         <Route path="/kelas-saya" element={<KelasSaya />} />
         <Route path="/topik-kelas" element={<TopikKelas />} />
-        <Route path="/detail-kelas" element={<DetailKelas />} />
+        <Route path="/detail-kelas:courseCode" element={<DetailKelas />} />
         <Route path="/pembayaran" element={<Pembayaran />} />
         <Route path="/pembayaran-sukses" element={<PembayaranSukses />} />
         <Route path="/mulai-kelas" element={<MulaiKelas />} />
