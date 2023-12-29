@@ -4,7 +4,6 @@ import KategoriBelajar from "../components/KategoriBelajar";
 import KursusPopuler from "../components/KursusPopuler";
 import Hero from "../components/Hero";
 import NavigationBar from "../components/NavigationBar";
-import Notifikasi1 from "../components/notifcoba";
 import Notifications from "../components/Notifikasi";
 
 const Notif = () => {

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import Filter from "./Filter";
+import Filter from "../components/Filter";
 import Card from "react-bootstrap/Card";
 import KursusPopulerImage from "../../public/kursus-populer-image.svg";
-import NavigationBar from "./NavigationBar";
+import NavigationBar from "../components/NavigationBar";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const PilihPremium = () => {
+const TopikKelas = () => {
   const navigate = useNavigate();
   const [course, setCourse] = useState([]);
   //input filter
@@ -319,4 +319,4 @@ const PilihPremium = () => {
   );
 };
 
-export default PilihPremium;
+export default TopikKelas;

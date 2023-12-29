@@ -5,8 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 // import Footer from "./components/Footer";
 import KelasSaya from "./pages/KelasSaya";
-import PilihPremium from "./components/PilihPremium";
-import PilihGratis from "./components/PilihGratis";
+import TopikKelas from "./pages/TopikKelas";
 import DetailKelas from "./pages/DetailKelas";
 import Pembayaran from "./components/Pembayaran";
 import PembayaranSukses from "./components/PembayaranSukses";
@@ -42,8 +41,7 @@ function App() {
         <Route path="/riwayat" element={<Riwayat />} />
 
         <Route path="/kelas-saya" element={<KelasSaya />} />
-        <Route path="/pilih-premium" element={<PilihPremium />} />
-        <Route path="/pilih-gratis" element={<PilihGratis />} />
+        <Route path="/topik-kelas" element={<TopikKelas />} />
         <Route path="/detail-kelas" element={<DetailKelas />} />
         <Route path="/pembayaran" element={<Pembayaran />} />
         <Route path="/pembayaran-sukses" element={<PembayaranSukses />} />
