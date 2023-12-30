@@ -23,7 +23,7 @@ function Sidebar() {
             </a>
             <a className='bg-primary bg-gradient list-group-item py-2'>
                 <i className='fs-4 me-3'></i>
-                <span className='fs-5' onClick={() => navigate("/admin/login-admin")}>Keluar</span>
+                <span className='fs-5' onClick={() => navigate("/admin/logout-admin")}>Keluar</span>
             </a>
             
         </div>

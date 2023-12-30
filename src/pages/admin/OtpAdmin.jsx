@@ -130,7 +130,7 @@ function OtpAdmin() {
                 <p>Kirim Ulang OTP dalam 60 detik</p>
               </div>
             )}
-            <div class="d-grid">
+            <div className="d-grid">
               <button
                 type="submit"
                 onClick={onSubmit}

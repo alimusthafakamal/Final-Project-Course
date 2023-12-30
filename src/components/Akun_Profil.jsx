@@ -97,7 +97,6 @@ const Akun_Profil = () => {
     menuItem: {
       marginBottom: "2rem",
       cursor: "pointer",
-      fontWeight: "500",
       color: "black",
       fontFamily: "Montserrat",
       fontSize: "14px",
@@ -389,7 +388,7 @@ const Akun_Profil = () => {
                     <button
                       onClick={() => {
                         localStorage.removeItem("token");
-                        window.location.href = "/";
+                        window.location.href = "/logout ";
                       }}
                     >
                       Keluar

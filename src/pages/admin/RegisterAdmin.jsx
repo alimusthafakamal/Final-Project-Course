@@ -112,7 +112,7 @@ function RegisterAdmin() {
                 onChange={(e)=>setPhone(e.target.value)}
               />
             </div>
-            <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/login'>Masuk di sini</a></p>
+            <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/admin/login-admin'>Masuk di sini</a></p>
             <button type='submit' className='btn btn-primary rounded-pill' 
             style={{ width: '452px', height: '48px', top: '8px', left: '0px' }} onClick={handleregister}>Register</button>
           </form>
