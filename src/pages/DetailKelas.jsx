@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import { Icon } from "@iconify/react";
 import Card from "react-bootstrap/Card";
@@ -16,9 +16,9 @@ const DetailKelas = () => {
     navigate("/");
   };
 
-  const [modalShow, setModalShow] = React.useState(false);
-  const [course, setCourse] = React.useState([]);
-  console.log(course);
+  const [modalShow, setModalShow] = useState(false);
+  const [course, setCourse] = useState({});
+  const [video, setVideo] = useState([]);
 
   const token = localStorage.getItem("token");
   const fetchData = async () => {
@@ -32,8 +32,53 @@ const DetailKelas = () => {
   };
   useEffect(() => {
     fetchData();
-  }, [navigate, token]);
+  }, [navigate]);
+  // const datavideo = video.subjects[0].detail[0].url;
+  // console.log(datavideo);
+  // console.log(course);
+  // console.log(course?.subjects[0]?.detail[0]?.url);
+  console.log(course);
+  // console.log(course.subjects[0]);
+  useEffect(() => {
+    const handleuser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        let config = {
+          method: "get",
+          url: `https://mooc.code69.my.id/course-detail?courseCode=${code}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
 
+        const response = await axios.request(config);
+        if (response.status == 200) {
+          console.log(response);
+          setVideo(response.data.data);
+          console.log(response.status);
+          console.log(response.message);
+        } else {
+          console.log(response.status);
+          console.log(response.message);
+        }
+
+        // navigate("/");
+
+        // Temporary solution
+        // window.location.href = "/";
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast.error(error.response.data.message);
+          return;
+        }
+        toast.error(error.message);
+      }
+    };
+    handleuser();
+  }, []);
+  console.log(video);
+  // console.log(video.subjects[0]);
   return (
     <>
       <NavigationBar />
@@ -167,7 +212,7 @@ const DetailKelas = () => {
                   <div className="video d-grid ms-2 mt-5">
                     <video
                       controls
-                      src={course.url}
+                      // src={course.subjects[0].detail[0].url}
                       className="play-video object-fit-cover border rounded my-4"
                       style={{ background: "#000000D9" }}
                     >
@@ -198,16 +243,10 @@ const DetailKelas = () => {
                         style={{ fontSize: "14px" }}
                       >
                         <li className="list-group-item mb-2">
-                          {course.courseFor}
+                          {course.courseFor?.substr(0, 17)}
                         </li>
                         <li className="list-group-item mb-2">
-                          {course.courseFor}
-                        </li>
-                        <li className="list-group-item mb-2">
-                          {course.courseFor}
-                        </li>
-                        <li className="list-group-item mb-2">
-                          {course.courseFor}
+                          {course.courseFor?.substr(18, 15)}
                         </li>
                       </ol>
                     </div>
@@ -258,9 +297,7 @@ const DetailKelas = () => {
                       <div>
                         <ul className="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
                           <div className="header-chapter d-flex justify-content-between">
-                            <div className="intro-chapter">
-                              {course.chapter}
-                            </div>
+                            <div className="intro-chapter">Chapter 1</div>
                             <div className="durasi-chapter">60 menit</div>
                           </div>
                           <li className="list-group-item row d-flex align-items-center list-materi">

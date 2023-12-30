@@ -49,7 +49,7 @@ function App() {
           <Route path="/admin/login-admin" element={<LoginAdmin />} />
           <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
           <Route path="/admin/register-admin" element={<RegisterAdmin />} />
-          <Route path="/admin/add-course" element={<CreateCourse/>}/>
+          {/* <Route path="/admin/add-course" element={<CreateCourse/>}/> */}
           
     </Routes>
 
