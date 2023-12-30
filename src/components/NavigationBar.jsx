@@ -156,7 +156,10 @@ const NavigationBar = () => {
                 </span>
               </li>
             ) : (
-              <li className="nav-item d-flex align-items-center gap-2">
+              <li
+                className="nav-item d-flex align-items-center gap-3"
+                style={{ cursor: "pointer" }}
+              >
                 <div class="dropdown">
                   <button
                     className="btn fw-bold text-white align-items-center "
