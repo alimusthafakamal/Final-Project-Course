@@ -74,7 +74,10 @@ const NavigationNotif = () => {
             className="navbar-nav me-auto w-100 d-flex align-items-center justify-content-lg-end "
             id="navbarTogglerDemo02"
           >
-            <li className="nav-item d-flex align-items-center gap-2">
+            <li
+              className="nav-item d-flex align-items-center gap-2"
+              style={{ cursor: "pointer" }}
+            >
               <div class="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
