@@ -225,7 +225,7 @@ const NavigationBar = () => {
                 height="24"
                 color="white"
                 className="me-2"
-                onClick={() => navigate("/akunprofil")}
+                onClick={() => navigate("/login")}
               />
               {/* Akun */}
               {/* </button>

@@ -9,6 +9,12 @@ function KelolaKelas() {
     const Toggle = () => {
         setToggle(!toggle);
     }
+    
+    const [isRefresh, setIsRefresh] = useState(true);
+
+	const setRefresh = (status) => {
+		setIsRefresh(status);
+	};
   return (
     <div className='bg-secondary min-vh-100'>
         <div className='row'>
@@ -16,7 +22,7 @@ function KelolaKelas() {
                 <Sidebar/>
             </div>}
             <div className='col'>
-                <KelolaKelasAdmin Toggle={Toggle} />
+                <KelolaKelasAdmin Toggle={Toggle}/>
             </div>
         </div>
         

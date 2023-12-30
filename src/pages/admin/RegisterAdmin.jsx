@@ -10,7 +10,7 @@ function RegisterAdmin() {
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
-  const handleregister = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
@@ -36,7 +36,7 @@ function RegisterAdmin() {
       console.log(response.message)}
       else{console.log(response.status);
         console.log(response.message)}
-      const { token } = response.data.data;
+      const { token } = response.data;
 
       localStorage.setItem("token", token);
 
@@ -52,7 +52,7 @@ function RegisterAdmin() {
       toast.error(error.message);
     }
   };
-    
+  console.log("data",handleRegister)
 
   return (
     <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
@@ -108,9 +108,9 @@ function RegisterAdmin() {
                 onChange={(e)=>setPhone(e.target.value)}
               />
             </div>
-            <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/login'>Masuk di sini</a></p>
+            <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/admin/login-admin'>Masuk di sini</a></p>
             <button type='submit' className='btn btn-primary rounded-pill' 
-            style={{ width: '452px', height: '48px', top: '8px', left: '0px' }} onClick={handleregister}>Register</button>
+            style={{ width: '452px', height: '48px', top: '8px', left: '0px' }} onClick={handleRegister}>Register</button>
           </form>
         </div>
         <div className='col-md-6 d-none d-md-block'>

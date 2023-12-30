@@ -101,6 +101,8 @@ function ForgetPassword() {
       </div>
     </div>
   );
+  
 }
+
 
 export default ForgetPassword;

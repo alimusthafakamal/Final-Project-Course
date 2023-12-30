@@ -45,11 +45,15 @@ function App() {
         <Route path="/pembayaran-sukses" element={<PembayaranSukses />} />
         <Route path="/mulai-kelas" element={<MulaiKelas />} />
 
-        <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/login-admin" element={<LoginAdmin />} />
-        <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
-        <Route path="/admin/register-admin" element={<RegisterAdmin />} />
-      </Routes>
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/login-admin" element={<LoginAdmin />} />
+          <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
+          <Route path="/admin/register-admin" element={<RegisterAdmin />} />
+          <Route path="/admin/add-course" element={<CreateCourse/>}/>
+          
+    </Routes>
+
+        
     </div>
   );
 }
