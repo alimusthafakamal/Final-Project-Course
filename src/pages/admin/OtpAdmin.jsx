@@ -86,11 +86,11 @@ function OtpAdmin() {
               width="32"
               height="32"
               fill="currentColor"
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"
               />
             </svg>
@@ -98,7 +98,7 @@ function OtpAdmin() {
             <h4 className="">Masukkan OTP</h4>
             <p className="text-center">
               Ketik 6 digit kode yang dikirimkan ke{" "}
-              <strong>${email}</strong>
+              <strong>j*****@gmail.com</strong>
             </p>
             <div className="mb-3">
               <label htmlFor="username" className="form-tabel">
@@ -108,7 +108,7 @@ function OtpAdmin() {
                 type="text"
                 className="form-control rounded-pill"
                 id="username"
-                placeholder="Enter your OTP here"
+                placeholder="Enter your email"
                 style={{
                   width: "452px",
                   height: "48px",
@@ -146,10 +146,10 @@ function OtpAdmin() {
                 Simpan
               </button>
             </div>
-            <div class="d-grid gap-2 mt-5">
+            <div className="d-grid gap-2 mt-5">
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 style={{
                   width: "70%",
                   height: "48px",

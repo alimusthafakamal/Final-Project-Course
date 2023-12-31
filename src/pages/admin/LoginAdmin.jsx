@@ -41,6 +41,7 @@ function LoginAdmin() {
         return;
       }
       toast.error(error.message);
+      console.log("token", token)
     }
   };
   

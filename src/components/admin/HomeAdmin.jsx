@@ -17,7 +17,12 @@ function HomeAdmin({ Toggle }) {
         setPremiumClassCount (activeUserResponse.data.data.premiumClass)
         
         const paymentResponse = await axios.get('https://mooc.code69.my.id/admin/payment-status')
-        setPaymentData (paymentResponse.data.paymentStatusResponse)
+        setPaymentData (paymentResponse.data.paymentStatusResponse, {
+          page:'',
+          title:'',
+          categories:'',
+          status:'',
+        })
 
         console.log('activeUserResponse', activeUserResponse)
         console.log('paymentResponse', paymentResponse)

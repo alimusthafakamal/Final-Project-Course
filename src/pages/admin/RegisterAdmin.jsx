@@ -40,10 +40,10 @@ function RegisterAdmin() {
         console.log(response.status);
         console.log(response.message);
       }
-      const { token } = response.data.data;
+      const { token } = response.data;
 
       localStorage.setItem("token", token);
-
+      console.log('token', token)
       // navigate("/");
 
       // Temporary solution
@@ -56,6 +56,7 @@ function RegisterAdmin() {
       toast.error(error.message);
     }
   };
+  
     
 
   return (
