@@ -21,6 +21,7 @@ import KelolaKelas from "./pages/admin/KelolaKelas";
 import ForgetPassword from "./pages/ForgetPassword";
 import RegisterAdmin from "./pages/admin/RegisterAdmin";
 import ResetPassword from "./pages/ResetPassword";
+import OtpAdmin from "./pages/admin/OtpAdmin";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         <Route path="/mulai-kelas" element={<MulaiKelas />} />
 
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/otp-admin/:email" element={<OtpAdmin/>} />
         <Route path="/admin/login-admin" element={<LoginAdmin />} />
         <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
         <Route path="/admin/register-admin" element={<RegisterAdmin />} />
