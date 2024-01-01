@@ -14,7 +14,12 @@ const KelasSaya = () => {
   const [kategori, setKategori] = useState([]);
   const [level, setLevel] = useState([]);
   const navigate = useNavigate();
-  const [isDone, setIsDone] = useState(["IS DONE", "IN PROGRESS"]);
+  const [premium, setPremium] = useState(["PREMIUM", "FREE"]);
+  const [active, setActive] = useState(false);
+
+  const ActiveButton = () => {
+    setActive(!active);
+  };
 
   const token = localStorage.getItem("token");
   const fetchData = async () => {
@@ -31,20 +36,15 @@ const KelasSaya = () => {
   }, [navigate, token]);
 
   console.log("course ", course);
-  const FilterCourse = async (
-    dataKategori,
-    dataLevel,
-    dataIsDone,
-    dataPremium
-  ) => {
+  const FilterCourse = async (dataKategori, dataLevel, dataPremium) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
       .get(
         `https://mooc.code69.my.id/course-progress/?page=1${[
           ...dataKategori.map((e) => `&categories=${e}`),
         ].join("")}${[...dataLevel.map((e) => `&courseLevel=${e}`)].join("")}${[
-          ...dataIsDone.map((e) => `&isDone=${e}`),
-        ].join("")}${[...dataPremium.map((e) => `&ispremium=${e}`)].join("")}`
+          ...dataPremium.map((e) => `&ispremium=${e}`),
+        ].join("")}`
       )
       .then((response) => {
         console.log("response filter ===>", response);
@@ -69,7 +69,7 @@ const KelasSaya = () => {
             <Card
               className="card border border-0"
               style={{ borderRadius: "1.3rem", cursor: "pointer" }}
-              onClick={() => navigate("/detail-kelas:courseCode")}
+              onClick={() => navigate("/detail-kelas")}
             >
               <Card.Img className="card-img" src={KursusPopulerImage} />
               <Card.Body className="row">
@@ -241,7 +241,7 @@ const KelasSaya = () => {
                 } else {
                   // e = KATEGORI
                   // FILTER COURSE (KATEGORI, LEVEL) <==== V
-                  FilterCourse(e, level, isDone);
+                  FilterCourse(e, level, premium);
                   // FILTER COURSE (LEVEL, KATEGORI) <==== X
                 }
               }}
@@ -256,7 +256,7 @@ const KelasSaya = () => {
                 if (e.length === 0 && kategori.length === 0) {
                   fetchData();
                 } else {
-                  FilterCourse(kategori, e, isDone); // ["UIX"]
+                  FilterCourse(kategori, e, premium); // ["UIX"]
                 }
               }}
               // namaFunctionYangDiPassing={()=>{
@@ -276,8 +276,8 @@ const KelasSaya = () => {
               <button
                 className="btn-kategori-header-1 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  FilterCourse(kategori, level, ["IS DONE", "IN PROGRESS"]);
-                  setIsDone(["IS DONE", "IN PROGRESS"]);
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
                 }}
               >
                 All
@@ -285,8 +285,8 @@ const KelasSaya = () => {
               <button
                 className="btn-kategori-header-2 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  FilterCourse(kategori, level, ["IN PROGRESS"]);
-                  setIsDone(["IN PROGRESS"]);
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
                 }}
               >
                 In Progress
@@ -294,8 +294,8 @@ const KelasSaya = () => {
               <button
                 className="btn-kategori-header-3 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  FilterCourse(kategori, level, ["IS DONE"]);
-                  setIsDone(["IS DONE"]);
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
                 }}
               >
                 Selesai

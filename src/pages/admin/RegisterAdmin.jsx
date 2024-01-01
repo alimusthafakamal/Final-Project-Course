@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function RegisterAdmin() {
+
   const [nameAdmin, setNameAdmin] = useState("");
   const [emailAdmin, setEmailAdmin] = useState("");
   const [phoneAdmin, setPhoneAdmin] = useState("")
   const [passwordAdmin, setPasswordAdmin] = useState("");
   const navigate = useNavigate()
-
   const handleregister = async (e) => {
     e.preventDefault();
 
@@ -57,17 +57,34 @@ function RegisterAdmin() {
       toast.error(error.message);
     }
   };
-  
-    
+
+
 
   return (
-    <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
-      <div className='row align-items-center'>
-        <div className='col-md-6'>
-          <form style={{ width: '452px', height: '348px', top: '301px', left: '158px' }}>
+    <div
+      className="container-fluid"
+      style={{
+        width: "1440px",
+        height: "950px",
+        top: "-987px",
+        left: "1575px",
+      }}
+    >
+      <div className="row align-items-center">
+        <div className="col-md-6">
+          <form
+            style={{
+              width: "452px",
+              height: "348px",
+              top: "301px",
+              left: "158px",
+            }}
+          >
             <h2>Registrasi</h2>
-            <div className='mb-3'>
-              <label htmlFor='name' className='form-tabel'>Name</label>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-tabel">
+                Name
+              </label>
               <input
                 type='text'
                 name='name'
@@ -76,11 +93,15 @@ function RegisterAdmin() {
                 placeholder='Enter your name'
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
                 onChange={(e)=>setNameAdmin(e.target.value)}
+
               />
             </div>
-            <div className='mb-3'>
-              <label htmlFor='email' className='form-label'>Email</label>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
               <input
+
                 type='email'
                 name='email'
                 className='form-control rounded-pill'
@@ -90,9 +111,12 @@ function RegisterAdmin() {
                 onChange={(e)=>setEmailAdmin(e.target.value)}
               />
             </div>
-            <div className='mb-3'>
-              <label htmlFor='password' className='form-label'>Password</label>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
               <input
+
                 type='password'
                 name='password'
                 className='form-control rounded-pill'
@@ -102,8 +126,10 @@ function RegisterAdmin() {
                 onChange={(e)=>setPasswordAdmin(e.target.value)}
               />
             </div>
-            <div className='mb-3'>
-              <label htmlFor='phone' className='form-label'>Phone</label>
+            <div className="mb-3">
+              <label htmlFor="phone" className="form-label">
+                Phone
+              </label>
               <input
                 type='tel'
                 name='phone'
@@ -117,18 +143,15 @@ function RegisterAdmin() {
             <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/admin/login-admin'>Masuk di sini</a></p>
             <button type='submit' className='btn btn-primary rounded-pill' 
             style={{ width: '452px', height: '48px', top: '8px', left: '0px' }} onClick={handleregister}>Register</button>
+
           </form>
         </div>
-        <div className='col-md-6 d-none d-md-block'>
-          <img
-            src="/img.svg"
-            alt='Side Image'
-            className='img-fluid'
-          />
+        <div className="col-md-6 d-none d-md-block">
+          <img src="/img.svg" alt="Side Image" className="img-fluid" />
         </div>
       </div>
     </div>
   );
 }
 
-export default RegisterAdmin
+export default RegisterAdmin;

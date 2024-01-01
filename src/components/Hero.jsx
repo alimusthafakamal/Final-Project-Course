@@ -21,7 +21,7 @@ const Hero = () => {
               <button
                 className="btn bg-white btn-sm fw-bold text-center dark-blue100 my-3 rounded-pill "
                 style={{ fontSize: "16px", width: "240px", radius: "10px" }}
-                onClick={() => navigate("/kelas-saya")}
+                onClick={() => navigate("/topik-kelas")}
               >
                 IKUTI KELAS
               </button>
