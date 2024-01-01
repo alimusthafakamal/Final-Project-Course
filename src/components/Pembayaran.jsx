@@ -1,17 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import { Button, Container } from "react-bootstrap";
 import { Icon } from "@iconify/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import KursusPopulerImage from "../../public/kursus-populer-image.svg";
 import MasterCard from "../../public/master-card.svg";
 import Visa from "../../public/visa.svg";
 import Amex from "../../public/amex.svg";
 import Paypal from "../../public/paypal.svg";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Pembayaran = () => {
   const navigate = useNavigate();
+  const { code } = useParams();
+
+  console.log(typeof code);
+
+  const HandleOrder = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token");
+
+      // let data = JSON.stringify({
+      //   courseCode: String(code),
+      // });
+      let config = {
+        method: "post",
+        url: `https://mooc.code69.my.id/order-updatePaidStatus`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          accept: "*/*",
+        },
+        params: { courseCode: code },
+        data: { paymentMethod: "bank" },
+      };
+
+      const response = await axios.request(config);
+      if (response.status == 200) {
+        console.log(response.data);
+        navigate("/kelas-saya");
+      } else {
+        console.log(response.status);
+        console.log(response.message);
+      }
+
+      // navigate("/");
+
+      // Temporary solution
+      // window.location.href = "/";
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+      }
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       <NavigationBar />
@@ -40,7 +88,7 @@ const Pembayaran = () => {
                 }}
                 aria-pressed="true"
               >
-                Selesaikan Pembayaran sampai 10 Maret 2023 12:00
+                Selesaikan Pembayaran dalam 24 Jam
               </span>
             </div>
           </Container>
@@ -70,7 +118,7 @@ const Pembayaran = () => {
                       data-bs-parent="#accordionExample"
                     >
                       <div className="accordion-body">
-                        <div className="d-flex gap-3 align-items-center justify-content-center">
+                        <div className="d-flex gap-3 mt-1 align-items-center justify-content-center">
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -145,8 +193,49 @@ const Pembayaran = () => {
                             </label>
                           </div>
                         </div>
-
-                        <div></div>
+                        <div className="form-pembayaran pt-4" width="400">
+                          <div className="card-number d-grid justify-content-center ">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Nama Lengkap
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="Shinta"
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Kategori
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="WEB DEVELOPMENT"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Tanggal Pembayaran
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="31/12/2023"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -181,11 +270,11 @@ const Pembayaran = () => {
                               className="fw-bold"
                               style={{ fontSize: "14px" }}
                             >
-                              Card Number
+                              Nama Lengkap
                             </label>
                             <input
                               className="form-control border border-0 text-secondary"
-                              placeholder="4488 0000 0000 0000"
+                              placeholder="Shinta"
                             />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
@@ -194,43 +283,28 @@ const Pembayaran = () => {
                               className="fw-bold"
                               style={{ fontSize: "14px" }}
                             >
-                              Card holdername
+                              Kategori
                             </label>
                             <input
                               className="form-control border border-0 text-secondary"
-                              placeholder="John Doe"
+                              placeholder="WEB DEVELOPMENT"
+                              onChange={(e) => setName(e.target.value)}
                             />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
-                          <div>
-                            <div className="row d-flex justify-content-center">
-                              <div className="col-3 me-4 ">
-                                <label
-                                  className="fw-bold"
-                                  style={{ fontSize: "14px" }}
-                                >
-                                  CVV
-                                </label>
-                                <input
-                                  className="form-control border border-0 text-secondary"
-                                  placeholder="000"
-                                />
-                                <hr width="130" style={{ marginTop: "-4px" }} />
-                              </div>
-                              <div className="col-3  ">
-                                <label
-                                  className="fw-bold"
-                                  style={{ fontSize: "14px" }}
-                                >
-                                  Expiry Date
-                                </label>
-                                <input
-                                  className="form-control border border-0 text-secondary"
-                                  placeholder="07/24"
-                                />
-                                <hr width="130" style={{ marginTop: "-4px" }} />
-                              </div>
-                            </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Tanggal Pembayaran
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="31/12/2023"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
                         </div>
                       </div>
@@ -323,7 +397,7 @@ const Pembayaran = () => {
                       background: "#FF0000",
                       boxShadow: "0px 4px 4px 0px #00000026",
                     }}
-                    onClick={() => navigate("/pembayaran-sukses")}
+                    onClick={HandleOrder}
                   >
                     <span className="">Bayar dan Ikuti Kelas Selamanya</span>
                     <Icon icon="carbon:next-filled" width="24" height="24" />

@@ -170,28 +170,11 @@ const KursusPopuler = () => {
         </div>
         <div className="row row-cols-auto  d-flex mb-2 ">
           <div className="col align-items-center d-flex gap-4">
-            <button className="btn rounded-pill btn-sm">All</button>
-            <button
-              className="btn rounded-pill btn-sm"
-
-              // onClick={(e) => {
-              //   setKategori(e);
-              //   if (e.length === 0 && level.length === 0) {
-              //     fetchData();
-              //   } else {
-              //     // e = KATEGORI
-              //     // FILTER COURSE (KATEGORI, LEVEL) <==== V
-              //     FilterCourse(e, level, premium);
-              //     // FILTER COURSE (LEVEL, KATEGORI) <==== X
-              //   }
-              // }}
-            >
-              Data Science
-            </button>
+            <button className="btn rounded-pill btn-sm px-5">All</button>
 
             <button
               type="button"
-              className="btn rounded-pill btn-sm active"
+              className="btn rounded-pill btn-sm"
               data-bs-toggle="button"
             >
               UI/UX Design
@@ -204,7 +187,7 @@ const KursusPopuler = () => {
             <button className="btn rounded-pill btn-sm">IOS Development</button>
 
             <button className="btn rounded-pill btn-sm">
-              Business Intelligence
+              Product Management
             </button>
           </div>
         </div>

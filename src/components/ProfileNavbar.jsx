@@ -9,6 +9,16 @@ import { Container } from "react-bootstrap";
 const UbahNavbar = () => {
   const navigate = useNavigate();
 
+  const LogoutUser = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      localStorage.removeItem("authToken");
+
+      navigate("/login");
+    }, [navigate]);
+  };
+
   return (
     <div
       className="navbar navbar-expand-lg navbar-background sticky-top "
@@ -74,17 +84,28 @@ const UbahNavbar = () => {
             className="navbar-nav me-auto w-100 d-flex align-items-center justify-content-lg-end "
             id="navbarTogglerDemo02"
           >
-            <li className="nav-item d-flex align-items-center gap-2">
+            <li
+              className="nav-item d-flex align-items-center gap-3"
+              style={{ cursor: "pointer" }}
+            >
               <div class="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  style={{
+                    fontSize: "16px",
+                  }}
                 >
-                  <Icon icon="ic:round-list" width="24" height="24" />
+                  <Icon
+                    icon="ic:round-list"
+                    width="24"
+                    height="24"
+                    className=""
+                  />
                 </button>
-                <ul class="dropdown-menu dropdown-menu-lg-end">
+                <ul class="dropdown-menu dropdown-menu-lg-start">
                   <li style={{ cursor: "pointer" }} className="">
                     <a
                       class="dropdown-item fw-bold "
@@ -94,6 +115,7 @@ const UbahNavbar = () => {
                     >
                       Kelas Berjalan
                     </a>
+
                     <a
                       class="dropdown-item fw-bold"
                       style={{ color: "#6148ff" }}
@@ -104,49 +126,58 @@ const UbahNavbar = () => {
                   </li>
                 </ul>
               </div>
+
               <div className="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{
-                    fontSize: "16px",
-                  }}
                 >
                   <Icon
                     icon="system-uicons:bell"
                     width="24"
                     height="24"
                     color="white"
-                    className=""
                     onClick={() => navigate("/notif")}
                   />
                 </button>
               </div>
-              <div className="dropdown">
+              <div class="dropdown">
                 <button
                   className="btn fw-bold text-white align-items-center "
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  style={{
-                    background: "#489CFF",
-                    borderRadius: "10px",
-                    padding: "5px 25px 5px 25px",
-                    fontSize: "16px",
-                  }}
+                  style={{}}
                 >
-                  <Icon
-                    icon="ep:user"
-                    width="24"
-                    height="24"
-                    color="white"
-                    className="me-2"
-                    onClick={() => navigate("/akunprofil")}
-                  />
-                  Akun
+                  <Icon icon="ep:user" width="24" height="24" className="" />
                 </button>
+                <ul className="dropdown-menu dropdown-menu-lg-start align-items-center">
+                  <li style={{ cursor: "pointer" }} className="">
+                    <a
+                      className="dropdown-item fw-bold  "
+                      aria-current="true"
+                      style={{ color: "#6148ff" }}
+                      onClick={() => navigate("/akunprofil")}
+                    >
+                      <Icon icon="solar:user-bold" className="me-1" />
+                      Akun
+                    </a>
+
+                    <a
+                      className="dropdown-item fw-bold"
+                      style={{ color: "#6148ff" }}
+                      onClick={LogoutUser}
+                    >
+                      <Icon
+                        icon="majesticons:logout-half-circle"
+                        className="me-1"
+                      />
+                      Logout
+                    </a>
+                  </li>
+                </ul>
               </div>
             </li>
           </ul>

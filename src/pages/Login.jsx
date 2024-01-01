@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BelajarWhite from "../../public/belajar-white.svg";
+import { Icon } from "@iconify/react";
 
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -44,6 +46,10 @@ function Login() {
       toast.error(error.message);
     }
   };
+
+  const Kembali = () => {
+    navigate("/");
+  };
   return (
     <div className="container-fluid">
       <div className="row ">
@@ -55,6 +61,14 @@ function Login() {
             }}
             onSubmit={onSubmit}
           >
+            <span
+              className="d-flex fw-bold align-items-center gap-2 mb-3"
+              style={{ cursor: "pointer", marginLeft: "-35px" }}
+              onClick={Kembali}
+            >
+              <Icon icon="formkit:arrowleft" />
+              <span style={{ padding: "" }}>Kembali </span>
+            </span>
             <h2>Login</h2>
             <div className="mb-3">
               <label htmlFor="username" className="form-tabel">
@@ -87,7 +101,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <p
-                className="forgot-password justify-content-end d-flex me-2 mt-3"
+                className="forgot-password justify-content-end d-flex me-2 mt-2 fw-bold"
                 style={{ fontSize: "12px" }}
               >
                 <Link to={"/forget-password"}>Forget Password ?</Link>
@@ -103,8 +117,31 @@ function Login() {
             >
               Login
             </button>
-            <p style={{ marginTop: "10px", textAlign: "center" }}>
-              Belum punya akun? <a href="/register">Daftar di sini</a>
+            <p
+              style={{
+                marginTop: "10px",
+                textAlign: "center",
+              }}
+            >
+              Belum punya akun?{" "}
+              <a href="/register" className="text-decoration-none fw-bold">
+                Daftar disini
+              </a>
+            </p>
+            <p
+              style={{
+                textAlign: "center",
+                marginTop: "-16px",
+              }}
+            >
+              Login sebagai
+              <a
+                className="text-decoration-none fw-bold"
+                style={{ cursor: "pointer", marginLeft: "4px" }}
+                onClick={() => navigate("/admin/login-admin")}
+              >
+                Admin
+              </a>
             </p>
           </form>
         </div>
