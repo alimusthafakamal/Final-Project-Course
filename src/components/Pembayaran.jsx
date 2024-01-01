@@ -118,7 +118,7 @@ const Pembayaran = () => {
                       data-bs-parent="#accordionExample"
                     >
                       <div className="accordion-body">
-                        <div className="d-flex gap-3 mt-1 align-items-center justify-content-center">
+                        <div className="d-flex gap-3 mt-1 galign-items-center justify-content-center">
                           <div class="form-check">
                             <input
                               class="form-check-input"

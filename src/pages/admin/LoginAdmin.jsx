@@ -1,7 +1,7 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function LoginAdmin() {
@@ -42,7 +42,7 @@ function LoginAdmin() {
       toast.error(error.message);
     }
   };
-  
+
   return (
     <div
       className="container-fluid"
@@ -102,6 +102,10 @@ function LoginAdmin() {
                 }}
               />
             </div>
+            <p style={{ marginTop: "10px", textAlign: "center" }}>
+              Belum punya akun?{" "}
+              <a href="/admin/register-admin">Daftar di sini</a>
+            </p>
             <button
               type="submit"
               className="btn btn-primary rounded-pill"
@@ -114,7 +118,6 @@ function LoginAdmin() {
             >
               Login
             </button>
-            <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
             <p
               className="justify-content-end d-flex me-3"
               style={{ fontSize: "14px" }}
@@ -125,10 +128,9 @@ function LoginAdmin() {
                 style={{ cursor: "pointer", marginLeft: "4px" }}
                 onClick={() => navigate("/login")}
               >
-                di Sini
+                disini
               </a>
             </p>
-            
           </form>
         </div>
       </div>
