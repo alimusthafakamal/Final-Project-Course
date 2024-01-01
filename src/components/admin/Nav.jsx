@@ -1,4 +1,6 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
+import LoginAdmin from '../../pages/admin/LoginAdmin';
 
 function Nav({Toggle}) {
   return (

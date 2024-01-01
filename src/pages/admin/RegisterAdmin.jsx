@@ -5,20 +5,21 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 function RegisterAdmin() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+
+  const [nameAdmin, setNameAdmin] = useState("");
+  const [emailAdmin, setEmailAdmin] = useState("");
+  const [phoneAdmin, setPhoneAdmin] = useState("")
+  const [passwordAdmin, setPasswordAdmin] = useState("");
+  const navigate = useNavigate()
   const handleregister = async (e) => {
     e.preventDefault();
 
     try {
       let data = JSON.stringify({
-        username: name,
-        email: email,
-        phoneNumber: phone,
-        password: password,
+        username: nameAdmin,
+        email: emailAdmin,
+        phoneNumber: phoneAdmin,
+        password: passwordAdmin,
       });
       let config = {
         method: "post",
@@ -40,10 +41,10 @@ function RegisterAdmin() {
         console.log(response.status);
         console.log(response.message);
       }
-      const { token } = response.data.data;
+      const { token } = response.data;
 
-      localStorage.setItem("token", token);
-
+      localStorage.setItem("tokenAdmin", token);
+      console.log('tokenAdmin', token)
       // navigate("/");
 
       // Temporary solution
@@ -56,6 +57,8 @@ function RegisterAdmin() {
       toast.error(error.message);
     }
   };
+
+
 
   return (
     <div
@@ -83,18 +86,14 @@ function RegisterAdmin() {
                 Name
               </label>
               <input
-                type="text"
-                name="name"
-                className="form-control rounded-pill"
-                id="name"
-                placeholder="Enter your name"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
-                onChange={(e) => setName(e.target.value)}
+                type='text'
+                name='name'
+                className='form-control rounded-pill'
+                id='name'
+                placeholder='Enter your name'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                onChange={(e)=>setNameAdmin(e.target.value)}
+
               />
             </div>
             <div className="mb-3">
@@ -102,18 +101,14 @@ function RegisterAdmin() {
                 Email
               </label>
               <input
-                type="email"
-                name="email"
-                className="form-control rounded-pill"
-                id="email"
-                placeholder="Enter your email"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
-                onChange={(e) => setEmail(e.target.value)}
+
+                type='email'
+                name='email'
+                className='form-control rounded-pill'
+                id='email'
+                placeholder='Enter your email'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                onChange={(e)=>setEmailAdmin(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -121,18 +116,14 @@ function RegisterAdmin() {
                 Password
               </label>
               <input
-                type="password"
-                name="password"
-                className="form-control rounded-pill"
-                id="password"
-                placeholder="Enter your password"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
-                onChange={(e) => setPassword(e.target.value)}
+
+                type='password'
+                name='password'
+                className='form-control rounded-pill'
+                id='password'
+                placeholder='Enter your password'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                onChange={(e)=>setPasswordAdmin(e.target.value)}
               />
             </div>
             <div className="mb-3">
@@ -140,36 +131,19 @@ function RegisterAdmin() {
                 Phone
               </label>
               <input
-                type="tel"
-                name="phone"
-                className="form-control rounded-pill"
-                id="phone"
-                placeholder="Enter your phone"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
-                onChange={(e) => setPhone(e.target.value)}
+                type='tel'
+                name='phone'
+                className='form-control rounded-pill'
+                id='phone'
+                placeholder='Enter your phone'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                onChange={(e)=>setPhoneAdmin(e.target.value)}
               />
             </div>
-            <p style={{ marginTop: "10px", textAlign: "center" }}>
-              Sudah punya akun? <a href="/admin/login-admin">Masuk di sini</a>
-            </p>
-            <button
-              type="submit"
-              className="btn btn-primary rounded-pill"
-              style={{
-                width: "452px",
-                height: "48px",
-                top: "8px",
-                left: "0px",
-              }}
-              onClick={handleregister}
-            >
-              Register
-            </button>
+            <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/admin/login-admin'>Masuk di sini</a></p>
+            <button type='submit' className='btn btn-primary rounded-pill' 
+            style={{ width: '452px', height: '48px', top: '8px', left: '0px' }} onClick={handleregister}>Register</button>
+
           </form>
         </div>
         <div className="col-md-6 d-none d-md-block">

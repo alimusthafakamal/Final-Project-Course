@@ -1,12 +1,14 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
+
 
 function LoginAdmin() {
-  const navigate = useNavigate();
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,10 +28,12 @@ function LoginAdmin() {
 
       const response = await axios.request(config);
 
+      console.log('lgin', response)
       const { token } = response.data;
 
-      localStorage.setItem("token", token);
-      console.log(token);
+
+
+      localStorage.setItem("tokenAdmin", token);
       // navigate("/");
 
       // Temporary solution
@@ -40,6 +44,7 @@ function LoginAdmin() {
         return;
       }
       toast.error(error.message);
+      // console.log("tokenAdmin", token)
     }
   };
 
@@ -68,21 +73,16 @@ function LoginAdmin() {
             onSubmit={onSubmit}
           >
             <h2>Login Admin</h2>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-tabel">
-                Username
-              </label>
+
+            <div className='mb-3'>
+              <label htmlFor='email' className='form-tabel'>Email</label>
               <input
-                type="text"
-                className="form-control rounded-pill"
-                id="username"
-                placeholder="Enter your username"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
+                type='text'
+                className='form-control rounded-pill'
+                id='username'
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder='Enter your username'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
               />
             </div>
             <div className="mb-3">
@@ -90,6 +90,19 @@ function LoginAdmin() {
                 Password
               </label>
               <input
+
+                type='password'
+                className='form-control rounded-pill'
+                id='password'
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder='Enter your password'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+              />
+            </div>
+            <button type='submit' className='btn btn-primary rounded-pill' style={{width: '452px', height: '48px', top: '8px', left: '0px'}}>
+              Login</button>
+            <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
+
                 type="password"
                 className="form-control rounded-pill"
                 id="password"

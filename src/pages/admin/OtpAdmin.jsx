@@ -6,21 +6,21 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function OtpAdmin() {
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [otpAdmin, setOtpAdmin] = useState(new Array(6).fill(""));
   const [otpError, setOtpError] = useState(false);
   const [otpBaru, setOtpBaru] = useState("");
   const { email } = useParams();
   const navigate = useNavigate();
-  console.log(otp);
+  console.log(otpAdmin);
   console.log(email);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
 
     const newOtp = [
-      ...otp.map((d, idx) => (idx === index ? element.value : d)),
+      ...otpAdmin.map((d, idx) => (idx === index ? element.value : d)),
     ];
-    setOtp(newOtp);
+    setOtpAdmin(newOtp);
 
     const enteredOtp = newOtp.join("");
     console.log(enteredOtp);
@@ -98,7 +98,7 @@ function OtpAdmin() {
             <h4 className="">Masukkan OTP</h4>
             <p className="text-center">
               Ketik 6 digit kode yang dikirimkan ke{" "}
-              <strong>${email}</strong>
+              <strong>j*****@gmail.com</strong>
             </p>
             <div className="mb-3">
               <label htmlFor="username" className="form-tabel">
@@ -108,7 +108,7 @@ function OtpAdmin() {
                 type="text"
                 className="form-control rounded-pill"
                 id="username"
-                placeholder="Enter your OTP here"
+                placeholder="Enter your email"
                 style={{
                   width: "452px",
                   height: "48px",

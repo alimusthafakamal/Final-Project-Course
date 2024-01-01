@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { auto } from '@popperjs/core';
 
 function KelolaKelasAdmin({ Toggle }) {
   const [userCount, setUserCount] = useState();
@@ -9,12 +10,13 @@ function KelolaKelasAdmin({ Toggle }) {
   const [premiumClassCount, setPremiumClassCount] = useState();
   const [courseItems, setCourseItems] = useState([]);
   const [newCourse, setNewCourse] = useState({
+    teacher: '',
     courseCode: '',
-    courseCategory: '',
     courseName: '',
+    courseCategory: '',
     typePremium: '',
     courseLevel: '',
-    coursePrice: '',
+    coursePrice: 0,
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
 
@@ -52,18 +54,21 @@ function KelolaKelasAdmin({ Toggle }) {
       [e.target.name]: e.target.value,
     });
   };
-
+  console.log("course", newCourse)
   const addCourse = async () => {
     try {
       await axios.post('https://mooc.code69.my.id/course', newCourse);
-      fetchData(); // Fetch updated data after adding a new course
-      setNewCourse(data.data.courseList ,{
+      setNewCourse({
+        teacher: '',
         courseCode: '',
-        courseCategory: '',
         courseName: '',
-        typePremium: '',
+        courseCategory: '',
         courseLevel: '',
-        coursePrice: '',
+        coursePrice: 0,
+        courseAbout: '',
+        courseFor: '',
+        urlTele: '',
+        typePremium: '',
       });
       setShowAddCourseModal(false); // Close the modal after adding a new course
     } catch (error) {
@@ -110,75 +115,95 @@ function KelolaKelasAdmin({ Toggle }) {
           </div>
         </div>
       </div>
-      <div className='container mt-3'>
-        <h2>Kelola Kelas</h2>
-        <button className="btn btn-success mb-3" onClick={() => setShowAddCourseModal(true)}>
-          Tambah Course
-        </button>
+      <div className='container'>
+        <div className='row'>
+          <div className='col-9'>
+            <h2>Kelola Kelas</h2>
+          </div>
+          <div className='col'>
+            <button className="btn btn-success mb-3" onClick={() => setShowAddCourseModal(true)}>
+              Tambah Course
+            </button>
+          </div>
+        </div>
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Kode Kelas</th>
-            <th scope="col">Kategori</th>
-            <th scope="col">Nama Kelas</th>
-            <th scope="col">Tipe Kelas</th>
-            <th scope="col">Level</th>
-            <th scope="col">Harga Kelas</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(courseItems) &&
-            courseItems.map((courseItem) => (
-              <tr key={courseItem.courseCode}>
-                <td>{courseItem.courseCode}</td>
-                <td>{courseItem.courseCategory}</td>
-                <td>{courseItem.courseName}</td>
-                <td>{courseItem.typePremium}</td>
-                <td>{courseItem.courseLevel}</td>
-                <td>{courseItem.coursePrice}</td>
-                <td>
-                  <button className="btn btn-warning">Edit</button>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteClass(courseItem.courseCode)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+            <div className='table-responsive'>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Guru</th>
+                    <th scope="col">Kode Kelas</th>
+                    <th scope="col">Kategori</th>
+                    <th scope="col">Level Kelas</th>
+                    <th scope="col">Harga Kelas</th>
+                    <th scope="col">Tentang Kelas</th>
+                    <th scope="col">Kelas untuk</th>
+                    <th scope="col">Link telegram</th>
+                    <th scope="col">Tipe Kelas</th>
+                    <th scope="col">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Array.isArray(courseItems) &&
+                    courseItems.map((courseItem) => (
+                      <tr key={courseItem.courseCode}>
+                        <td>{courseItem.teacher}</td>
+                        <td>{courseItem.courseCode}</td>
+                        <td>{courseItem.courseName}</td>
+                        <td>{courseItem.courseCategory}</td>
+                        <td>{courseItem.courseLevel}</td>
+                        <td>{courseItem.coursePrice}</td>
+                        <td>{courseItem.courseAbout}</td>
+                        <td>{courseItem.courseFor}</td>
+                        <td>{courseItem.urlTele}</td>
+                        <td>{courseItem.typePremium}</td>
+                        <td>
+                          <button className="btn btn-warning">Edit</button>
+                          <button
+                            className="btn btn-danger"
+                            onClick={() => deleteClass(courseItem.courseCode)}
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Add Course Modal */}
       {showAddCourseModal && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'}}>
           <div className="modal-dialog" role="document">
-            <div className="modal-content">
+            <div className="modal-content"style={{height: auto}}>
               <div className="modal-header">
-                <h5 className="modal-title">Tambah Course</h5>
+                <h5 className="modal-title" >Tambah Course</h5>
                 <button type="button" className="btn-close" onClick={() => setShowAddCourseModal(false)}></button>
               </div>
               <div className="modal-body">
                 <form>
                   {/* Form fields for adding a new course */}
                   <div className="mb-3">
-                    <label htmlFor="courseCode" className="form-label">Kode Kelas</label>
-                    <input type="text" className="form-control" id="courseCode" name="courseCode" value={newCourse.courseCode} onChange={handleInputChange} />
+                    <label htmlFor="teacher" className="form-label">Nama Guru</label>
+                    <input type="text" className="form-control" id="teacher" name="teacher" value={newCourse.teacher} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseCategory" className="form-label">Kategori</label>
-                    <input type="text" className="form-control" id="courseCategory" name="courseCategory" value={newCourse.courseCategory} onChange={handleInputChange} />
+                    <label htmlFor="courseCode" className="form-label">Kode Kelas</label>
+                    <input type="text" className="form-control" id="courseCode" name="courseCode" value={newCourse.courseCode} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="courseName" className="form-label">Nama Kelas</label>
                     <input type="text" className="form-control" id="courseName" name="courseName" value={newCourse.courseName} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
-                    <input type="text" className="form-control" id="typePremium" name="typePremium" value={newCourse.typePremium} onChange={handleInputChange} />
+                    <label htmlFor="courseCategory" className="form-label">Kategori</label>
+                    <input type="text" className="form-control" id="courseCategory" name="courseCategory" value={newCourse.courseCategory} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="courseLevel" className="form-label">Level Kelas</label>
@@ -186,7 +211,23 @@ function KelolaKelasAdmin({ Toggle }) {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="coursePrice" className="form-label">Harga Kelas</label>
-                    <input type="text" className="form-control" id="coursePrice" name="coursePrice" value={newCourse.coursePrice} onChange={handleInputChange} />
+                    <input type="number" className="form-control" id="coursePrice" name="coursePrice" value={newCourse.coursePrice} onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="courseAbout" className="form-label">Tentang Kelas</label>
+                    <input type="text" className="form-control" id="courseAbout" name="courseAbout" value={newCourse.courseAbout} onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="courseFor" className="form-label">Kelas Untuk</label>
+                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={newCourse.courseFor} onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="urlTele" className="form-label">Link telegram</label>
+                    <input type="hyperlink" className="form-control" id="urlTele" name="urlTele" value={newCourse.urlTele} onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
+                    <input type="text" className="form-control" id="typePremium" name="typePremium" value={newCourse.typePremium} onChange={handleInputChange} />
                   </div>
                 </form>
               </div>

@@ -15,7 +15,7 @@ function KelolaKelas() {
             {toggle && <div className='col-2 bg-primary bg-gradient vh-100'>
                 <Sidebar/>
             </div>}
-            <div className='col'>
+            <div className='col-10'>
                 <KelolaKelasAdmin Toggle={Toggle} />
             </div>
         </div>

@@ -1,19 +1,19 @@
 // src/components/Logout.js
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
-const Logout = () => {
-  const history = useHistory();
+const LogoutAdmin = () => {
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Clear user authentication token or session
     // For example, you might be using localStorage or sessionStorage
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenAdmin');
 
     // Redirect to the login page
-    history.push('/admin/login-admin');
-  }, [history]);
-
+    navigate('/admin/login-admin');
+  }, [navigate]);
+  console.log("navigate", navigate)
   return (
     <div>
       Logging out...
@@ -21,4 +21,4 @@ const Logout = () => {
   );
 };
 
-export default Logout;
+export default LogoutAdmin;

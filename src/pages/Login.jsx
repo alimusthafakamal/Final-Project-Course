@@ -29,7 +29,7 @@ function Login() {
       };
 
       const response = await axios.request(config);
-
+      console.log('lgin', response);
       const { token } = response.data;
 
       localStorage.setItem("token", token);
