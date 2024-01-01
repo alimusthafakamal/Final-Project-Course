@@ -2,10 +2,10 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
-
+import { useNavigate } from "react-router-dom";
 
 function LoginAdmin() {
+  const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -25,16 +25,15 @@ function LoginAdmin() {
       };
 
       const response = await axios.request(config);
-      
+
       const { token } = response.data;
 
-
       localStorage.setItem("token", token);
-      console.log(token)
+      console.log(token);
       // navigate("/");
 
       // Temporary solution
-      window.location.href = "/";
+      window.location.href = "/admin/dashboard";
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
@@ -45,46 +44,96 @@ function LoginAdmin() {
   };
   
   return (
-    <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
-      <div className='row align-items-center'>
-        <div className='col-md-6'>
-          <img
-            src="/images/img.jpg"
-            alt='Side Image'
-            className='img-fluid'
-          />
+    <div
+      className="container-fluid"
+      style={{
+        width: "1440px",
+        height: "950px",
+        top: "-987px",
+        left: "1575px",
+      }}
+    >
+      <div className="row align-items-center">
+        <div className="col-md-6">
+          <img src="/images/img.jpg" alt="Side Image" className="img-fluid" />
         </div>
-        <div className='col-md-6'>
-          <form style={{ width: '452px', height: '348px', top: '301px', left: '158px' }}onSubmit={onSubmit}>
+        <div className="col-md-6">
+          <form
+            style={{
+              width: "452px",
+              height: "348px",
+              top: "301px",
+              left: "158px",
+            }}
+            onSubmit={onSubmit}
+          >
             <h2>Login Admin</h2>
-            <div className='mb-3'>
-              <label htmlFor='username' className='form-tabel'>Username</label>
+            <div className="mb-3">
+              <label htmlFor="username" className="form-tabel">
+                Username
+              </label>
               <input
-                type='text'
-                className='form-control rounded-pill'
-                id='username'
-                placeholder='Enter your username'
-                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                type="text"
+                className="form-control rounded-pill"
+                id="username"
+                placeholder="Enter your username"
+                style={{
+                  width: "452px",
+                  height: "48px",
+                  top: "22px",
+                  left: "0px",
+                }}
               />
             </div>
-            <div className='mb-3'>
-              <label htmlFor='password' className='form-label'>Password</label>
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
               <input
-                type='password'
-                className='form-control rounded-pill'
-                id='password'
-                placeholder='Enter your password'
-                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                type="password"
+                className="form-control rounded-pill"
+                id="password"
+                placeholder="Enter your password"
+                style={{
+                  width: "452px",
+                  height: "48px",
+                  top: "22px",
+                  left: "0px",
+                }}
               />
             </div>
-            <button type='submit' className='btn btn-primary rounded-pill' style={{width: '452px', height: '48px', top: '8px', left: '0px'}}>
-              <a href='/admin/dashboard'>Login</a></button>
+            <button
+              type="submit"
+              className="btn btn-primary rounded-pill"
+              style={{
+                width: "452px",
+                height: "48px",
+                top: "8px",
+                left: "0px",
+              }}
+            >
+              Login
+            </button>
             <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
+            <p
+              className="justify-content-end d-flex me-3"
+              style={{ fontSize: "14px" }}
+            >
+              Login sebagai User
+              <a
+                className="text-decoration-none fw-bold"
+                style={{ cursor: "pointer", marginLeft: "4px" }}
+                onClick={() => navigate("/login")}
+              >
+                di Sini
+              </a>
+            </p>
+            
           </form>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default LoginAdmin;

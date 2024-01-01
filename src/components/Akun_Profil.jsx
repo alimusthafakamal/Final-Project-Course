@@ -1,4 +1,3 @@
-import { auto } from "@popperjs/core";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -102,7 +101,6 @@ const Akun_Profil = () => {
       fontFamily: "Montserrat",
       fontSize: "14px",
       fontStyle: "normal",
-      fontWeight: "500",
     },
 
     icons: {
@@ -281,10 +279,12 @@ const Akun_Profil = () => {
     handleuser();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <div className="row">
       <div style={styles.mainContainer}>
-        <div style={styles.backlink}>
+        <div style={styles.backlink} onClick={() => navigate("/")}>
           <svg
             style={styles.iconback}
             xmlns="http://www.w3.org/2000/svg"
@@ -300,12 +300,8 @@ const Akun_Profil = () => {
               d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"
             />
           </svg>
-          <a
-            href="/"
-            className="md-3 backlink"
-            style={{ textDecoration: "none" }}
-          >
-            Kembali ke Beranda{" "}
+          <a className="md-3 backlink" style={{ textDecoration: "none" }}>
+            Kembali ke Beranda
           </a>
         </div>
         <div style={styles.header}>
@@ -410,6 +406,7 @@ const Akun_Profil = () => {
                             type="file"
                             className="custom-file-input"
                             id="inputGroupFile01"
+                            style={{ fontSize: "10px" }}
                           ></input>
                         </div>
                       </div>
