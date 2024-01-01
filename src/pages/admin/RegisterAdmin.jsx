@@ -5,20 +5,21 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function RegisterAdmin() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("")
-  const [password, setPassword] = useState("");
+  const [nameAdmin, setNameAdmin] = useState("");
+  const [emailAdmin, setEmailAdmin] = useState("");
+  const [phoneAdmin, setPhoneAdmin] = useState("")
+  const [passwordAdmin, setPasswordAdmin] = useState("");
   const navigate = useNavigate()
+
   const handleregister = async (e) => {
     e.preventDefault();
 
     try {
       let data = JSON.stringify({
-        username: name,
-        email: email,
-        phoneNumber: phone,
-        password: password,
+        username: nameAdmin,
+        email: emailAdmin,
+        phoneNumber: phoneAdmin,
+        password: passwordAdmin,
       });
       let config = {
         method: "post",
@@ -42,8 +43,8 @@ function RegisterAdmin() {
       }
       const { token } = response.data;
 
-      localStorage.setItem("token", token);
-      console.log('token', token)
+      localStorage.setItem("tokenAdmin", token);
+      console.log('tokenAdmin', token)
       // navigate("/");
 
       // Temporary solution
@@ -74,7 +75,7 @@ function RegisterAdmin() {
                 id='name'
                 placeholder='Enter your name'
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
-                onChange={(e)=>setName(e.target.value)}
+                onChange={(e)=>setNameAdmin(e.target.value)}
               />
             </div>
             <div className='mb-3'>
@@ -86,7 +87,7 @@ function RegisterAdmin() {
                 id='email'
                 placeholder='Enter your email'
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={(e)=>setEmailAdmin(e.target.value)}
               />
             </div>
             <div className='mb-3'>
@@ -98,7 +99,7 @@ function RegisterAdmin() {
                 id='password'
                 placeholder='Enter your password'
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
-                onChange={(e)=>setPassword(e.target.value)}
+                onChange={(e)=>setPasswordAdmin(e.target.value)}
               />
             </div>
             <div className='mb-3'>
@@ -110,7 +111,7 @@ function RegisterAdmin() {
                 id='phone'
                 placeholder='Enter your phone'
                 style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
-                onChange={(e)=>setPhone(e.target.value)}
+                onChange={(e)=>setPhoneAdmin(e.target.value)}
               />
             </div>
             <p style={{ marginTop: '10px', textAlign: 'center' }}>Sudah punya akun? <a href='/admin/login-admin'>Masuk di sini</a></p>

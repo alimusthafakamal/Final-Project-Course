@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { auto } from '@popperjs/core';
 
 function KelolaKelasAdmin({ Toggle }) {
   const [userCount, setUserCount] = useState();
@@ -15,7 +16,7 @@ function KelolaKelasAdmin({ Toggle }) {
     courseCategory: '',
     typePremium: '',
     courseLevel: '',
-    coursePrice: '',
+    coursePrice: 0,
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
 
@@ -53,18 +54,17 @@ function KelolaKelasAdmin({ Toggle }) {
       [e.target.name]: e.target.value,
     });
   };
-
+  console.log("course", newCourse)
   const addCourse = async () => {
     try {
       await axios.post('https://mooc.code69.my.id/course', newCourse);
-      fetchData(); // Fetch updated data after adding a new course
       setNewCourse({
         teacher: '',
         courseCode: '',
         courseName: '',
         courseCategory: '',
         courseLevel: '',
-        coursePrice: '',
+        coursePrice: 0,
         courseAbout: '',
         courseFor: '',
         urlTele: '',
@@ -152,6 +152,7 @@ function KelolaKelasAdmin({ Toggle }) {
                       <tr key={courseItem.courseCode}>
                         <td>{courseItem.teacher}</td>
                         <td>{courseItem.courseCode}</td>
+                        <td>{courseItem.courseName}</td>
                         <td>{courseItem.courseCategory}</td>
                         <td>{courseItem.courseLevel}</td>
                         <td>{courseItem.coursePrice}</td>
@@ -178,11 +179,11 @@ function KelolaKelasAdmin({ Toggle }) {
       </div>
       {/* Add Course Modal */}
       {showAddCourseModal && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'}}>
           <div className="modal-dialog" role="document">
-            <div className="modal-content">
+            <div className="modal-content"style={{height: auto}}>
               <div className="modal-header">
-                <h5 className="modal-title">Tambah Course</h5>
+                <h5 className="modal-title" >Tambah Course</h5>
                 <button type="button" className="btn-close" onClick={() => setShowAddCourseModal(false)}></button>
               </div>
               <div className="modal-body">
@@ -197,6 +198,10 @@ function KelolaKelasAdmin({ Toggle }) {
                     <input type="text" className="form-control" id="courseCode" name="courseCode" value={newCourse.courseCode} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
+                    <label htmlFor="courseName" className="form-label">Nama Kelas</label>
+                    <input type="text" className="form-control" id="courseName" name="courseName" value={newCourse.courseName} onChange={handleInputChange} />
+                  </div>
+                  <div className="mb-3">
                     <label htmlFor="courseCategory" className="form-label">Kategori</label>
                     <input type="text" className="form-control" id="courseCategory" name="courseCategory" value={newCourse.courseCategory} onChange={handleInputChange} />
                   </div>
@@ -206,7 +211,7 @@ function KelolaKelasAdmin({ Toggle }) {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="coursePrice" className="form-label">Harga Kelas</label>
-                    <input type="text" className="form-control" id="coursePrice" name="coursePrice" value={newCourse.coursePrice} onChange={handleInputChange} />
+                    <input type="number" className="form-control" id="coursePrice" name="coursePrice" value={newCourse.coursePrice} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="courseAbout" className="form-label">Tentang Kelas</label>

@@ -8,7 +8,7 @@ const LogoutAdmin = () => {
   useEffect(() => {
     // Clear user authentication token or session
     // For example, you might be using localStorage or sessionStorage
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenAdmin');
 
     // Redirect to the login page
     navigate('/admin/login-admin');

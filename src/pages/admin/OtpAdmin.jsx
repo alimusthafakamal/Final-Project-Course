@@ -6,21 +6,21 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function OtpAdmin() {
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [otpAdmin, setOtpAdmin] = useState(new Array(6).fill(""));
   const [otpError, setOtpError] = useState(false);
   const [otpBaru, setOtpBaru] = useState("");
   const { email } = useParams();
   const navigate = useNavigate();
-  console.log(otp);
+  console.log(otpAdmin);
   console.log(email);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
 
     const newOtp = [
-      ...otp.map((d, idx) => (idx === index ? element.value : d)),
+      ...otpAdmin.map((d, idx) => (idx === index ? element.value : d)),
     ];
-    setOtp(newOtp);
+    setOtpAdmin(newOtp);
 
     const enteredOtp = newOtp.join("");
     console.log(enteredOtp);
@@ -86,11 +86,11 @@ function OtpAdmin() {
               width="32"
               height="32"
               fill="currentColor"
-              className="bi bi-arrow-left"
+              class="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path
-                fillRule="evenodd"
+                fill-rule="evenodd"
                 d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"
               />
             </svg>
@@ -130,7 +130,7 @@ function OtpAdmin() {
                 <p>Kirim Ulang OTP dalam 60 detik</p>
               </div>
             )}
-            <div className="d-grid">
+            <div class="d-grid">
               <button
                 type="submit"
                 onClick={onSubmit}
@@ -146,10 +146,10 @@ function OtpAdmin() {
                 Simpan
               </button>
             </div>
-            <div className="d-grid gap-2 mt-5">
+            <div class="d-grid gap-2 mt-5">
               <button
                 type="button"
-                className="btn btn-success"
+                class="btn btn-success"
                 style={{
                   width: "70%",
                   height: "48px",
