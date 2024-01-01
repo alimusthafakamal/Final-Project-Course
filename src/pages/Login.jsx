@@ -101,9 +101,15 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <p
-                className="forgot-password justify-content-end d-flex me-2 mt-2 fw-bold"
+                className="forgot-password justify-content-between d-flex me-2 mt-2 fw-bold"
                 style={{ fontSize: "12px" }}
               >
+                <p>
+                  Belum punya akun?
+                  <a href="/register" className="text-decoration-none fw-bold">
+                    Daftar disini
+                  </a>
+                </p>
                 <Link to={"/forget-password"}>Forget Password ?</Link>
               </p>
             </div>
@@ -117,30 +123,18 @@ function Login() {
             >
               Login
             </button>
+
             <p
-              style={{
-                marginTop: "10px",
-                textAlign: "center",
-              }}
+              className="justify-content-end d-flex me-3"
+              style={{ fontSize: "14px" }}
             >
-              Belum punya akun?{" "}
-              <a href="/register" className="text-decoration-none fw-bold">
-                Daftar disini
-              </a>
-            </p>
-            <p
-              style={{
-                textAlign: "center",
-                marginTop: "-16px",
-              }}
-            >
-              Login sebagai
+              Login sebagai Admin
               <a
                 className="text-decoration-none fw-bold"
                 style={{ cursor: "pointer", marginLeft: "4px" }}
                 onClick={() => navigate("/admin/login-admin")}
               >
-                Admin
+                disini
               </a>
             </p>
           </form>
