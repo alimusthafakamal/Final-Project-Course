@@ -1,5 +1,7 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 
 function LoginAdmin() {
@@ -31,7 +33,7 @@ function LoginAdmin() {
       // navigate("/");
 
       // Temporary solution
-      window.location.href = "/";
+      window.location.href = "/admin/dashboard";
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
@@ -40,7 +42,7 @@ function LoginAdmin() {
       toast.error(error.message);
     }
   };
-
+  
   return (
     <div
       className="container-fluid"
@@ -112,8 +114,9 @@ function LoginAdmin() {
             >
               Login
             </button>
+            <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
             <p
-              className="justify-content-end d-flex mt-2 me-3"
+              className="justify-content-end d-flex me-3"
               style={{ fontSize: "14px" }}
             >
               Login sebagai User
@@ -125,6 +128,7 @@ function LoginAdmin() {
                 di Sini
               </a>
             </p>
+            
           </form>
         </div>
       </div>
