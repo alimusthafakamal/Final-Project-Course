@@ -243,7 +243,7 @@ function KelolaKelasAdmin({ Toggle }) {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="urlTele" className="form-label">Link telegram</label>
-                    <input type="hyperlink" className="form-control" id="urlTele" name="urlTele" value={newCourse.urlTele} onChange={handleInputChange} />
+                    <input type="url" className="form-control" id="urlTele" name="urlTele" value={newCourse.urlTele} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
@@ -298,13 +298,12 @@ function KelolaKelasAdmin({ Toggle }) {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="urlTele" className="form-label">Link telegram</label>
-                    <input type="hyperlink" className="form-control" id="urlTele" name="urlTele" value={selectedCourse.urlTele} onChange={handleInputChangeEdit} />
+                    <input type="url" className="form-control" id="urlTele" name="urlTele" value={selectedCourse.urlTele} onChange={handleInputChangeEdit} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
                     <input type="text" className="form-control" id="typePremium" name="typePremium" value={selectedCourse.typePremium} onChange={handleInputChangeEdit} />
                   </div>
-                  <input type="hidden" name="courseCode" value={selectedCourse.courseCode} />
                 </form>
               </div>
               <div className="modal-footer">
