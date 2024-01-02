@@ -166,7 +166,7 @@ function RegisterAdmin() {
                 top: "8px",
                 left: "0px",
               }}
-              onClick={handleregister}
+              onClick={handleRegister}
             >
               Register
             </button>

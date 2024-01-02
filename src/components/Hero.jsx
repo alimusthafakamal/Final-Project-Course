@@ -1,59 +1,59 @@
 import React, { useEffect, useState } from "react";
 import HeroPoster from "../../public/hero-poster.svg";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+// import Modal from "react-bootstrap/Modal";
+// import Button from "react-bootstrap/Button";
 
 const Hero = () => {
   const navigate = useNavigate();
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const token = localStorage.getItem("token");
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+  // const token = localStorage.getItem("token");
 
-  const handleorder = async (e) => {
-    e.preventDefault();
+  // const handleorder = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      const token = localStorage.getItem("token");
+  //   try {
+  //     const token = localStorage.getItem("token");
 
-      let config = {
-        method: "post",
-        url: `https://mooc.code69.my.id/order`,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          accept: "*/*",
-        },
-        data: { courseCode: String(props.code) },
-      };
+  //     let config = {
+  //       method: "post",
+  //       url: `https://mooc.code69.my.id/order`,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //         accept: "*/*",
+  //       },
+  //       data: { courseCode: String(props.code) },
+  //     };
 
-      const response = await axios.request(config);
-      if (response.status == 200) {
-        console.log(response.data);
-        toast.success("berhasil");
-        navigate(`/pembayaran/${props.code}`);
-      } else {
-        console.log(response.status);
-        console.log(response.message);
-      }
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.response.data.message);
-      }
-      toast.error(error.message);
-    }
-  };
-  const ModalHandleLogin = () => {
-    Authorization: `Bearer ${token}`;
+  //     const response = await axios.request(config);
+  //     if (response.status == 200) {
+  //       console.log(response.data);
+  //       toast.success("berhasil");
+  //       navigate(`/pembayaran/${props.code}`);
+  //     } else {
+  //       console.log(response.status);
+  //       console.log(response.message);
+  //     }
+  //   } catch (error) {
+  //     if (axios.isAxiosError(error)) {
+  //       toast.error(error.response.data.message);
+  //     }
+  //     toast.error(error.message);
+  //   }
+  // };
+  // const ModalHandleLogin = () => {
+  //   Authorization: `Bearer ${token}`;
 
-    if (token !== null) {
-      navigate("/topik-kelas");
-    } else {
-      handleShow;
-    }
-  };
+  //   if (token !== null) {
+  //     navigate("/topik-kelas");
+  //   } else {
+  //     handleShow;
+  //   }
+  // };
 
   return (
     <section className="hero">
@@ -76,11 +76,12 @@ const Hero = () => {
                   radius: "10px",
                   color: "#6148ff",
                 }}
-                onClick={ModalHandleLogin}
+                // onClick={ModalHandleLogin}
+                onClick={() => navigate("/topik-kelas")}
               >
                 IKUTI KELAS
               </button>
-              <Modal show={show} onHide={handleClose}>
+              {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>Anda Belum Login</Modal.Title>
                 </Modal.Header>
@@ -93,7 +94,7 @@ const Hero = () => {
                     Close
                   </Button>
                 </Modal.Footer>
-              </Modal>
+              </Modal> */}
             </div>
           </div>
         </div>
