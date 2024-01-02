@@ -33,7 +33,7 @@ function RegisterAdmin() {
       const response = await axios.request(config);
       if (response.status == 200) {
         toast.success("Registrasi berhasil!");
-        navigate(`/admin/otp-admin/${email}`);
+        navigate(`/admin/login-admin`);
         console.log(response.status);
         console.log(response.message);
       } else {
