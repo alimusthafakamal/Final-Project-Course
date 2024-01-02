@@ -41,7 +41,7 @@ function Otp() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    console.log("run", otp);
     try {
       let data = JSON.stringify({
         email: email,
@@ -49,7 +49,7 @@ function Otp() {
       });
       let config = {
         method: "put",
-        url: `https://mooc.code69.my.id/verify-account`,
+        url: "https://mooc.code69.my.id/verify-account",
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,6 +57,7 @@ function Otp() {
       };
 
       const response = await axios.request(config);
+      console.log("response ", response);
       console.log(response.status);
       navigate("/login");
 
@@ -86,7 +87,7 @@ function Otp() {
               width="32"
               height="32"
               fill="currentColor"
-              class="bi bi-arrow-left"
+              className="bi bi-arrow-left"
               viewBox="0 0 16 16"
             >
               <path
@@ -100,23 +101,20 @@ function Otp() {
               Ketik 6 digit kode yang dikirimkan ke{" "}
               <strong>j*****@gmail.com</strong>
             </p>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-tabel">
-                OTP
-              </label>
-              <input
-                type="text"
-                className="form-control rounded-pill"
-                id="username"
-                placeholder="Enter your email"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
-                onChange={(e) => setOtpBaru(e.target.value)}
-              />
+            <div className="form-group d-flex justify-content-center">
+              {otp.map((data, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  className={`form-control otp-input ${
+                    otpError ? "otp-error" : ""
+                  }`}
+                  maxLength="1"
+                  value={data}
+                  onChange={(e) => handleChange(e.target, index)}
+                  onFocus={(e) => e.target.select()}
+                />
+              ))}
             </div>
             {otpError && (
               <div className="text-center mt-3 link-resend">
@@ -130,7 +128,7 @@ function Otp() {
                 <p>Kirim Ulang OTP dalam 60 detik</p>
               </div>
             )}
-            <div class="d-grid">
+            <div className="d-grid">
               <button
                 type="submit"
                 onClick={onSubmit}
@@ -146,10 +144,10 @@ function Otp() {
                 Simpan
               </button>
             </div>
-            <div class="d-grid gap-2 mt-5">
+            <div className="d-grid gap-2 mt-5">
               <button
                 type="button"
-                class="btn btn-success"
+                className="btn btn-success"
                 style={{
                   width: "70%",
                   height: "48px",
