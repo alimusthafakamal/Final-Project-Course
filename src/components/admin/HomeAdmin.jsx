@@ -10,31 +10,34 @@ function HomeAdmin({ Toggle }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        localStorage.getItem("tokenAdmin");
-        // Fetch data for Active Users
-        const activeUserResponse = await axios.get(
-          "https://mooc.code69.my.id/dashboard-data"
-        );
-        setUserCount(activeUserResponse.data.data.activeUser);
-        setActiveClassCount(activeUserResponse.data.data.activeClass);
-        setPremiumClassCount(activeUserResponse.data.data.premiumClass);
 
-        const paymentResponse = await axios.get(
-          "https://mooc.code69.my.id/admin/payment-status?page=1"
+        const token = localStorage.getItem("tokenAdmin");
+        console.log(token);
+        const response = axios.get(`https://mooc.code69.my.id/user`,
+        {
+          headers:{
+            Authorization:`Bearer ${token}`,
+          },
+        }
         );
-        setPaymentData(paymentResponse.data.paymentStatusResponse, {
-          page: "",
-          title: "",
-          categories: "",
-          status: "",
-        });
+        console.log("response",response);
+        // Fetch data for Active Users
+        const activeUserResponse = await axios.get('https://mooc.code69.my.id/dashboard-data');
+        setUserCount (activeUserResponse.data.data.activeUser)
+        setActiveClassCount (activeUserResponse.data.data.activeClass)
+        setPremiumClassCount (activeUserResponse.data.data.premiumClass)
+        
+        const paymentResponse = await axios.get('https://mooc.code69.my.id/admin/payment-status?page=1')
+        setPaymentData (paymentResponse.data.paymentStatusResponses)
 
         console.log("activeUserResponse", activeUserResponse);
         console.log("paymentResponse", paymentResponse);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+      
     };
+    
 
     fetchData();
   }, []); // Empty dependency array to run the effect only once on mount
