@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Await, Link } from 'react-router-dom';
 import { auto } from '@popperjs/core';
 
 function KelolaKelasAdmin({ Toggle }) {
@@ -19,13 +19,19 @@ function KelolaKelasAdmin({ Toggle }) {
     coursePrice: 0,
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState (false);
 
   useEffect(() => {
+    const token = localStorage.getItem("tokenAdmin");
+    setIsLoggedIn(!!token);
+    if (token) {
     fetchData();
+    }
   }, []);
 
   const fetchData = async () => {
     try {
+
       const activeUserResponse = await axios.get('https://mooc.code69.my.id/dashboard-data');
       setUserCount(activeUserResponse.data.data.activeUser);
       setActiveClassCount(activeUserResponse.data.data.activeClass);
@@ -41,8 +47,14 @@ function KelolaKelasAdmin({ Toggle }) {
 
   const deleteClass = async (courseCode) => {
     try {
-      await axios.delete(`https://mooc.code69.my.id/course/${courseCode}`);
-      fetchData(); // Fetch updated data after deletion
+      await axios.delete(`https://mooc.code69.my.id/course/${courseCode}`,
+      {
+        headers:{
+          Authorization:`Bearer ${localStorage.getItem("tokenAdmin")}`,
+        }
+      });
+      const updatedClassesResponse = await axios.get('https://mooc.code69.my.id/course');
+    setCourseItems(updatedClassesResponse.data.data.courseList)
     } catch (error) {
       console.error('Error deleting class:', error);
     }
@@ -57,23 +69,33 @@ function KelolaKelasAdmin({ Toggle }) {
   console.log("course", newCourse)
   const addCourse = async () => {
     try {
-      await axios.post('https://mooc.code69.my.id/course', newCourse);
+      await axios.post('https://mooc.code69.my.id/course', newCourse, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
+        },
+      });
+  
+      // Fetch updated course list
+      const updatedClassesResponse = await axios.get('https://mooc.code69.my.id/course');
+      setCourseItems(updatedClassesResponse.data.data.courseList);
+  
+      // Reset newCourse state
       setNewCourse({
         teacher: '',
         courseCode: '',
         courseName: '',
         courseCategory: '',
+        typePremium: '',
         courseLevel: '',
         coursePrice: 0,
-        courseAbout: '',
-        courseFor: '',
-        urlTele: '',
-        typePremium: '',
       });
-      setShowAddCourseModal(false); // Close the modal after adding a new course
+  
+      // Close the modal after adding a new course
+      setShowAddCourseModal(false);
     } catch (error) {
       console.error('Error adding course:', error);
     }
+    console.log("add course", addCourse);
   };
 
   return (
@@ -136,6 +158,7 @@ function KelolaKelasAdmin({ Toggle }) {
                   <tr>
                     <th scope="col">Guru</th>
                     <th scope="col">Kode Kelas</th>
+                    <th scope="col">Nama Kelas</th>
                     <th scope="col">Kategori</th>
                     <th scope="col">Level Kelas</th>
                     <th scope="col">Harga Kelas</th>
@@ -178,7 +201,7 @@ function KelolaKelasAdmin({ Toggle }) {
         </div>
       </div>
       {/* Add Course Modal */}
-      {showAddCourseModal && (
+      {isLoggedIn && showAddCourseModal && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'}}>
           <div className="modal-dialog" role="document">
             <div className="modal-content"style={{height: auto}}>
@@ -189,14 +212,6 @@ function KelolaKelasAdmin({ Toggle }) {
               <div className="modal-body">
                 <form>
                   {/* Form fields for adding a new course */}
-                  <div className="mb-3">
-                    <label htmlFor="teacher" className="form-label">Nama Guru</label>
-                    <input type="text" className="form-control" id="teacher" name="teacher" value={newCourse.teacher} onChange={handleInputChange} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="courseCode" className="form-label">Kode Kelas</label>
-                    <input type="text" className="form-control" id="courseCode" name="courseCode" value={newCourse.courseCode} onChange={handleInputChange} />
-                  </div>
                   <div className="mb-3">
                     <label htmlFor="courseName" className="form-label">Nama Kelas</label>
                     <input type="text" className="form-control" id="courseName" name="courseName" value={newCourse.courseName} onChange={handleInputChange} />
