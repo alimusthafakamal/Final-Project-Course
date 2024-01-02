@@ -232,7 +232,6 @@ const DetailKelas = () => {
                       </span>
                       <p className="" style={{ fontSize: "14px" }}>
                         {course.courseAbout}
-                        {course.courseAbout}
                       </p>
                       <span
                         className="col-6 fw-bold"
