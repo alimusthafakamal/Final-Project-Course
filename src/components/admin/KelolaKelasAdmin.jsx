@@ -221,9 +221,8 @@ function KelolaKelasAdmin({ Toggle }) {
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content" style={{ height: auto }}>
-            <div className="modal-content" style={{ height: auto }}>
               <div className="modal-header">
-                <h5 className="modal-title">Tambah/Edit Course</h5>
+                <h5 className="modal-title" >Tambah Course</h5>
                 <button type="button" className="btn-close" onClick={() => setShowAddCourseModal(false)}></button>
               </div>
               <div className="modal-body">
@@ -287,7 +286,7 @@ function KelolaKelasAdmin({ Toggle }) {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="courseFor" className="form-label">Kelas Untuk</label>
-                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={ newCourse.courseFor} onChange={handleInputChange} />
+                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={newCourse.courseFor} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="urlTele" className="form-label">
@@ -320,62 +319,7 @@ function KelolaKelasAdmin({ Toggle }) {
               </div>
               <div className="modal-footer">
                 <button type="button" className="btn btn-secondary" onClick={() => setShowAddCourseModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={addCourse}>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {isLoggedIn && showEditCourseModal && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
-          <div className="modal-dialog" role="document">
-            <div className="modal-content" style={{ height: auto }}>
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Course</h5>
-                <button type="button" className="btn-close" onClick={() => setShowEditCourseModal(false)}></button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="mb-3">
-                    <label htmlFor="courseName" className="form-label">Nama Kelas</label>
-                    <input type="text" className="form-control" id="courseName" name="courseName" value={selectedCourse.courseName} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="courseCategory" className="form-label">Kategori</label>
-                    <input type="text" className="form-control" id="courseCategory" name="courseCategory" value={selectedCourse.courseCategory} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="courseLevel" className="form-label">Level Kelas</label>
-                    <input type="text" className="form-control" id="courseLevel" name="courseLevel" value={selectedCourse.courseLevel} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="coursePrice" className="form-label">Harga Kelas</label>
-                    <input type="number" className="form-control" id="coursePrice" name="coursePrice" value={selectedCourse.coursePrice} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="courseAbout" className="form-label">Tentang Kelas</label>
-                    <input type="text" className="form-control" id="courseAbout" name="courseAbout" value={selectedCourse.courseAbout} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="courseFor" className="form-label">Kelas Untuk</label>
-                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={ selectedCourse.courseFor} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="urlTele" className="form-label">Link telegram</label>
-                    <input type="hyperlink" className="form-control" id="urlTele" name="urlTele" value={selectedCourse.urlTele} onChange={handleInputChangeEdit} />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
-                    <input type="text" className="form-control" id="typePremium" name="typePremium" value={selectedCourse.typePremium} onChange={handleInputChangeEdit} />
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowEditCourseModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={editCourse}>
-                {selectedCourse ? 'Edit' : 'Tambah'}
-                </button>
+                <button type="button" className="btn btn-primary" onClick={addCourse}>Tambah</button>
               </div>
             </div>
           </div>
