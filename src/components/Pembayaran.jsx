@@ -15,10 +15,8 @@ import { toast } from "react-toastify";
 const Pembayaran = () => {
   const navigate = useNavigate();
   const { code } = useParams();
-
   console.log(typeof code);
-
-  const HandleOrder = async (e) => {
+  const handleorder = async (e) => {
     e.preventDefault();
 
     try {
@@ -397,7 +395,8 @@ const Pembayaran = () => {
                       background: "#FF0000",
                       boxShadow: "0px 4px 4px 0px #00000026",
                     }}
-                    onClick={HandleOrder}
+                    // onClick={() => navigate("/pembayaran-sukses")}
+                    onClick={handleorder}
                   >
                     <span className="">Bayar dan Ikuti Kelas Selamanya</span>
                     <Icon icon="carbon:next-filled" width="24" height="24" />

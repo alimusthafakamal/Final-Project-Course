@@ -39,18 +39,18 @@ function App() {
         <Route path="/akunprofil" element={<AkunProfil />} />
         <Route path="/ubahpw" element={<Ubahpw />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-pass" element={<ResetPass />} />
         <Route path="/riwayat" element={<Riwayat />} />
 
         <Route path="/kelas-saya" element={<KelasSaya />} />
         <Route path="/topik-kelas" element={<TopikKelas />} />
-        <Route path="/:code" element={<DetailKelas />} />
-        <Route path="/pembayaran" element={<Pembayaran />} />
+        <Route path="/detail-kelas/:code" element={<DetailKelas />} />
+        <Route path="/pembayaran/:code" element={<Pembayaran />} />
         <Route path="/pembayaran-sukses" element={<PembayaranSukses />} />
         <Route path="/mulai-kelas" element={<MulaiKelas />} />
 
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/admin/otp-admin/:email" element={<OtpAdmin/>} />
+        <Route path="/admin/otp-admin/:email" element={<OtpAdmin />} />
         <Route path="/admin/login-admin" element={<LoginAdmin />} />
         <Route path="/admin/logout-admin" element={<LogoutAdmin />} />
         <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />

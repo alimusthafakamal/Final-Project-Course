@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 function Otp() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [otpError, setOtpError] = useState(false);
-  const [otpBaru, setOtpBaru] = useState("");
   const { email } = useParams();
   const navigate = useNavigate();
   console.log(otp);
@@ -16,7 +15,7 @@ function Otp() {
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
-
+    //new
     const newOtp = [
       ...otp.map((d, idx) => (idx === index ? element.value : d)),
     ];
@@ -46,7 +45,7 @@ function Otp() {
     try {
       let data = JSON.stringify({
         email: email,
-        otp: otpBaru,
+        otp: otp.join(""),
       });
       let config = {
         method: "put",
@@ -64,6 +63,7 @@ function Otp() {
       // Temporary solution
       // window.location.href = "/";
     } catch (error) {
+      console.log("error ", error);
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
         return;

@@ -16,7 +16,7 @@ const DetailKelas = () => {
     navigate("/");
   };
 
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [course, setCourse] = useState({});
   const [video, setVideo] = useState([]);
 
@@ -62,11 +62,6 @@ const DetailKelas = () => {
           console.log(response.status);
           console.log(response.message);
         }
-
-        // navigate("/");
-
-        // Temporary solution
-        // window.location.href = "/";
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);
@@ -79,7 +74,6 @@ const DetailKelas = () => {
   }, []);
   console.log(video);
   // console.log(video.subjects[0]);
-
   return (
     <>
       <NavigationBar />
@@ -103,131 +97,132 @@ const DetailKelas = () => {
           <div className="row d-flex justify-content-md-center">
             <div className="col-6">
               <div className="d-grid">
-                {
-                  <Card className="border border-0 bg-transparent" key={i}>
-                    <Card.Body
-                      className="row d-flex"
-                      onClick={() => setModalShow(true)}
-                    >
-                      <div className="col-md-6 d-flex align-items-center justify-content-between">
-                        <div
-                          className="dark-blue100 fw-bold"
-                          style={{ fontSize: "20px", lineHeight: "14px" }}
-                        >
-                          {course.courseCategory}
-                        </div>
-                      </div>
-                      <div className="col-md-6 align-items-center d-flex justify-content-end">
-                        <span className="fw-bold d-flex" style={{}}>
-                          <Icon
-                            icon="ic:round-star"
-                            width="14"
-                            height="14"
-                            color="#F9CC00"
-                          />
-                          <p style={{ fontSize: "14px" }}>5.0</p>
-                        </span>
-                      </div>
-                      <div className="deets">
-                        <Card.Title
-                          className="kursus-populer-title fw-bold"
-                          style={{ fontSize: "14px" }}
-                        >
-                          {course.courseName}
-                        </Card.Title>
-                        <Card.Subtitle
-                          className="fw-bold"
-                          style={{ fontSize: "10px" }}
-                        >
-                          {course.teacher}
-                        </Card.Subtitle>
-                      </div>
+                <Card className="border border-0 bg-transparent">
+                  <Card.Body
+                    className="row d-flex"
+                    onClick={() => setModalShow(true)}
+                  >
+                    <div className="col-md-6 d-flex align-items-center justify-content-between">
                       <div
-                        className="deets d-flex fw-bold"
-                        style={{ gap: "3px", padding: "3px 0 3px 0" }}
+                        className="dark-blue100 fw-bold"
+                        style={{ fontSize: "20px", lineHeight: "14px" }}
                       >
-                        <span
-                          className="col-3"
-                          style={{
-                            gap: "4px",
-                            marginLeft: "10px",
-                            fontSize: "12px",
-                          }}
-                        >
-                          <Icon
-                            icon="mdi:badge-outline"
-                            color="#73CA5C"
-                            width="14"
-                            height="14"
-                          />
-                          <a style={{ color: "#6148FF" }}>
-                            {course.courseLevel}
-                          </a>
-                        </span>
-                        <span
-                          className="col-2"
-                          style={{ gap: "4px", fontSize: "12px" }}
-                        >
-                          <Icon
-                            icon="clarity:book-line"
-                            color="#73CA5C"
-                            width="14"
-                            height="14"
-                          />
-                          <a>{course.numberOfModule} </a>
-                        </span>
-                        <span
-                          className="col-3"
-                          style={{ gap: "4px", fontSize: "12px" }}
-                        >
-                          <Icon
-                            icon="ri:time-fill"
-                            color="#73CA5C"
-                            width="14"
-                            height="14"
-                          />{" "}
-                          <a>120 Menit </a>
-                        </span>
+                        {course.courseCategory}
                       </div>
-                    </Card.Body>
-                    <div
-                      className="btn d-flex rounded-pill text-center text-white fw-bold justify-content-center align-items-center"
-                      style={{
-                        background: "#73CA5C",
-                        boxShadow: "0px 3px 2px 0px #0000001A",
-                        width: "269px",
-                        padding: "5px",
-                        gap: "10px",
-                      }}
-                    >
-                      <span style={{ fontSize: "16px" }}>
-                        {" "}
-                        <a
-                          style={{ color: "white", textDecoration: "none" }}
-                          href={course.urlTele}
-                          target="_blank"
-                        >
-                          Join Grup Telegram
-                        </a>
-                      </span>
-                      <Icon icon="gridicons:chat" style={{}} className="" />
                     </div>
-                  </Card>
-                }
+                    <div className="col-md-6 align-items-center d-flex justify-content-end">
+                      <span className="fw-bold d-flex" style={{}}>
+                        <Icon
+                          icon="ic:round-star"
+                          width="14"
+                          height="14"
+                          color="#F9CC00"
+                        />
+                        <p style={{ fontSize: "14px" }}>5.0</p>
+                      </span>
+                    </div>
+                    <div className="deets">
+                      <Card.Title
+                        className="kursus-populer-title fw-bold"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {course.courseName}
+                      </Card.Title>
+                      <Card.Subtitle
+                        className="fw-bold"
+                        style={{ fontSize: "10px" }}
+                      >
+                        {course.teacher}
+                      </Card.Subtitle>
+                    </div>
+                    <div
+                      className="deets d-flex fw-bold"
+                      style={{ gap: "3px", padding: "3px 0 3px 0" }}
+                    >
+                      <span
+                        className="col-3"
+                        style={{
+                          gap: "4px",
+                          marginLeft: "10px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        <Icon
+                          icon="mdi:badge-outline"
+                          color="#73CA5C"
+                          width="14"
+                          height="14"
+                        />
+                        <a style={{ color: "#6148FF" }}>{course.courseLevel}</a>
+                      </span>
+                      <span
+                        className="col-2"
+                        style={{ gap: "4px", fontSize: "12px" }}
+                      >
+                        <Icon
+                          icon="clarity:book-line"
+                          color="#73CA5C"
+                          width="14"
+                          height="14"
+                        />{" "}
+                        <a>Modul 6 </a>
+                      </span>
+                      <span
+                        className="col-3"
+                        style={{ gap: "4px", fontSize: "12px" }}
+                      >
+                        <Icon
+                          icon="ri:time-fill"
+                          color="#73CA5C"
+                          width="14"
+                          height="14"
+                        />{" "}
+                        <a>120 Menit </a>
+                      </span>
+                    </div>
+                  </Card.Body>
+                  <div
+                    className="btn d-flex rounded-pill text-center text-white fw-bold justify-content-center align-items-center"
+                    style={{
+                      background: "#73CA5C",
+                      boxShadow: "0px 3px 2px 0px #0000001A",
+                      width: "269px",
+                      padding: "5px",
+                      gap: "10px",
+                    }}
+                  >
+                    <span style={{ fontSize: "16px" }}>
+                      <a
+                        style={{ color: "white", textDecoration: "none" }}
+                        href={course.urlTele}
+                        target="_blank"
+                      >
+                        Join Grup Telegram
+                      </a>
+                    </span>
+                    <Icon icon="gridicons:chat" style={{}} className="" />
+                  </div>
+                </Card>
                 <div className=" col-6">
                   <div className="video d-grid ms-2 mt-5">
-                    <video
-                      controls
-                      // src={course.subjects[0].detail[0].url}
-                      className="play-video object-fit-cover border rounded my-4"
-                      style={{ background: "#000000D9" }}
-                    >
-                      <div className="justify-content-center align-items-center">
+                    <iframe
+                      className="video"
+                      src={`https://youtube.com/embed/rRSK7n4oeew`}
+                      title={`youtube player`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                    {/* // controls
+                      // src={`https://youtu.be/rRSK7n4oeew?si=L2QBHr3agTAH5LFY`}
+                      // className="play-video object-fit-cover border rounded my-4"
+                      // style={{ background: "#000000D9" }} */}
+
+                    {/* <div className="justify-content-center align-items-center">
                         <button className="btn btn-primary rounded-pill d-flex align-items-center gap-1">
                           <PlayCircleIcon className="icon text-white" />
                         </button>
-                      </div>
-                    </video>
+                      </div> */}
+
                     <div className="desc">
                       <span
                         className="col-6 fw-bold"
@@ -236,6 +231,7 @@ const DetailKelas = () => {
                         Tentang Kelas
                       </span>
                       <p className="" style={{ fontSize: "14px" }}>
+                        {course.courseAbout}
                         {course.courseAbout}
                       </p>
                       <span
@@ -250,8 +246,10 @@ const DetailKelas = () => {
                       >
                         <li className="list-group-item mb-2">
                           {course.courseFor?.substr(0, 17)}
+                          {course.courseFor?.substr(0, 17)}
                         </li>
                         <li className="list-group-item mb-2">
+                          {course.courseFor?.substr(18, 15)}
                           {course.courseFor?.substr(18, 15)}
                         </li>
                       </ol>
@@ -301,14 +299,12 @@ const DetailKelas = () => {
                   <div className="jenis-materi">
                     <div className="chapter">
                       <div>
-                        <ul class="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
+                        <ul className="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
                           <div className="header-chapter d-flex justify-content-between">
-                            <div className="intro-chapter">
-                              Chapter 1 - Pendahuluan
-                            </div>
+                            <div className="intro-chapter">Chapter 1</div>
                             <div className="durasi-chapter">60 menit</div>
                           </div>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               tujuan mengikuti kelas design system
                             </span>
@@ -320,7 +316,7 @@ const DetailKelas = () => {
                               style={{ color: "#73CA5C" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               pengenalan Design System
                             </span>
@@ -332,7 +328,7 @@ const DetailKelas = () => {
                               style={{ color: "#73CA5C" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               Contoh dalam membangun design system
                             </span>
@@ -350,7 +346,7 @@ const DetailKelas = () => {
                             </div>
                             <div className="durasi-chapter">120 menit</div>
                           </div>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">color pallete</span>
                             <Icon
                               icon="bxs:lock"
@@ -360,7 +356,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">
                               Typography, layout, dan grid
                             </span>
@@ -372,7 +368,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -382,7 +378,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -392,7 +388,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -402,7 +398,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -412,7 +408,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi">
+                          <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
                             <Icon
                               icon="bxs:lock"
@@ -422,7 +418,7 @@ const DetailKelas = () => {
                               style={{ color: "#D9D9D9" }}
                             />
                           </li>
-                          <li class="list-group-item row d-flex align-items-center list-materi underline">
+                          <li className="list-group-item row d-flex align-items-center list-materi underline">
                             <span className="col-10">membuat assets </span>
                             <Icon
                               icon="bxs:lock"

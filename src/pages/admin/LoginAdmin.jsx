@@ -47,7 +47,6 @@ function LoginAdmin() {
       // console.log("tokenAdmin", token)
     }
   };
-
   return (
     <div
       className="container-fluid"

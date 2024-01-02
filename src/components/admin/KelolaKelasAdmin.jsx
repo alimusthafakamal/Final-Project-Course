@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
@@ -10,12 +11,12 @@ function KelolaKelasAdmin({ Toggle }) {
   const [premiumClassCount, setPremiumClassCount] = useState();
   const [courseItems, setCourseItems] = useState([]);
   const [newCourse, setNewCourse] = useState({
-    teacher: '',
-    courseCode: '',
-    courseName: '',
-    courseCategory: '',
-    typePremium: '',
-    courseLevel: '',
+    teacher: "",
+    courseCode: "",
+    courseName: "",
+    courseCategory: "",
+    typePremium: "",
+    courseLevel: "",
     coursePrice: 0,
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
@@ -37,11 +38,13 @@ function KelolaKelasAdmin({ Toggle }) {
       setActiveClassCount(activeUserResponse.data.data.activeClass);
       setPremiumClassCount(activeUserResponse.data.data.premiumClass);
 
-      const classesResponse = await axios.get('https://mooc.code69.my.id/course');
+      const classesResponse = await axios.get(
+        "https://mooc.code69.my.id/course"
+      );
       setCourseItems(classesResponse.data.data.courseList);
-      console.log('Course Data', classesResponse);
+      console.log("Course Data", classesResponse);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -56,7 +59,7 @@ function KelolaKelasAdmin({ Toggle }) {
       const updatedClassesResponse = await axios.get('https://mooc.code69.my.id/course');
     setCourseItems(updatedClassesResponse.data.data.courseList)
     } catch (error) {
-      console.error('Error deleting class:', error);
+      console.error("Error deleting class:", error);
     }
   };
 
@@ -66,9 +69,10 @@ function KelolaKelasAdmin({ Toggle }) {
       [e.target.name]: e.target.value,
     });
   };
-  console.log("course", newCourse)
+  console.log("course", newCourse);
   const addCourse = async () => {
     try {
+
       await axios.post('https://mooc.code69.my.id/course', newCourse, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
@@ -88,71 +92,75 @@ function KelolaKelasAdmin({ Toggle }) {
         typePremium: '',
         courseLevel: '',
         coursePrice: 0,
+
       });
   
       // Close the modal after adding a new course
       setShowAddCourseModal(false);
     } catch (error) {
-      console.error('Error adding course:', error);
+      console.error("Error adding course:", error);
     }
     console.log("add course", addCourse);
   };
 
   return (
-    <div className='px-3'>
+    <div className="px-3">
       <Nav Toggle={Toggle} />
-      <div className='container-fluid'>
-        <div className='row g-3 gy-2 my-2'>
+      <div className="container-fluid">
+        <div className="row g-3 gy-2 my-2">
           {/* Active Users */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{userCount}</h3>
-                <p className='fs-5'>Active User</p>
+                <h3 className="fs-2">{userCount}</h3>
+                <p className="fs-5">Active User</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
 
           {/* Active Classes */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{activeClassCount}</h3>
-                <p className='fs-5'>Active Class</p>
+                <h3 className="fs-2">{activeClassCount}</h3>
+                <p className="fs-5">Active Class</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
 
           {/* Premium Classes */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{premiumClassCount}</h3>
-                <p className='fs-5'>Premium Class</p>
+                <h3 className="fs-2">{premiumClassCount}</h3>
+                <p className="fs-5">Premium Class</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
         </div>
       </div>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-9'>
+      <div className="container">
+        <div className="row">
+          <div className="col-9">
             <h2>Kelola Kelas</h2>
           </div>
-          <div className='col'>
-            <button className="btn btn-success mb-3" onClick={() => setShowAddCourseModal(true)}>
+          <div className="col">
+            <button
+              className="btn btn-success mb-3"
+              onClick={() => setShowAddCourseModal(true)}
+            >
               Tambah Course
             </button>
           </div>
         </div>
       </div>
-      <div className='container'>
-        <div className='row'>
-          <div className='col'>
-            <div className='table-responsive'>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="table-responsive">
               <table className="table">
                 <thead>
                   <tr>
@@ -201,54 +209,135 @@ function KelolaKelasAdmin({ Toggle }) {
         </div>
       </div>
       {/* Add Course Modal */}
+
       {isLoggedIn && showAddCourseModal && (
         <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'}}>
           <div className="modal-dialog" role="document">
-            <div className="modal-content"style={{height: auto}}>
+            <div className="modal-content" style={{ height: auto }}>
               <div className="modal-header">
-                <h5 className="modal-title" >Tambah Course</h5>
-                <button type="button" className="btn-close" onClick={() => setShowAddCourseModal(false)}></button>
+                <h5 className="modal-title">Tambah Course</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowAddCourseModal(false)}
+                ></button>
               </div>
               <div className="modal-body">
                 <form>
                   {/* Form fields for adding a new course */}
                   <div className="mb-3">
+
                     <label htmlFor="courseName" className="form-label">Nama Kelas</label>
                     <input type="text" className="form-control" id="courseName" name="courseName" value={newCourse.courseName} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseCategory" className="form-label">Kategori</label>
-                    <input type="text" className="form-control" id="courseCategory" name="courseCategory" value={newCourse.courseCategory} onChange={handleInputChange} />
+                    <label htmlFor="courseCategory" className="form-label">
+                      Kategori
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="courseCategory"
+                      name="courseCategory"
+                      value={newCourse.courseCategory}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseLevel" className="form-label">Level Kelas</label>
-                    <input type="text" className="form-control" id="courseLevel" name="courseLevel" value={newCourse.courseLevel} onChange={handleInputChange} />
+                    <label htmlFor="courseLevel" className="form-label">
+                      Level Kelas
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="courseLevel"
+                      name="courseLevel"
+                      value={newCourse.courseLevel}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="coursePrice" className="form-label">Harga Kelas</label>
-                    <input type="number" className="form-control" id="coursePrice" name="coursePrice" value={newCourse.coursePrice} onChange={handleInputChange} />
+                    <label htmlFor="coursePrice" className="form-label">
+                      Harga Kelas
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="coursePrice"
+                      name="coursePrice"
+                      value={newCourse.coursePrice}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseAbout" className="form-label">Tentang Kelas</label>
-                    <input type="text" className="form-control" id="courseAbout" name="courseAbout" value={newCourse.courseAbout} onChange={handleInputChange} />
+                    <label htmlFor="courseAbout" className="form-label">
+                      Tentang Kelas
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="courseAbout"
+                      name="courseAbout"
+                      value={newCourse.courseAbout}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseFor" className="form-label">Kelas Untuk</label>
-                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={newCourse.courseFor} onChange={handleInputChange} />
+                    <label htmlFor="courseFor" className="form-label">
+                      Kelas Untuk
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="courseFor"
+                      name="courseFor"
+                      value={newCourse.courseFor}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="urlTele" className="form-label">Link telegram</label>
-                    <input type="hyperlink" className="form-control" id="urlTele" name="urlTele" value={newCourse.urlTele} onChange={handleInputChange} />
+                    <label htmlFor="urlTele" className="form-label">
+                      Link telegram
+                    </label>
+                    <input
+                      type="hyperlink"
+                      className="form-control"
+                      id="urlTele"
+                      name="urlTele"
+                      value={newCourse.urlTele}
+                      onChange={handleInputChange}
+                    />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="typePremium" className="form-label">Tipe Kelas</label>
-                    <input type="text" className="form-control" id="typePremium" name="typePremium" value={newCourse.typePremium} onChange={handleInputChange} />
+                    <label htmlFor="typePremium" className="form-label">
+                      Tipe Kelas
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="typePremium"
+                      name="typePremium"
+                      value={newCourse.typePremium}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowAddCourseModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={addCourse}>Tambah</button>
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setShowAddCourseModal(false)}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={addCourse}
+                >
+                  Tambah
+                </button>
               </div>
             </div>
           </div>

@@ -5,10 +5,46 @@ import Card from "react-bootstrap/Card";
 import { Icon } from "@iconify/react";
 import KursusPopulerImage from "../../public/kursus-populer-image.svg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function BeliPremium(props) {
-    const navigate = useNavigate();
-    
+  const navigate = useNavigate();
+  console.log(props.code);
+  const handleorder = async (e) => {
+    e.preventDefault();
+
+    try {
+      const token = localStorage.getItem("token");
+
+      let config = {
+        method: "post",
+        url: `https://mooc.code69.my.id/order`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          accept: "*/*",
+        },
+        data: { courseCode: String(props.code) },
+      };
+
+      const response = await axios.request(config);
+      if (response.status == 200) {
+        console.log(response.data);
+        toast.success("berhasil");
+        navigate(`/pembayaran/${props.code}`);
+      } else {
+        console.log(response.status);
+        console.log(response.message);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response.data.message);
+      }
+      toast.error(error.message);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -158,7 +194,7 @@ function BeliPremium(props) {
                 gap: "8px",
                 boxShadow: "0px 4px 4px 0px #00000026",
               }}
-              onClick={() => navigate("/pembayaran")}
+              onClick={handleorder}
             >
               <span className="">Beli Sekarang</span>
               <Icon icon="carbon:next-filled" width="24" height="24" />

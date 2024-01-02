@@ -15,7 +15,7 @@ const UbahNavbar = () => {
     useEffect(() => {
       localStorage.removeItem("authToken");
 
-      navigate("/login");
+      navigate("/");
     }, [navigate]);
   };
 
