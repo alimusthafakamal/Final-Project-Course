@@ -33,10 +33,12 @@ function Register() {
 
       const response = await axios.request(config);
       if (response.status == 200) {
+        toast.success("Registrasi berhasil!");
         navigate(`/otp/${email}`);
         console.log(response.status);
         console.log(response.message);
       } else {
+        toast.error("Registrasi gagal.");
         console.log(response.status);
         console.log(response.message);
       }

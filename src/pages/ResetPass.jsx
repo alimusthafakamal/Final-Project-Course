@@ -4,38 +4,32 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function ForgetPassword() {
+function ResetPass() {
   const [resetToken, setResetToken] = useState("");
-  const [email, setEmail] = useState("");
+  const [newpassword, setNewPassword] = useState("");
+  const [newrepassword, setNewRePassword] = useState("");
 
-  console.log(email);
-  //   const handleGenerateToken = async () => {
-  //     const resetToken = await axios.post(
-  //       "https://mooc.code69.my.id/forget-password/generate-token"
-  //     );
-  //     setResetToken(resetToken.data);
-  //   };
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      //   let data = JSON.stringify({
-      //     emailAddress: email,
-      //   });
+      let data = JSON.stringify({
+        resetToken,
+        newpassword,
+        newrepassword,
+      });
       let config = {
-        method: "post",
-        url: `https://mooc.code69.my.id/forget-password/generate-token`,
+        method: "put",
+        url: `https://mooc.code69.my.id/forget-password/reset`,
         headers: {
           "Content-Type": "application/json",
-          emailAddress: email,
         },
-        // data: data,
+        data: data,
       };
 
       const response = await axios.request(config);
       if (response.status == 200) {
         console.log(response.data);
-        console.log(response);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -64,14 +58,32 @@ function ForgetPassword() {
             <h2>Reset Password</h2>
             <div className="mb-3">
               <label htmlFor="newpassword" className="form-tabel">
-                Masukkan email{" "}
+                Masukkan Password Baru{" "}
               </label>
               <input
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setNewPassword(e.target.value)}
                 type="text"
                 className="form-control rounded-pill"
-                id="email"
-                placeholder="Enter your email"
+                id="new password"
+                placeholder="Enter your new password"
+                style={{
+                  width: "452px",
+                  height: "48px",
+                  top: "22px",
+                  left: "0px",
+                }}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="newRePassword" className="form-tabel">
+                Ulangi Password Baru{" "}
+              </label>
+              <input
+                onChange={(e) => setNewRePassword(e.target.value)}
+                type="text"
+                className="form-control rounded-pill"
+                id="Password Baru"
+                placeholder="Enter your Password Baru"
                 style={{
                   width: "452px",
                   height: "48px",
@@ -101,8 +113,6 @@ function ForgetPassword() {
       </div>
     </div>
   );
-  
 }
 
-
-export default ForgetPassword;
+export default ResetPass;

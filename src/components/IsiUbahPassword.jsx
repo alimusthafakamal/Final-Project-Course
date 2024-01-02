@@ -1,10 +1,11 @@
 import { auto } from "@popperjs/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const IsiUbahPassword = () => {
   const styles = {
@@ -57,15 +58,17 @@ const IsiUbahPassword = () => {
 
     card: {
       height: "auto",
-      maxWidth: "100%",
+      Width: "auto",
       backgroundColor: "#ffff",
       borderRadius: "0px 0px 8px 8px",
       border: "2px solid #6148FF",
     },
 
     wrap: {
+      justifyContent: "center",
       marginTop: "20px",
       display: "flex",
+      flexWrap: "wrap",
       width: "100%",
     },
 
@@ -78,14 +81,15 @@ const IsiUbahPassword = () => {
       fontWeight: "700",
     },
 
-    menuItem: {
-      marginBottom: "2rem",
-      cursor: "pointer",
-      fontWeight: "500",
-      color: "black",
-      fontFamily: "Montserrat",
-      fontSize: "14px",
-      fontStyle: "normal",
+    asideleft: {
+      paddingLeft: "2rem",
+      paddingRight: "3rem",
+      wordWrap: "break-word",
+      paddingBottom: "1rem",
+    },
+
+    asideright: {
+      paddingLeft: "1rem",
     },
 
     icons: {
@@ -93,51 +97,33 @@ const IsiUbahPassword = () => {
       marginRight: "16px",
     },
 
-    menuActive: {
-      color: "#6148FF",
-      fontWeight: "700",
-    },
-
-    sidebarright: {
-      boxSizing: "border-box",
-      padding: "1rem",
-      width: "100%",
-      marginRight: "1rem",
-      fontSize: "12px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
-    },
-
     supertitle: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingLeft: "10%",
-      paddingBottom: "10%",
+      paddingBottom: "3%",
+      fontSize: "30px",
+      fontWeight: "700",
     },
-
     label: {
       fontFamily: "Poppins",
-      fontSize: "12x",
+      fontSize: "14px",
       marginBottom: "0.5rem",
       fontWeight: "500",
     },
 
-    input: {
-      width: "100%",
-      height: "auto",
-      borderRadius: "14px",
-      border: "1px solid #D0D0D0",
-      fontSize: "12px",
-      marginBottom: "40px",
+    visibleicon: {
+      borderRadius: "0px 14px 14px 0px",
+      backgroundColor: "white",
     },
 
     button: {
       backgroundColor: "#6148FF",
       borderRadius: "25px",
-      width: "100%",
+      width: "auto",
       color: "white",
       marginTop: "5%",
+      fontSize: "12px",
     },
     borderBottom: {
       borderBottom: "2px solid #E5E5E5",
@@ -229,19 +215,17 @@ const IsiUbahPassword = () => {
       toast.error(error.message);
     }
   };
-
-  const navigate = useNavigate();
   return (
     <div className="row">
       <div style={styles.mainContainer}>
-        <div style={styles.backlink} onClick={() => navigate("/")}>
+        <div style={styles.backlink}>
           <svg
             style={styles.iconback}
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
             fill="currentColor"
-            class="bi bi-arrow-left"
+            className="bi bi-arrow-left"
             viewBox="0 0 16 16"
             color="#6148FF"
           >
@@ -271,7 +255,7 @@ const IsiUbahPassword = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-pen"
+                      className="bi bi-pen"
                       viewBox="0 0 16 16"
                     >
                       <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
@@ -292,7 +276,7 @@ const IsiUbahPassword = () => {
                     width="24"
                     height="24"
                     fill="currentColor"
-                    class="bi bi-gear"
+                    className="bi bi-gear"
                     viewBox="0 0 16 16"
                   >
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
@@ -300,6 +284,7 @@ const IsiUbahPassword = () => {
                   </svg>
                   Ubah Password
                 </div>
+
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
                   <a href="/riwayat" style={{ textDecoration: "none" }}>
                     <svg
@@ -308,7 +293,7 @@ const IsiUbahPassword = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-cart3"
+                      className="bi bi-cart3"
                       viewBox="0 0 16 16"
                     >
                       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
@@ -324,7 +309,7 @@ const IsiUbahPassword = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-box-arrow-right"
+                      className="bi bi-box-arrow-right"
                       viewBox="0 0 16 16"
                     >
                       <path

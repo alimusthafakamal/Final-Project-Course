@@ -50,7 +50,11 @@ const KursusPopuler = () => {
     return course?.map((data, i) => {
       return (
         <div key={i} className="col d-flex gap-4">
-          <Card className="card" style={{ borderRadius: "1.3rem" }}>
+          <Card
+            className="card"
+            style={{ borderRadius: "1.3rem" }}
+            onClick={() => navigate(`/detail-kelas/${data.courseCode}`)}
+          >
             <Card.Img className="card-img" src={KursusPopulerImage} />
             <Card.Body className="row">
               <div className="col-8 d-flex align-items-center justify-content-between">
@@ -174,19 +178,23 @@ const KursusPopuler = () => {
 
             <button
               type="button"
-              className="btn rounded-pill btn-sm"
+              className="btn rounded-pill btn-sm px-5 "
               data-bs-toggle="button"
             >
               UI/UX Design
             </button>
-            <button className="btn rounded-pill btn-sm">
+            <button className="btn rounded-pill btn-sm px-5">
               Android Development
             </button>
 
-            <button className="btn rounded-pill btn-sm">Web Development</button>
-            <button className="btn rounded-pill btn-sm">IOS Development</button>
+            <button className="btn rounded-pill btn-sm px-4">
+              Web Development
+            </button>
+            <button className="btn rounded-pill btn-sm px-4">
+              IOS Development
+            </button>
 
-            <button className="btn rounded-pill btn-sm">
+            <button className="btn rounded-pill btn-sm px-4">
               Product Management
             </button>
           </div>

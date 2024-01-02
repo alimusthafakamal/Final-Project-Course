@@ -53,10 +53,6 @@ const TopikKelas = () => {
       });
   };
 
-  const HandleDetail = () => {
-    navigate(`/${code}`);
-  };
-
   const ActiveButton = () => {
     setActive(!active);
   };
@@ -76,7 +72,7 @@ const TopikKelas = () => {
             <Card
               className="card border border-0"
               style={{ borderRadius: "1.3rem", cursor: "pointer" }}
-              onClick={HandleDetail}
+              onClick={() => navigate(`/detail-kelas/${data.courseCode}`)}
             >
               <Card.Img className="card-img" src={KursusPopulerImage} />
               <Card.Body className="row">

@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-
-
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -63,12 +61,17 @@ function LoginAdmin() {
             <div className='mb-3'>
               <label htmlFor='email' className='form-tabel'>Email</label>
               <input
-                type='text'
-                className='form-control rounded-pill'
-                id='username'
+                type="text"
+                className="form-control rounded-pill"
+                id="username"
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder='Enter your username'
-                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
+                placeholder="Enter your username"
+                style={{
+                  width: "452px",
+                  height: "48px",
+                  top: "22px",
+                  left: "0px",
+                }}
               />
             </div>
             <div className='mb-3'>

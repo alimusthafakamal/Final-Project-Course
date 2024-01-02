@@ -30,16 +30,16 @@ const Akun_Profil = () => {
     },
     profileContent: {
       padding: "1rem",
+      justifyContent: "center",
       width: "100%",
       borderRadius: "0 10px 10px 0",
     },
     profileImagePlaceholder: {
       justifyContent: "center",
+      marginRight: "50px",
       width: "7rem",
-      height: "7rem",
-      borderRadius: "50%",
-      marginBottom: "2rem",
-      border: "2px solid #6148FF",
+      marginBottom: "1rem",
+      position: "relative",
     },
     iconback: {
       marginRight: "10px",
@@ -59,7 +59,7 @@ const Akun_Profil = () => {
     },
 
     title: {
-      paddingTop: "15px",
+      paddingTop: "10px",
       color: "white",
       fontSize: "20px",
       display: "flex",
@@ -78,55 +78,54 @@ const Akun_Profil = () => {
     },
 
     wrap: {
+      justifyContent: "center",
       marginTop: "20px",
       display: "flex",
+      flexWrap: "wrap",
       width: "100%",
     },
 
-    sidebarleft: {
-      padding: "1rem",
+    asideleft: {
       paddingLeft: "2rem",
-      width: "15rem",
-      marginRight: "10%",
-      fontSize: "14px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
+      paddingRight: "3rem",
+      wordWrap: "break-word",
+      paddingBottom: "1rem",
     },
 
-    menuItem: {
-      marginBottom: "2rem",
+    btnWarning: {
+      marginTop: "60px",
+      marginLeft: "60px",
+      padding: "5px 10px",
+      fontSize: "15px",
+      borderRadius: "10px",
+      color: "white",
+      backgroundColor: "blue",
+      border: "0",
+    },
+
+    btnWarningInput: {
       cursor: "pointer",
-      color: "black",
-      fontFamily: "Montserrat",
-      fontSize: "14px",
-      fontStyle: "normal",
+      position: "absolute",
+      tranformScale: "scale(5)",
+      opacity: "0",
+      top: "0",
+    },
+
+    asideright: {
+      paddingLeft: "1rem",
     },
 
     icons: {
       color: "#6148FF",
       marginRight: "16px",
     },
-
-    menuActive: {
-      color: "#6148FF",
-      fontWeight: "700",
-    },
-
-    sidebarright: {
-      padding: "0rem",
-      width: "20rem",
-      marginRight: "1rem",
-      fontSize: "14px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
-    },
-
     supertitle: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingLeft: "10%",
-      paddingBottom: "10%",
+      paddingBottom: "3%",
+      fontSize: "30px",
+      fontWeight: "700",
     },
 
     label: {
@@ -136,33 +135,24 @@ const Akun_Profil = () => {
       fontWeight: "500",
     },
 
-    input: {
-      width: "100%",
-      height: "auto",
-      borderRadius: "14px",
-      border: "1px solid #D0D0D0",
-      fontSize: "12px",
-      marginBottom: "40px",
-    },
-
     button: {
       backgroundColor: "#6148FF",
       borderRadius: "25px",
-      width: "100%",
+      width: "auto",
       color: "white",
       marginTop: "5%",
-      fontSize: "14px",
-      fontWeight: "500",
+      fontSize: "12px",
     },
 
-    uploadarea: {
-      paddingTop: "20px",
-      paddingLeft: "130px",
-    },
     borderBottom: {
       borderBottom: "2px solid #E5E5E5",
       paddingBottom: "7px",
-      marginBottom: "20px",
+      marginBottom: "15px",
+    },
+
+    uploadarea: {
+      paddingTop: "120px",
+      paddingLeft: "120px",
     },
   };
 
@@ -180,24 +170,12 @@ const Akun_Profil = () => {
     country: "",
     imageUrl: null,
   });
-
-  console.log(datauser.city);
-  // console.log(username)
-  // console.log(phoneNumber)
-  // console.log(city)
-  // console.log(country)
-  console.log("foto", imageUrl);
+  const navigate = useNavigate();
 
   const handleprofil = async (e) => {
     e.preventDefault();
 
     try {
-      console.log(email);
-      console.log(phoneNumber);
-      console.log(username);
-      console.log(city);
-      console.log(country);
-
       const token = localStorage.getItem("token");
       console.log(token);
       let config = {
@@ -225,11 +203,6 @@ const Akun_Profil = () => {
         console.log(response.status);
         console.log(response.message);
       }
-
-      // navigate("/");
-
-      // Temporary solution
-      // window.location.href = "/";
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
@@ -262,11 +235,6 @@ const Akun_Profil = () => {
           console.log(response.status);
           console.log(response.message);
         }
-
-        // navigate("/");
-
-        // Temporary solution
-        // window.location.href = "/";
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);
@@ -278,19 +246,17 @@ const Akun_Profil = () => {
     handleuser();
   }, []);
 
-  const navigate = useNavigate();
-
   return (
     <div className="row">
       <div style={styles.mainContainer}>
-        <div style={styles.backlink} onClick={() => navigate("/")}>
+        <div style={styles.backlink} onClick={() => navigate(`/`)}>
           <svg
             style={styles.iconback}
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
             fill="currentColor"
-            class="bi bi-arrow-left"
+            className="bi bi-arrow-left"
             viewBox="0 0 16 16"
             color="#6148FF"
           >
@@ -299,15 +265,19 @@ const Akun_Profil = () => {
               d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"
             />
           </svg>
-          <a className="md-3 backlink" style={{ textDecoration: "none" }}>
-            Kembali ke Beranda
+          <a
+            href="/"
+            className="md-3 backlink"
+            style={{ textDecoration: "none" }}
+          >
+            Kembali ke Beranda{" "}
           </a>
         </div>
         <div style={styles.header}>
           <h5 style={styles.title}>Akun</h5>
           <div style={styles.card}>
             <div style={styles.wrap}>
-              <aside style={styles.sidebarleft}>
+              <aside style={styles.asideleft}>
                 <div
                   style={{
                     ...styles.menuItem,
@@ -321,7 +291,7 @@ const Akun_Profil = () => {
                     width="24"
                     height="24"
                     fill="currentColor"
-                    class="bi bi-pen"
+                    className="bi bi-pen"
                     viewBox="0 0 16 16"
                   >
                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
@@ -336,7 +306,7 @@ const Akun_Profil = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-gear"
+                      className="bi bi-gear"
                       viewBox="0 0 16 16"
                     >
                       <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
@@ -353,7 +323,7 @@ const Akun_Profil = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-cart3"
+                      className="bi bi-cart3"
                       viewBox="0 0 16 16"
                     >
                       <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
@@ -369,7 +339,7 @@ const Akun_Profil = () => {
                       width="24"
                       height="24"
                       fill="currentColor"
-                      class="bi bi-box-arrow-right"
+                      className="bi bi-box-arrow-right"
                       viewBox="0 0 16 16"
                     >
                       <path
@@ -384,7 +354,7 @@ const Akun_Profil = () => {
                     <button
                       onClick={() => {
                         localStorage.removeItem("token");
-                        window.location.href = "/logout ";
+                        window.location.href = "/";
                       }}
                     >
                       Keluar
@@ -398,14 +368,26 @@ const Akun_Profil = () => {
                   <div style={styles.sidebarright}>
                     <div style={styles.profileContent}>
                       <div style={styles.profileImagePlaceholder}>
-                        <img src={datauser.imageUrl} />
+                        {" "}
+                        <div image style={{ width: "100%" }}>
+                          <img
+                            src={datauser.imageUrl}
+                            alt=""
+                            style={{
+                              width: "100%",
+                              height: "7rem",
+                              objectFit: "cover",
+                              borderRadius: "50%",
+                              border: "1px solid #6148FF",
+                            }}
+                          />
+                        </div>
                         <div className="custom-file" style={styles.uploadarea}>
                           <input
                             onChange={(e) => setImageUrl(e.target.files[0])}
                             type="file"
                             className="custom-file-input"
                             id="inputGroupFile01"
-                            style={{ fontSize: "10px" }}
                           ></input>
                         </div>
                       </div>
