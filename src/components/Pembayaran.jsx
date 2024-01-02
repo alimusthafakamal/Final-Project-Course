@@ -9,29 +9,38 @@ import MasterCard from "../../public/master-card.svg";
 import Visa from "../../public/visa.svg";
 import Amex from "../../public/amex.svg";
 import Paypal from "../../public/paypal.svg";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Pembayaran = () => {
   const navigate = useNavigate();
   const { code } = useParams();
-  console.log(code);
-  const handleprofil = async (e) => {
+  console.log(typeof code);
+  const handleorder = async (e) => {
     e.preventDefault();
 
     try {
       const token = localStorage.getItem("token");
-      console.log(token);
+
+      // let data = JSON.stringify({
+      //   courseCode: String(code),
+      // });
       let config = {
         method: "post",
-        url: `https://mooc.code69.my.id/order`,
+        url: `https://mooc.code69.my.id/order-updatePaidStatus`,
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
+          accept: "*/*",
         },
+        params: { courseCode: code },
+        data: { paymentMethod: "bank" },
       };
 
       const response = await axios.request(config);
       if (response.status == 200) {
         console.log(response.data);
+        navigate("/kelas-saya")
       } else {
         console.log(response.status);
         console.log(response.message);
@@ -44,7 +53,6 @@ const Pembayaran = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
-        return;
       }
       toast.error(error.message);
     }
@@ -296,7 +304,8 @@ const Pembayaran = () => {
                       background: "#FF0000",
                       boxShadow: "0px 4px 4px 0px #00000026",
                     }}
-                    onClick={() => navigate("/pembayaran-sukses")}
+                    // onClick={() => navigate("/pembayaran-sukses")}
+                    onClick={handleorder}
                   >
                     <span className="">Bayar dan Ikuti Kelas Selamanya</span>
                     <Icon icon="carbon:next-filled" width="24" height="24" />

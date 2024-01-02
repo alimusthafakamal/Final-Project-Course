@@ -1,10 +1,11 @@
 import { auto } from "@popperjs/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const IsiUbahPassword = () => {
   const styles = {
@@ -57,15 +58,17 @@ const IsiUbahPassword = () => {
 
     card: {
       height: "auto",
-      maxWidth: "100%",
+      Width: "auto",
       backgroundColor: "#ffff",
       borderRadius: "0px 0px 8px 8px",
       border: "2px solid #6148FF",
     },
 
     wrap: {
+      justifyContent: "center",
       marginTop: "20px",
       display: "flex",
+      flexWrap: "wrap",
       width: "100%",
     },
 
@@ -78,14 +81,15 @@ const IsiUbahPassword = () => {
       fontWeight: "700",
     },
 
-    menuItem: {
-      marginBottom: "2rem",
-      cursor: "pointer",
-      fontWeight: "500",
-      color: "black",
-      fontFamily: "Montserrat",
-      fontSize: "14px",
-      fontStyle: "normal",
+    asideleft: {
+      paddingLeft: "2rem",
+      paddingRight: "3rem",
+      wordWrap: "break-word",
+      paddingBottom: "1rem",
+    },
+
+    asideright: {
+      paddingLeft: "1rem",
     },
 
     icons: {
@@ -93,61 +97,77 @@ const IsiUbahPassword = () => {
       marginRight: "16px",
     },
 
-    menuActive: {
-      color: "#6148FF",
-      fontWeight: "700",
-    },
-
-    sidebarright: {
-      boxSizing: "border-box",
-      padding: "1rem",
-      width: "100%",
-      marginRight: "1rem",
-      fontSize: "12px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
-    },
-
     supertitle: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingLeft: "10%",
-      paddingBottom: "10%",
+      paddingBottom: "3%",
+      fontSize: "30px",
+      fontWeight: "700",
     },
-
     label: {
       fontFamily: "Poppins",
-      fontSize: "12x",
+      fontSize: "14px",
       marginBottom: "0.5rem",
       fontWeight: "500",
     },
 
-    input: {
-      width: "100%",
-      height: "auto",
-      borderRadius: "14px",
-      border: "1px solid #D0D0D0",
-      fontSize: "12px",
-      marginBottom: "40px",
+    visibleicon: {
+      borderRadius: "0px 14px 14px 0px",
+      backgroundColor: "white",
     },
 
     button: {
       backgroundColor: "#6148FF",
       borderRadius: "25px",
-      width: "100%",
+      width: "auto",
       color: "white",
       marginTop: "5%",
+      fontSize: "12px",
     },
     borderBottom: {
       borderBottom: "2px solid #E5E5E5",
       paddingBottom: "7px",
       marginBottom: "15px",
     },
+
+    
   };
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newrePassword, setNewRePassword] = useState("");
+
+  //  SC BARU visible password
+  const toggleOldPasswordVisibility = () => {
+    console.log("Toggling password visibility");
+    setShowOldPassword(!showOldPassword);
+  };
+  const toggleNewPasswordVisibility = () => {
+    console.log("Toggling password visibility");
+    setShowNewPassword(!showNewPassword);
+  };
+
+  const toggleNewRePasswordVisibility = () => {
+    console.log("Toggling password visibility");
+    setShowNewRePassword(!showNewRePassword);
+  };
+
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth < 425);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 425);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showNewRePassword, setShowNewRePassword] = useState(false);
+  //end of sc baru
 
   const onSubmit = async (e) => {
     // e.preventDefault();
@@ -266,6 +286,7 @@ const IsiUbahPassword = () => {
                   </svg>
                   Ubah Password
                 </div>
+
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
                   <a href="/riwayat" style={{ textDecoration: "none" }}>
                     <svg

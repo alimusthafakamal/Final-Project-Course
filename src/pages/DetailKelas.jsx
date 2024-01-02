@@ -62,11 +62,6 @@ const DetailKelas = () => {
           console.log(response.status);
           console.log(response.message);
         }
-
-        // navigate("/");
-
-        // Temporary solution
-        // window.location.href = "/";
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);
@@ -210,18 +205,24 @@ const DetailKelas = () => {
                 </Card>
                 <div className=" col-6">
                   <div className="video d-grid ms-2 mt-5">
-                    <video
-                      controls
-                      // src={course.subjects[0].detail[0].url}
-                      className="play-video object-fit-cover border rounded my-4"
-                      style={{ background: "#000000D9" }}
-                    >
-                      <div className="justify-content-center align-items-center">
+                    <iframe
+                      className="video"
+                      src={`https://youtube.com/embed/rRSK7n4oeew`}
+                      title={`youtube player`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                    {/* // controls
+                      // src={`https://youtu.be/rRSK7n4oeew?si=L2QBHr3agTAH5LFY`}
+                      // className="play-video object-fit-cover border rounded my-4"
+                      // style={{ background: "#000000D9" }} */}
+
+                    {/* <div className="justify-content-center align-items-center">
                         <button className="btn btn-primary rounded-pill d-flex align-items-center gap-1">
                           <PlayCircleIcon className="icon text-white" />
                         </button>
-                      </div>
-                    </video>
+                      </div> */}
+
                     <div className="desc">
                       <span
                         className="col-6 fw-bold"

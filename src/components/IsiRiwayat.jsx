@@ -89,7 +89,6 @@ const IsiRiwayat = () => {
       fontFamily: "Montserrat",
       fontSize: "14px",
       fontStyle: "normal",
-      
     },
 
     icons: {
@@ -176,10 +175,6 @@ const IsiRiwayat = () => {
           console.log(response.message);
         }
 
-        // navigate("/");
-
-        // Temporary solution
-        // window.location.href = "/";
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);

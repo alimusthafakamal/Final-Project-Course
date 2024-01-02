@@ -2,8 +2,10 @@ import { auto } from "@popperjs/core";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { useNavigate } from "react-router-dom";
 
 const NotificationItem = ({ type, message, date, isNew }) => {
+  const navigate = useNavigate();
   const styles = {
     container: {
       display: "flex",
@@ -13,7 +15,6 @@ const NotificationItem = ({ type, message, date, isNew }) => {
       backgroundColor: isNew ? "#ffff" : "transparent",
     },
     icon: {
-      // Placeholder style, replace with actual icon style
       marginRight: "0.5rem",
     },
     content: {
@@ -156,7 +157,7 @@ const Notifications = () => {
   return (
     <div className="row">
       <div style={styles.mainContainer}>
-        <div style={styles.backlink}>
+        <div style={styles.backlink} onClick={() => navigate(`/`)}>
           <svg
             style={styles.iconback}
             xmlns="http://www.w3.org/2000/svg"

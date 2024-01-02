@@ -30,6 +30,7 @@ const Akun_Profil = () => {
     },
     profileContent: {
       padding: "1rem",
+      justifyContent: "center",
       width: "100%",
       borderRadius: "0 10px 10px 0",
     },
@@ -37,10 +38,8 @@ const Akun_Profil = () => {
       justifyContent: "center",
       marginRight: "50px",
       width: "7rem",
-      height: "7rem",
-      borderRadius: "50%",
       marginBottom: "1rem",
-      border: "1px solid #6148FF",
+      position: "relative",
     },
     iconback: {
       marginRight: "10px",
@@ -60,7 +59,7 @@ const Akun_Profil = () => {
     },
 
     title: {
-      paddingTop: "15px",
+      paddingTop: "10px",
       color: "white",
       fontSize: "20px",
       display: "flex",
@@ -79,57 +78,54 @@ const Akun_Profil = () => {
     },
 
     wrap: {
+      justifyContent: "center",
       marginTop: "20px",
       display: "flex",
+      flexWrap: "wrap",
       width: "100%",
     },
 
-    sidebarleft: {
-      padding: "1rem",
+    asideleft: {
       paddingLeft: "2rem",
-      width: "15rem",
-      marginRight: "10%",
-      fontSize: "14px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
+      paddingRight: "3rem",
+      wordWrap: "break-word",
+      paddingBottom: "1rem",
     },
 
-    menuItem: {
-      marginBottom: "2rem",
+    btnWarning: {
+      marginTop: "60px",
+      marginLeft: "60px",
+      padding: "5px 10px",
+      fontSize: "15px",
+      borderRadius: "10px",
+      color: "white",
+      backgroundColor: "blue",
+      border: "0",
+    },
+
+    btnWarningInput: {
       cursor: "pointer",
-      fontWeight: "500",
-      color: "black",
-      fontFamily: "Montserrat",
-      fontSize: "14px",
-      fontStyle: "normal",
-      fontWeight: "500",
+      position: "absolute",
+      tranformScale: "scale(5)",
+      opacity: "0",
+      top: "0",
+    },
+
+    asideright: {
+      paddingLeft: "1rem",
     },
 
     icons: {
       color: "#6148FF",
       marginRight: "16px",
     },
-
-    menuActive: {
-      color: "#6148FF",
-      fontWeight: "700",
-    },
-
-    sidebarright: {
-      padding: "0rem",
-      width: "20rem",
-      marginRight: "1rem",
-      fontSize: "14px",
-      fontFamily: "Montserrat",
-      fontWeight: "700",
-    },
-
     supertitle: {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingLeft: "10%",
-      paddingBottom: "10%",
+      paddingBottom: "3%",
+      fontSize: "30px",
+      fontWeight: "700",
     },
 
     label: {
@@ -139,33 +135,24 @@ const Akun_Profil = () => {
       fontWeight: "500",
     },
 
-    input: {
-      width: "100%",
-      height: "auto",
-      borderRadius: "14px",
-      border: "1px solid #D0D0D0",
-      fontSize: "12px",
-      marginBottom: "40px",
-    },
-
     button: {
       backgroundColor: "#6148FF",
       borderRadius: "25px",
-      width: "100%",
+      width: "auto",
       color: "white",
       marginTop: "5%",
-      fontSize: "14px",
-      fontWeight: "500",
+      fontSize: "12px",
+    },
+
+    borderBottom: {
+      borderBottom: "2px solid #E5E5E5",
+      paddingBottom: "7px",
+      marginBottom: "15px",
     },
 
     uploadarea: {
       paddingTop: "120px",
       paddingLeft: "120px",
-    },
-    borderBottom: {
-      borderBottom: "2px solid #E5E5E5",
-      paddingBottom: "7px",
-      marginBottom: "20px",
     },
   };
 
@@ -183,24 +170,12 @@ const Akun_Profil = () => {
     country: "",
     imageUrl: null,
   });
-
-  console.log(datauser.city);
-  // console.log(username)
-  // console.log(phoneNumber)
-  // console.log(city)
-  // console.log(country)
-  console.log("foto", imageUrl);
+  const navigate = useNavigate();
 
   const handleprofil = async (e) => {
     e.preventDefault();
 
     try {
-      console.log(email);
-      console.log(phoneNumber);
-      console.log(username);
-      console.log(city);
-      console.log(country);
-
       const token = localStorage.getItem("token");
       console.log(token);
       let config = {
@@ -228,11 +203,6 @@ const Akun_Profil = () => {
         console.log(response.status);
         console.log(response.message);
       }
-
-      // navigate("/");
-
-      // Temporary solution
-      // window.location.href = "/";
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
@@ -265,11 +235,6 @@ const Akun_Profil = () => {
           console.log(response.status);
           console.log(response.message);
         }
-
-        // navigate("/");
-
-        // Temporary solution
-        // window.location.href = "/";
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);
@@ -284,7 +249,7 @@ const Akun_Profil = () => {
   return (
     <div className="row">
       <div style={styles.mainContainer}>
-        <div style={styles.backlink}>
+        <div style={styles.backlink} onClick={() => navigate(`/`)}>
           <svg
             style={styles.iconback}
             xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +369,19 @@ const Akun_Profil = () => {
                     <div style={styles.profileContent}>
                       <div style={styles.profileImagePlaceholder}>
                         {" "}
-                        <img src={datauser.imageUrl} alt="" />
+                        <div image style={{ width: "100%" }}>
+                          <img
+                            src={datauser.imageUrl}
+                            alt=""
+                            style={{
+                              width: "100%",
+                              height: "7rem",
+                              objectFit: "cover",
+                              borderRadius: "50%",
+                              border: "1px solid #6148FF",
+                            }}
+                          />
+                        </div>
                         <div className="custom-file" style={styles.uploadarea}>
                           <input
                             onChange={(e) => setImageUrl(e.target.files[0])}
