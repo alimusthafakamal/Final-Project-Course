@@ -62,6 +62,7 @@ const IsiUbahPassword = () => {
       backgroundColor: "#ffff",
       borderRadius: "0px 0px 8px 8px",
       border: "2px solid #6148FF",
+      paddingBottom: "12px",
     },
 
     wrap: {

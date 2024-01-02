@@ -151,8 +151,8 @@ const Akun_Profil = () => {
     },
 
     uploadarea: {
-      paddingTop: "120px",
-      paddingLeft: "120px",
+      fontSize: "12px",
+      paddingTop: "12px",
     },
   };
 
@@ -352,12 +352,13 @@ const Akun_Profil = () => {
                       />
                     </svg>
                     <button
+                      className="border border-0 bg-white"
                       onClick={() => {
                         localStorage.removeItem("token");
                         window.location.href = "/";
                       }}
                     >
-                      Keluar
+                      <span style={{ color: "#6148ff" }}>Keluar</span>
                     </button>
                   </a>
                 </div>
