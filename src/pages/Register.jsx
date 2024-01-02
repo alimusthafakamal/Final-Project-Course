@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import BelajarWhite from "../../public/belajar-white.svg";
+import { Icon } from "@iconify/react";
 
 function Register() {
   const [name, setName] = useState("");
@@ -56,6 +57,10 @@ function Register() {
     }
   };
 
+  const Kembali = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="container-fluid" style={{}}>
       <div className="row ">
@@ -67,6 +72,14 @@ function Register() {
               marginTop: "100px",
             }}
           >
+            <span
+              className="d-flex fw-bold align-items-center gap-2 mb-3"
+              style={{ cursor: "pointer", marginLeft: "-35px" }}
+              onClick={Kembali}
+            >
+              <Icon icon="formkit:arrowleft" />
+              <span style={{ padding: "" }}>Kembali </span>
+            </span>
             <h2>Registrasi</h2>
             <div className="mb-3">
               <label htmlFor="name" className="form-tabel">
@@ -145,7 +158,10 @@ function Register() {
               />
             </div>
             <p style={{ marginTop: "10px", textAlign: "center" }}>
-              Sudah punya akun? <a href="/login">Masuk di sini</a>
+              Sudah punya akun?{" "}
+              <a href="/login" className="fw-bold text-decoration-none">
+                Masuk disini
+              </a>
             </p>
             <button
               type="submit"
