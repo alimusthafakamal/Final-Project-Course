@@ -277,7 +277,7 @@ const Akun_Profil = () => {
           <h5 style={styles.title}>Akun</h5>
           <div style={styles.card}>
             <div style={styles.wrap}>
-              <aside style={styles.sidebarleft}>
+              <aside style={styles.asideleft}>
                 <div
                   style={{
                     ...styles.menuItem,

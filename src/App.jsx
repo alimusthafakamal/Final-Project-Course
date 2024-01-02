@@ -20,10 +20,10 @@ import LoginAdmin from "./pages/admin/LoginAdmin";
 import KelolaKelas from "./pages/admin/KelolaKelas";
 import ForgetPassword from "./pages/ForgetPassword";
 import RegisterAdmin from "./pages/admin/RegisterAdmin";
-import ResetPassword from "./pages/ResetPassword";
 import OtpAdmin from "./pages/admin/OtpAdmin";
 import LogoutAdmin from "./components/admin/LogoutAdmin";
 import LogoutUser from "./components/Logout";
+import ResetPass from "./pages/ResetPass";
 
 function App() {
   return (

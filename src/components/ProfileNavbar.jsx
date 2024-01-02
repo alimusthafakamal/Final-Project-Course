@@ -10,13 +10,8 @@ const UbahNavbar = () => {
   const navigate = useNavigate();
 
   const LogoutUser = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-      localStorage.removeItem("authToken");
-
-      navigate("/");
-    }, [navigate]);
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (

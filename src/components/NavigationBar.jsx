@@ -80,8 +80,8 @@ const NavigationBar = () => {
   };
 
   const LogoutUser = () => {
-    localStorage.removeItem("Token");
-    navigate("/login");
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   return (
