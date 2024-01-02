@@ -25,11 +25,12 @@ function LoginAdmin() {
       };
 
       const response = await axios.request(config);
-
-      console.log("lgin", response);
+      console.log('lgin', response)
       const { token } = response.data;
 
+
       localStorage.setItem("tokenAdmin", token);
+
       // navigate("/");
 
       // Temporary solution
@@ -43,36 +44,22 @@ function LoginAdmin() {
       // console.log("tokenAdmin", token)
     }
   };
+  
   return (
-    <div
-      className="container-fluid"
-      style={{
-        width: "1440px",
-        height: "950px",
-        top: "-987px",
-        left: "1575px",
-      }}
-    >
-      <div className="row align-items-center">
-        <div className="col-md-6">
-          <img src="/images/img.jpg" alt="Side Image" className="img-fluid" />
+    <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
+      <div className='row align-items-center'>
+        <div className='col-md-6'>
+          <img
+            src="/images/img.jpg"
+            alt='Side Image'
+            className='img-fluid'
+          />
         </div>
-        <div className="col-md-6">
-          <form
-            style={{
-              width: "452px",
-              height: "348px",
-              top: "301px",
-              left: "158px",
-            }}
-            onSubmit={onSubmit}
-          >
+        <div className='col-md-6'>
+          <form style={{ width: '452px', height: '348px', top: '301px', left: '158px' }}onSubmit={onSubmit}>
             <h2>Login Admin</h2>
-
-            <div className="mb-3">
-              <label htmlFor="email" className="form-tabel">
-                Email
-              </label>
+            <div className='mb-3'>
+              <label htmlFor='email' className='form-tabel'>Email</label>
               <input
                 type="text"
                 className="form-control rounded-pill"
@@ -87,59 +74,25 @@ function LoginAdmin() {
                 }}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
+            <div className='mb-3'>
+              <label htmlFor='password' className='form-label'>Password</label>
               <input
-                type="password"
-                className="form-control rounded-pill"
-                id="password"
+                type='password'
+                className='form-control rounded-pill'
+                id='password'
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                style={{
-                  width: "452px",
-                  height: "48px",
-                  top: "22px",
-                  left: "0px",
-                }}
+                placeholder='Enter your password'
+                style={{ width: '452px', height: '48px', top: '22px', left: '0px' }}
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary rounded-pill"
-              style={{
-                width: "452px",
-                height: "48px",
-                top: "8px",
-                left: "0px",
-              }}
-            >
-              Login
-            </button>
-            <p style={{ marginTop: "10px", textAlign: "center" }}>
-              Belum punya akun?{" "}
-              <a href="/admin/register-admin">Daftar di sini</a>
-            </p>
-
-            <p
-              className="justify-content-end d-flex me-3"
-              style={{ fontSize: "14px" }}
-            >
-              Login sebagai User
-              <a
-                className="text-decoration-none fw-bold"
-                style={{ cursor: "pointer", marginLeft: "4px" }}
-                onClick={() => navigate("/login")}
-              >
-                disini
-              </a>
-            </p>
+            <button type='submit' className='btn btn-primary rounded-pill' style={{width: '452px', height: '48px', top: '8px', left: '0px'}}>
+              Login</button>
+            <p style={{ marginTop: '10px', textAlign: 'center'}}>Belum punya akun? <a href='/admin/register-admin'>Daftar di sini</a></p>
           </form>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default LoginAdmin;

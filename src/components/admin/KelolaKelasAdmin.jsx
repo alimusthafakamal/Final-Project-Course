@@ -20,19 +20,20 @@ function KelolaKelasAdmin({ Toggle }) {
     coursePrice: 0,
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState (false);
+  const [showEditCourseModal, setShowEditCourseModal] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("tokenAdmin");
     setIsLoggedIn(!!token);
     if (token) {
-    fetchData();
+      fetchData();
     }
   }, []);
 
   const fetchData = async () => {
     try {
-
       const activeUserResponse = await axios.get('https://mooc.code69.my.id/dashboard-data');
       setUserCount(activeUserResponse.data.data.activeUser);
       setActiveClassCount(activeUserResponse.data.data.activeClass);
@@ -50,14 +51,13 @@ function KelolaKelasAdmin({ Toggle }) {
 
   const deleteClass = async (courseCode) => {
     try {
-      await axios.delete(`https://mooc.code69.my.id/course/${courseCode}`,
-      {
-        headers:{
-          Authorization:`Bearer ${localStorage.getItem("tokenAdmin")}`,
-        }
+      await axios.delete(`https://mooc.code69.my.id/course/${courseCode}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
+        },
       });
       const updatedClassesResponse = await axios.get('https://mooc.code69.my.id/course');
-    setCourseItems(updatedClassesResponse.data.data.courseList)
+      setCourseItems(updatedClassesResponse.data.data.courseList);
     } catch (error) {
       console.error("Error deleting class:", error);
     }
@@ -69,7 +69,14 @@ function KelolaKelasAdmin({ Toggle }) {
       [e.target.name]: e.target.value,
     });
   };
-  console.log("course", newCourse);
+
+  const handleInputChangeEdit = (e) => {
+    setNewCourse({
+      ...selectedCourse,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const addCourse = async () => {
     try {
 
@@ -78,12 +85,10 @@ function KelolaKelasAdmin({ Toggle }) {
           Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
         },
       });
-  
-      // Fetch updated course list
+
       const updatedClassesResponse = await axios.get('https://mooc.code69.my.id/course');
       setCourseItems(updatedClassesResponse.data.data.courseList);
-  
-      // Reset newCourse state
+
       setNewCourse({
         teacher: '',
         courseCode: '',
@@ -94,13 +99,17 @@ function KelolaKelasAdmin({ Toggle }) {
         coursePrice: 0,
 
       });
-  
-      // Close the modal after adding a new course
+
       setShowAddCourseModal(false);
     } catch (error) {
       console.error("Error adding course:", error);
     }
     console.log("add course", addCourse);
+  };
+
+  const editCourse = async (courseCode) => {
+    setSelectedCourse(courseCode);
+    setShowEditCourseModal(true);
   };
 
   return (
@@ -118,8 +127,6 @@ function KelolaKelasAdmin({ Toggle }) {
               <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
-
-          {/* Active Classes */}
           <div className="col-6 col-md-4 p-1">
             <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
@@ -129,8 +136,6 @@ function KelolaKelasAdmin({ Toggle }) {
               <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
-
-          {/* Premium Classes */}
           <div className="col-6 col-md-4 p-1">
             <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
@@ -192,7 +197,9 @@ function KelolaKelasAdmin({ Toggle }) {
                         <td>{courseItem.urlTele}</td>
                         <td>{courseItem.typePremium}</td>
                         <td>
-                          <button className="btn btn-warning">Edit</button>
+                          <button className="btn btn-warning" onClick={() => editCourse(courseItem)}>
+                            Edit
+                          </button>
                           <button
                             className="btn btn-danger"
                             onClick={() => deleteClass(courseItem.courseCode)}
@@ -211,20 +218,15 @@ function KelolaKelasAdmin({ Toggle }) {
       {/* Add Course Modal */}
 
       {isLoggedIn && showAddCourseModal && (
-        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block'}}>
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
           <div className="modal-dialog" role="document">
             <div className="modal-content" style={{ height: auto }}>
               <div className="modal-header">
-                <h5 className="modal-title">Tambah Course</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  onClick={() => setShowAddCourseModal(false)}
-                ></button>
+                <h5 className="modal-title" >Tambah Course</h5>
+                <button type="button" className="btn-close" onClick={() => setShowAddCourseModal(false)}></button>
               </div>
               <div className="modal-body">
                 <form>
-                  {/* Form fields for adding a new course */}
                   <div className="mb-3">
 
                     <label htmlFor="courseName" className="form-label">Nama Kelas</label>
@@ -283,17 +285,8 @@ function KelolaKelasAdmin({ Toggle }) {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="courseFor" className="form-label">
-                      Kelas Untuk
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="courseFor"
-                      name="courseFor"
-                      value={newCourse.courseFor}
-                      onChange={handleInputChange}
-                    />
+                    <label htmlFor="courseFor" className="form-label">Kelas Untuk</label>
+                    <input type="text" className="form-control" id="courseFor" name="courseFor" value={newCourse.courseFor} onChange={handleInputChange} />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="urlTele" className="form-label">
@@ -321,23 +314,12 @@ function KelolaKelasAdmin({ Toggle }) {
                       onChange={handleInputChange}
                     />
                   </div>
+                
                 </form>
               </div>
               <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={() => setShowAddCourseModal(false)}
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={addCourse}
-                >
-                  Tambah
-                </button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowAddCourseModal(false)}>Close</button>
+                <button type="button" className="btn btn-primary" onClick={addCourse}>Tambah</button>
               </div>
             </div>
           </div>
