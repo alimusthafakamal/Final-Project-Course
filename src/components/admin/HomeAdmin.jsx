@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Nav from '../admin/Nav';
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import Nav from "../admin/Nav";
+import axios from "axios";
 function HomeAdmin({ Toggle }) {
   const [userCount, setUserCount] = useState();
   const [activeClassCount, setActiveClassCount] = useState();
@@ -10,67 +10,70 @@ function HomeAdmin({ Toggle }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        localStorage.getItem("tokenAdmin");
         // Fetch data for Active Users
-        const activeUserResponse = await axios.get('https://mooc.code69.my.id/dashboard-data');
-        setUserCount (activeUserResponse.data.data.activeUser)
-        setActiveClassCount (activeUserResponse.data.data.activeClass)
-        setPremiumClassCount (activeUserResponse.data.data.premiumClass)
-        
-        const paymentResponse = await axios.get('https://mooc.code69.my.id/admin/payment-status')
-        setPaymentData (paymentResponse.data.paymentStatusResponse ,{
-          id :'',
-          category:'',
-          premiumCourse:'',
-          status:'',
-          paymentMethod:'',
-          paymentDate:'',
-        })
+        const activeUserResponse = await axios.get(
+          "https://mooc.code69.my.id/dashboard-data"
+        );
+        setUserCount(activeUserResponse.data.data.activeUser);
+        setActiveClassCount(activeUserResponse.data.data.activeClass);
+        setPremiumClassCount(activeUserResponse.data.data.premiumClass);
 
-        console.log('activeUserResponse', activeUserResponse)
-        console.log('paymentResponse', paymentResponse)
+        const paymentResponse = await axios.get(
+          "https://mooc.code69.my.id/admin/payment-status?page=1"
+        );
+        setPaymentData(paymentResponse.data.paymentStatusResponse, {
+          page: "",
+          title: "",
+          categories: "",
+          status: "",
+        });
+
+        console.log("activeUserResponse", activeUserResponse);
+        console.log("paymentResponse", paymentResponse);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
   }, []); // Empty dependency array to run the effect only once on mount
-  console.log('Payment Data',paymentData)
+  console.log("Payment Data", paymentData);
   return (
-    <div className='px-3'>
+    <div className="px-3">
       <Nav Toggle={Toggle} />
-      <div className='container-fluid'>
-        <div className='row g-3 gy-2 my-2'>
+      <div className="container-fluid">
+        <div className="row g-3 gy-2 my-2">
           {/* Active Users */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{userCount}</h3>
-                <p className='fs-5'>Active User</p>
+                <h3 className="fs-2">{userCount}</h3>
+                <p className="fs-5">Active User</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
 
           {/* Active Classes */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{activeClassCount}</h3>
-                <p className='fs-5'>Active Class</p>
+                <h3 className="fs-2">{activeClassCount}</h3>
+                <p className="fs-5">Active Class</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
 
           {/* Premium Classes */}
           <div className="col-6 col-md-4 p-1">
-            <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
+            <div className="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
               <div>
-                <h3 className='fs-2'>{premiumClassCount}</h3>
-                <p className='fs-5'>Premium Class</p>
+                <h3 className="fs-2">{premiumClassCount}</h3>
+                <p className="fs-5">Premium Class</p>
               </div>
-              <i className='bi bi-person p-3 fs-1'></i>
+              <i className="bi bi-person p-3 fs-1"></i>
             </div>
           </div>
         </div>

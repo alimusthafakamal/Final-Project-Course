@@ -130,8 +130,6 @@ const IsiUbahPassword = () => {
       paddingBottom: "7px",
       marginBottom: "15px",
     },
-
-    
   };
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");

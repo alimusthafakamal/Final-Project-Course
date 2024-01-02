@@ -5,21 +5,22 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function Otp() {
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+function OtpAdmin() {
+  const [otpAdmin, setOtpAdmin] = useState(new Array(6).fill(""));
   const [otpError, setOtpError] = useState(false);
+  const [otpBaru, setOtpBaru] = useState("");
   const { email } = useParams();
   const navigate = useNavigate();
-  console.log(otp);
+  console.log(otpAdmin);
   console.log(email);
 
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    //new
+
     const newOtp = [
-      ...otp.map((d, idx) => (idx === index ? element.value : d)),
+      ...otpAdmin.map((d, idx) => (idx === index ? element.value : d)),
     ];
-    setOtp(newOtp);
+    setOtpAdmin(newOtp);
 
     const enteredOtp = newOtp.join("");
     console.log(enteredOtp);
@@ -45,7 +46,7 @@ function Otp() {
     try {
       let data = JSON.stringify({
         email: email,
-        otp: otp.join(""),
+        otp: otpBaru,
       });
       let config = {
         method: "put",
@@ -58,12 +59,11 @@ function Otp() {
 
       const response = await axios.request(config);
       console.log(response.status);
-      navigate("/login");
+      navigate("/admin/login-admin");
 
       // Temporary solution
       // window.location.href = "/";
     } catch (error) {
-      console.log("error ", error);
       if (axios.isAxiosError(error)) {
         toast.error(error.response.data.message);
         return;
@@ -178,4 +178,4 @@ function Otp() {
   );
 }
 
-export default Otp;
+export default OtpAdmin;

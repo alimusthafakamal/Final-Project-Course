@@ -1,0 +1,339 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --alert-red: #ff0000;
+  --alert-yellow: #f9cc00;
+  --alert-green: #73ca5c;
+}
+
+.icon {
+  color: white;
+  width: 24px;
+  height: 24px;
+  margin-right: -10px;
+}
+
+.form-control::placeholder {
+  font-family: Montserrat, sans-serif;
+  color: #8A8A8A;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  left: 0;
+  text-align: left;
+}
+
+.form-control {
+  font-family: Montserrat, sans-serif;
+  color: #8A8A8A;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.hero-img {
+  background: linear-gradient(270.02deg,
+      #6148ff -2.88%,
+      rgba(255, 233, 202, 0) 100.97%);
+  background-attachment: fixed;
+}
+
+.kategori-belajar {
+  background: #ebf3fc;
+}
+
+.all-kategori-belajar {}
+
+.kursus-populer .card {
+  width: 410px;
+  box-shadow: 0 4px 10px 0 #00000014;
+  border: none;
+}
+
+.kursus-populer .btn {
+  background-color: #e8f1ff;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.kursus-populer .card-img {
+  border-radius: 20px 20px 0 0;
+}
+
+.kursus-populer-title {
+  font-size: 16px;
+}
+
+.kelas-saya {
+  background: #ebf3fc;
+}
+
+.kelas-saya .container .input-group .input {
+  padding: 6px, 16px, 6px, 16px;
+}
+
+.filter {
+  background: white;
+  width: 267px;
+  height: 428px;
+  padding: 10px, 24px, 10px, 24px;
+  border-radius: 16px;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.filter-title {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 16px 0 16px 0;
+}
+
+.filter-body {
+  width: 184px;
+  margin-left: 24px;
+  margin-bottom: 24px;
+  padding: 30px, 5px, 30px, 5px;
+  gap: 10px;
+}
+
+.filter-category {
+  padding: 10px, 5px, 10px, 5px;
+  gap: 10px;
+}
+
+.label-filter {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: flex;
+  cursor: pointer;
+  font-size: 12px;
+  gap: 8px;
+}
+
+.label-filter input {
+  cursor: pointer;
+
+}
+
+/* .checkmark {
+  position: absolute;
+  top: -2;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background: linear-gradient(0deg, #e8f1ff, #e8f1ff);
+  border: 2px solid #b4bdc4;
+  border-radius: 0.75em;
+}
+
+.label-filter:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+.label-filter input:checked~.checkmark {
+  background: #6148ff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.label-filter input:checked~.checkmark:after {
+  display: block;
+}
+
+.label-filter .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+} */
+
+/* input[type="checkbox"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background-color: #e8f1ff;
+  border: 2px solid #b4bdc4;
+  border-radius: 0.75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* input[type="checkbox"] ::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  box-sizing: border-box;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #e8f1ff;
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"] ::after {
+  box-sizing: border-box;
+} */
+
+.listing {
+  top: 297px;
+  left: 550px;
+  padding: 0px, 10px, 0px, 10px;
+}
+
+.kategori-header button:active {
+  background: #6148ff;
+  -webkit-text-fill-color: white;
+}
+
+.kategori-header button:hover {
+  background: #6148ff;
+  -webkit-text-fill-color: white;
+}
+
+.btn-kategori-header-1 {
+  width: 123.89px;
+  height: 40px;
+  top: 227px;
+  left: 550px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.btn-kategori-header-2 {
+  width: 277.69px;
+  height: 40px;
+  top: 227px;
+  left: 699.53px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.btn-kategori-header-3 {
+  width: 220px;
+  height: 40px;
+  top: 227px;
+  left: 1002.85px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.card-kelas-saya {
+  box-shadow: 0px 4px 10px 0px #00000014;
+  width: 323px;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.btn-harga {
+  width: (143px);
+  height: (18px);
+  top: 153px;
+  left: 10px;
+  padding: 2px, 15px, 2px, 15px;
+  border-radius: 15px;
+  gap: 5px;
+}
+
+.detail-kelas {
+  height: 250px;
+  background: #ebf3fc;
+  box-shadow: 0px 0px 10px 0px #00000026;
+}
+
+.video {}
+
+.materi-belajar {
+  width: 400px;
+  height: 718px;
+  padding: 20px, 24px, 20px, 24px;
+  border-radius: 16px;
+  gap: 10px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.modal-content {
+  border-radius: 25px;
+  width: 500px;
+  height: 450px;
+  box-shadow: 0px 0px 10px 0px #00000026;
+}
+
+.play-video {
+  width: 700px;
+  height: 327px;
+  border-radius: 25px;
+}
+
+.alert-pembayaran {
+  height: 135px;
+  box-shadow: 0px 0px 10px 0px #00000026;
+}
+
+.header-chapter {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.intro-chapter {
+  font-size: 14px;
+  color: #6148ff;
+}
+
+.durasi-chapter {
+  font-size: 14px;
+  color: #489cff;
+}
+
+.list-materi {
+  align-items: center;
+  font-size: 14px;
+}
+
+.form-pembayaran .form-control::placeholder {
+  color: #8a8a8a;
+  font-size: 14px;
+}
+
+.dark-blue100 {
+  color: #6148ff;
+}
+
+.bg-dark-blue100 {
+  background: #6148ff;
+}
+
+.border-dark-blue100 {
+  border-color: #6148ff;
+}
+
+.light-blue5 {
+  color: #ebf3fc;
+}
+
+.bg-light-blue5 {
+  color: #ebf3fc;
+}

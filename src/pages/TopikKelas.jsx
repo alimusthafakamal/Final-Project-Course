@@ -16,7 +16,8 @@ const TopikKelas = () => {
   const [kategori, setKategori] = useState([]);
   const [level, setLevel] = useState([]);
   const [premium, setPremium] = useState(["PREMIUM", "FREE"]);
-  console.log(course);
+  const [active, setActive] = useState(false);
+
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -31,7 +32,7 @@ const TopikKelas = () => {
     fetchData();
   }, [navigate, token]);
 
-  console.log("course ", course);
+  // console.log("course ", course);
   const FilterCourse = async (dataKategori, dataLevel, dataPremium) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
@@ -43,7 +44,7 @@ const TopikKelas = () => {
         ].join("")}`
       )
       .then((response) => {
-        console.log("response filter ===>", response);
+        // console.log("response filter ===>", response);
         setCourse(response.data?.data?.courseList);
       })
       .catch((error) => {
@@ -52,7 +53,9 @@ const TopikKelas = () => {
       });
   };
 
-  const btnPremium = premium;
+  const ActiveButton = () => {
+    setActive(!active);
+  };
 
   const CourseList = () => {
     if (course === null) {
@@ -60,7 +63,9 @@ const TopikKelas = () => {
     }
 
     return course
-      ?.filter((e) => e.courseName.includes(query))
+      ?.filter((e) =>
+        e.courseName.toLowerCase().includes(query.toLocaleLowerCase())
+      )
       ?.map((data, i) => {
         return (
           <div key={i} className="col d-flex gap-4 mb-4">
@@ -143,10 +148,10 @@ const TopikKelas = () => {
                       width="14"
                       height="14"
                     />{" "}
-                    <a>{data.courseFor} </a>
+                    <a>{data.courseAbout} </a>
                   </span>
                 </Card.Text>
-                {btnPremium ? (
+                {data.typePremium === "PREMIUM" ? (
                   <div
                     className="btn btn-sm d-flex rounded-pill text-center text-white fw-bold justify-content-center align-items-center"
                     style={{
@@ -199,7 +204,7 @@ const TopikKelas = () => {
           className="container "
           style={{ width: "1000px", padding: "5px 0px 5px 0px" }}
         >
-          <div className="d-flex justify-content-between mt-5">
+          <div className="d-flex justify-content-between mt-5 ">
             <h2
               style={{ fontSize: "20px", fontWeight: "bold", margin: "12px 0" }}
             >
@@ -271,7 +276,7 @@ const TopikKelas = () => {
               // LOGIC FETCH SEMUA DATA
               // }}
               buttonHapusFilter={() => {
-                console.log("RUN THIS");
+                // console.log("RUN THIS");
                 setKategori([]);
                 setLevel([]);
                 fetchData();
@@ -281,8 +286,9 @@ const TopikKelas = () => {
           <div className=" ">
             <div className=" row kategori-header d-flex gap-4">
               <button
-                className="btn-kategori-header-1 col btn btn-light rounded-4 text-secondary"
+                className="btn-kategori-header-1 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
+                  ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
                   setPremium(["PREMIUM", "FREE"]);
                 }}
@@ -290,8 +296,9 @@ const TopikKelas = () => {
                 All
               </button>
               <button
-                className="btn-kategori-header-2 col btn btn-light rounded-4 text-secondary"
+                className="btn-kategori-header-2 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
+                  ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM"]);
                   setPremium(["PREMIUM"]);
                 }}
@@ -299,8 +306,9 @@ const TopikKelas = () => {
                 Kelas Premium
               </button>
               <button
-                className="btn-kategori-header-3 col btn btn-light rounded-4 text-secondary"
+                className="btn-kategori-header-3 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
+                  ActiveButton;
                   FilterCourse(kategori, level, ["FREE"]);
                   setPremium(["FREE"]);
                 }}

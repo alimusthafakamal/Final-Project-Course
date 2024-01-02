@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "./NavigationBar";
 import { Button, Container } from "react-bootstrap";
 import { Icon } from "@iconify/react";
@@ -40,7 +40,7 @@ const Pembayaran = () => {
       const response = await axios.request(config);
       if (response.status == 200) {
         console.log(response.data);
-        navigate("/kelas-saya")
+        navigate("/kelas-saya");
       } else {
         console.log(response.status);
         console.log(response.message);
@@ -86,7 +86,7 @@ const Pembayaran = () => {
                 }}
                 aria-pressed="true"
               >
-                Selesaikan Pembayaran sampai 10 Maret 2023 12:00
+                Selesaikan Pembayaran dalam 24 Jam
               </span>
             </div>
           </Container>
@@ -116,18 +116,124 @@ const Pembayaran = () => {
                       data-bs-parent="#accordionExample"
                     >
                       <div className="accordion-body">
-                        <strong>
-                          This is the first item's accordion body.
-                        </strong>{" "}
-                        It is shown by default, until the collapse plugin adds
-                        the appropriate classes that we use to style each
-                        element. These classes control the overall appearance,
-                        as well as the showing and hiding via CSS transitions.
-                        You can modify any of this with custom CSS or overriding
-                        our default variables. It's also worth noting that just
-                        about any HTML can go within the{" "}
-                        <code>.accordion-body</code>, though the transition does
-                        limit overflow.
+                        <div className="d-flex gap-3 mt-1 galign-items-center justify-content-center">
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id="flexRadioDefault1"
+                            />
+                            <label
+                              className="form-check-label"
+                              for="flexRadioDefault1"
+                            >
+                              <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/BRI_2020.svg/1280px-BRI_2020.svg.png"
+                                height="20"
+                                width=""
+                              />
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id="flexRadioDefault1"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="flexRadioDefault1"
+                            >
+                              <img
+                                src="https://upload.wikimedia.org/wikipedia/id/thumb/5/55/BNI_logo.svg/1280px-BNI_logo.svg.png"
+                                height="20"
+                                width=""
+                              />
+                            </label>
+                          </div>
+
+                          <div class="form-check ">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id="flexRadioDefault1"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="flexRadioDefault1"
+                            >
+                              <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/2560px-Bank_Central_Asia.svg.png"
+                                height="20"
+                                width=""
+                              />
+                            </label>
+                          </div>
+                          <div class="form-check ">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id="flexRadioDefault1"
+                            />
+                            <label
+                              class="form-check-label"
+                              for="flexRadioDefault1"
+                            >
+                              <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Bank_Syariah_Indonesia.svg/1280px-Bank_Syariah_Indonesia.svg.png"
+                                height="20  "
+                                width=""
+                              />
+                            </label>
+                          </div>
+                        </div>
+                        <div className="form-pembayaran pt-4" width="400">
+                          <div className="card-number d-grid justify-content-center ">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Nama Lengkap
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="Shinta"
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Kategori
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="WEB DEVELOPMENT"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Tanggal Pembayaran
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="31/12/2023"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -162,11 +268,11 @@ const Pembayaran = () => {
                               className="fw-bold"
                               style={{ fontSize: "14px" }}
                             >
-                              Card Number
+                              Nama Lengkap
                             </label>
                             <input
                               className="form-control border border-0 text-secondary"
-                              placeholder="4488 0000 0000 0000"
+                              placeholder="Shinta"
                             />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
@@ -175,43 +281,28 @@ const Pembayaran = () => {
                               className="fw-bold"
                               style={{ fontSize: "14px" }}
                             >
-                              Card holdername
+                              Kategori
                             </label>
                             <input
                               className="form-control border border-0 text-secondary"
-                              placeholder="John Doe"
+                              placeholder="WEB DEVELOPMENT"
+                              onChange={(e) => setName(e.target.value)}
                             />
                             <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
-                          <div>
-                            <div className="row d-flex justify-content-center">
-                              <div className="col-3 me-4 ">
-                                <label
-                                  className="fw-bold"
-                                  style={{ fontSize: "14px" }}
-                                >
-                                  CVV
-                                </label>
-                                <input
-                                  className="form-control border border-0 text-secondary"
-                                  placeholder="000"
-                                />
-                                <hr width="130" style={{ marginTop: "-4px" }} />
-                              </div>
-                              <div className="col-3  ">
-                                <label
-                                  className="fw-bold"
-                                  style={{ fontSize: "14px" }}
-                                >
-                                  Expiry Date
-                                </label>
-                                <input
-                                  className="form-control border border-0 text-secondary"
-                                  placeholder="07/24"
-                                />
-                                <hr width="130" style={{ marginTop: "-4px" }} />
-                              </div>
-                            </div>
+                          <div className="card-holdername d-grid justify-content-center mt-1">
+                            <label
+                              className="fw-bold"
+                              style={{ fontSize: "14px" }}
+                            >
+                              Tanggal Pembayaran
+                            </label>
+                            <input
+                              className="form-control border border-0 text-secondary"
+                              placeholder="31/12/2023"
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                            <hr width="300" style={{ marginTop: "-4px" }} />
                           </div>
                         </div>
                       </div>

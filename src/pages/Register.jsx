@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import BelajarWhite from "../../public/belajar-white.svg";
+import { Icon } from "@iconify/react";
 
 function Register() {
   const [name, setName] = useState("");
@@ -57,26 +59,29 @@ function Register() {
     }
   };
 
+  const Kembali = () => {
+    navigate("/login");
+  };
+
   return (
-    <div
-      className="container-fluid"
-      style={{
-        width: "1440px",
-        height: "950px",
-        top: "-987px",
-        left: "1575px",
-      }}
-    >
-      <div className="row align-items-center">
-        <div className="col-md-6">
+    <div className="container-fluid" style={{}}>
+      <div className="row ">
+        <div className="col-md justify-content-center d-flex">
           <form
             style={{
               width: "452px",
               height: "348px",
-              top: "301px",
-              left: "158px",
+              marginTop: "100px",
             }}
           >
+            <span
+              className="d-flex fw-bold align-items-center gap-2 mb-3"
+              style={{ cursor: "pointer", marginLeft: "-35px" }}
+              onClick={Kembali}
+            >
+              <Icon icon="formkit:arrowleft" />
+              <span style={{ padding: "" }}>Kembali </span>
+            </span>
             <h2>Registrasi</h2>
             <div className="mb-3">
               <label htmlFor="name" className="form-tabel">
@@ -155,7 +160,10 @@ function Register() {
               />
             </div>
             <p style={{ marginTop: "10px", textAlign: "center" }}>
-              Sudah punya akun? <a href="/login">Masuk di sini</a>
+              Sudah punya akun?{" "}
+              <a href="/login" className="fw-bold text-decoration-none">
+                Masuk disini
+              </a>
             </p>
             <button
               type="submit"
@@ -172,8 +180,18 @@ function Register() {
             </button>
           </form>
         </div>
-        <div className="col-md-6 d-none d-md-block">
-          <img src="/img.svg" alt="Side Image" className="img-fluid" />
+        <div className="col-md d-none d-md-block">
+          <img
+            src="/img.svg"
+            alt="Side Image"
+            className="img-fluid position-fixed"
+          />
+          <img
+            src={BelajarWhite}
+            width="300"
+            className="img-fluid position-absolute"
+            style={{ top: "35%", right: "15%" }}
+          />
         </div>
       </div>
     </div>

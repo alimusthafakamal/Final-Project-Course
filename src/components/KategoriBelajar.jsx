@@ -41,7 +41,11 @@ const KategoriBelajar = () => {
                 className="bg-transparent"
                 onClick={() => navigate("/detail-kelas/:id")}
               >
-                <Card.Img variant="top" src={UiUxDesign} className="img-fluid" />
+                <Card.Img
+                  variant="top"
+                  src={UiUxDesign}
+                  className="img-fluid"
+                />
                 <Card.Body>
                   <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
                     UI/UX Design
@@ -53,13 +57,17 @@ const KategoriBelajar = () => {
               <Card
                 style={{
                   width: "100%",
-                height: "auto",
-                border: "none",
+                  height: "auto",
+                  border: "none",
                 }}
                 className="bg-transparent"
                 onClick={() => navigate("/detail-kelas/:id")}
               >
-                <Card.Img variant="top" src={ProductManagement} className="img-fluid" />
+                <Card.Img
+                  variant="top"
+                  src={ProductManagement}
+                  className="img-fluid"
+                />
                 <Card.Body>
                   <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
                     Product Management
@@ -71,13 +79,17 @@ const KategoriBelajar = () => {
               <Card
                 style={{
                   width: "100%",
-                height: "auto",
-                border: "none",
+                  height: "auto",
+                  border: "none",
                 }}
                 className="bg-transparent"
                 onClick={() => navigate("/detail-kelas/:id")}
               >
-                <Card.Img variant="top" src={WebDevelopment} className="img-fluid" />
+                <Card.Img
+                  variant="top"
+                  src={WebDevelopment}
+                  className="img-fluid"
+                />
                 <Card.Body>
                   <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
                     Web Development
@@ -89,13 +101,17 @@ const KategoriBelajar = () => {
               <Card
                 style={{
                   width: "100%",
-                height: "auto",
-                border: "none",
+                  height: "auto",
+                  border: "none",
                 }}
                 className="bg-transparent"
                 onClick={() => navigate("/detail-kelas/:id")}
               >
-                <Card.Img variant="top" src={AndroidDevelopment} className="img-fluid" />
+                <Card.Img
+                  variant="top"
+                  src={AndroidDevelopment}
+                  className="img-fluid"
+                />
                 <Card.Body>
                   <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
                     Android Development
@@ -107,33 +123,19 @@ const KategoriBelajar = () => {
               <Card
                 style={{
                   width: "100%",
-                height: "auto",
-                border: "none",
+                  height: "auto",
+                  border: "none",
                 }}
                 className="bg-transparent"
               >
-                <Card.Img variant="top" src={IOSDevelopment} className="img-fluid" />
+                <Card.Img
+                  variant="top"
+                  src={IOSDevelopment}
+                  className="img-fluid"
+                />
                 <Card.Body>
                   <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
                     IOS Development
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </div>
-            <div className="col">
-              <Card
-                style={{
-                  width: "100%",
-                height: "auto",
-                border: "none",
-                }}
-                className="bg-transparent"
-                onClick={() => navigate("/detail-kelas/:id")}
-              >
-                <Card.Img variant="top" src={DataScience} className="img-fluid" />
-                <Card.Body>
-                  <Card.Title style={{ fontSize: "12px", fontWeight: "bold" }}>
-                    Data Science
                   </Card.Title>
                 </Card.Body>
               </Card>

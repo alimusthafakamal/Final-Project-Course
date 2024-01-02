@@ -9,6 +9,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const KelasSaya = () => {
+  const [course, setCourse] = useState([]);
+  const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [kategori, setKategori] = useState([]);
   const [level, setLevel] = useState([]);
@@ -39,8 +41,6 @@ const KelasSaya = () => {
           console.log(response.status);
           console.log(response.message);
         }
-
-        
       } catch (error) {
         if (axios.isAxiosError(error)) {
           toast.error(error.response.data.message);
@@ -74,6 +74,7 @@ const KelasSaya = () => {
                 type="text"
                 className="form-control border border-0 bg-transparent "
                 placeholder="Cari Kelas...."
+                onChange={({ target }) => setQuery(target.value)}
               />
               <span className="input-group-text border border-0 bg-white bg-transparent">
                 <Icon
@@ -107,7 +108,7 @@ const KelasSaya = () => {
                 } else {
                   // e = KATEGORI
                   // FILTER COURSE (KATEGORI, LEVEL) <==== V
-                  FilterCourse(e, level);
+                  FilterCourse(e, level, premium);
                   // FILTER COURSE (LEVEL, KATEGORI) <==== X
                 }
               }}
@@ -122,7 +123,7 @@ const KelasSaya = () => {
                 if (e.length === 0 && kategori.length === 0) {
                   fetchData();
                 } else {
-                  FilterCourse(kategori, e); // ["UIX"]
+                  FilterCourse(kategori, e, premium); // ["UIX"]
                 }
               }}
               // namaFunctionYangDiPassing={()=>{
@@ -139,13 +140,31 @@ const KelasSaya = () => {
           </div>
           <div className="">
             <div className=" row kategori-header d-flex gap-5 fw-bold">
-              <button className="btn-kategori-header-1 col btn btn-light px-5 rounded-4 text-secondary">
+              <button
+                className="btn-kategori-header-1 col btn btn-light px-5 rounded-4 text-secondary"
+                onClick={() => {
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                }}
+              >
                 All
               </button>
-              <button className="btn-kategori-header-2 col btn btn-light px-5 rounded-4 text-secondary ">
+              <button
+                className="btn-kategori-header-2 col btn btn-light px-5 rounded-4 text-secondary"
+                onClick={() => {
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                }}
+              >
                 In Progress
               </button>
-              <button className="btn-kategori-header-3 col btn btn-light px-5 rounded-4 text-secondary">
+              <button
+                className="btn-kategori-header-3 col btn btn-light px-5 rounded-4 text-secondary"
+                onClick={() => {
+                  ActiveButton;
+                  FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                }}
+              >
                 Selesai
               </button>
             </div>

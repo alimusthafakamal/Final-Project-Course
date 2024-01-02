@@ -232,6 +232,7 @@ const DetailKelas = () => {
                       </span>
                       <p className="" style={{ fontSize: "14px" }}>
                         {course.courseAbout}
+                        {course.courseAbout}
                       </p>
                       <span
                         className="col-6 fw-bold"
@@ -245,8 +246,10 @@ const DetailKelas = () => {
                       >
                         <li className="list-group-item mb-2">
                           {course.courseFor?.substr(0, 17)}
+                          {course.courseFor?.substr(0, 17)}
                         </li>
                         <li className="list-group-item mb-2">
+                          {course.courseFor?.substr(18, 15)}
                           {course.courseFor?.substr(18, 15)}
                         </li>
                       </ol>

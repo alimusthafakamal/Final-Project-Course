@@ -1,10 +1,10 @@
-import { auto } from "@popperjs/core";
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import NavigationBar from "./NavigationBar";
 
 const Akun_Profil = () => {
   const styles = {

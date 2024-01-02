@@ -20,7 +20,10 @@ import LoginAdmin from "./pages/admin/LoginAdmin";
 import KelolaKelas from "./pages/admin/KelolaKelas";
 import ForgetPassword from "./pages/ForgetPassword";
 import RegisterAdmin from "./pages/admin/RegisterAdmin";
-import ResetPass from "./pages/ResetPass";
+import ResetPassword from "./pages/ResetPassword";
+import OtpAdmin from "./pages/admin/OtpAdmin";
+import LogoutAdmin from "./components/admin/LogoutAdmin";
+import LogoutUser from "./components/Logout";
 
 function App() {
   return (
@@ -28,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<LogoutUser />} />
         <Route path="/register" element={<Register />} />
         <Route path="/notif" element={<Notif />} />
 
@@ -45,15 +49,13 @@ function App() {
         <Route path="/pembayaran-sukses" element={<PembayaranSukses />} />
         <Route path="/mulai-kelas" element={<MulaiKelas />} />
 
-          <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="/admin/login-admin" element={<LoginAdmin />} />
-          <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
-          <Route path="/admin/register-admin" element={<RegisterAdmin />} />
-          {/* <Route path="/admin/add-course" element={<CreateCourse/>}/> */}
-          
-    </Routes>
-
-        
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/otp-admin/:email" element={<OtpAdmin />} />
+        <Route path="/admin/login-admin" element={<LoginAdmin />} />
+        <Route path="/admin/logout-admin" element={<LogoutAdmin />} />
+        <Route path="/admin/kelola-kelas" element={<KelolaKelas />} />
+        <Route path="/admin/register-admin" element={<RegisterAdmin />} />
+      </Routes>
     </div>
   );
 }
