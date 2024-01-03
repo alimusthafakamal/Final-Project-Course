@@ -11,15 +11,15 @@ function ResetPass() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const resetToken = searchParams.get("resetToken");
-  console.log(resetToken);
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
       let data = JSON.stringify({
-        resetToken,
-        newpassword,
-        newrepassword,
+        resetToken: resetToken,
+        newpassword: newpassword,
+        newrepassword: newrepassword,
       });
       let config = {
         method: "put",
