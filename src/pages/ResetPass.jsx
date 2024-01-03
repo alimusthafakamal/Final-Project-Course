@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function ResetPass() {
-  const [resetToken, setResetToken] = useState("");
+  const [resetToken] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [newrepassword, setNewRePassword] = useState("");
+  const navigate = useNavigate();
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  const ResetToken = searchParams.get("resetToken");
+  console.log(ResetToken);
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -30,6 +34,7 @@ function ResetPass() {
       const response = await axios.request(config);
       if (response.status == 200) {
         console.log(response.data);
+        navigate("/login");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -40,6 +45,7 @@ function ResetPass() {
     }
   };
   console.log("resetToken", resetToken);
+
   return (
     <div
       className="container-fluid"

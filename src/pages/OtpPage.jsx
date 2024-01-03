@@ -4,6 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import BelajarWhite from "../../public/belajar-white.svg";
 
 function Otp() {
   const [otp, setOtp] = useState(new Array(6).fill(""));
@@ -162,14 +163,18 @@ function Otp() {
         </div>
 
         {/* Right Side banner */}
-        <div className="col-md-5 right-sidebar">
-          <div className="banner-side d-flex justify-content-center">
-            <img
-              src="src\assets\Belajar_white.png"
-              alt="Belajar"
-              className=""
-            />
-          </div>
+        <div className="col-md d-none d-md-block">
+          <img
+            src="/img.svg"
+            alt="Side Image"
+            className="img-fluid position-fixed"
+          />
+          <img
+            src={BelajarWhite}
+            width="300"
+            className="img-fluid position-absolute"
+            style={{ top: "35%", right: "15%" }}
+          />
         </div>
       </div>
     </div>
