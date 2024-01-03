@@ -5,14 +5,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function ResetPass() {
-  const [resetToken] = useState("");
   const [newpassword, setNewPassword] = useState("");
   const [newrepassword, setNewRePassword] = useState("");
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const ResetToken = searchParams.get("resetToken");
-  console.log(ResetToken);
+  const resetToken = searchParams.get("resetToken");
+  console.log(resetToken);
   const onSubmit = async (e) => {
     e.preventDefault();
 
