@@ -256,7 +256,7 @@ const KelasSaya = () => {
                             className="fw-bold"
                             style={{ fontSize: "8px" }}
                           >
-                            {item.teacher}
+                            by {item.teacher}
                           </Card.Subtitle>
                         </div>
                         <Card.Text

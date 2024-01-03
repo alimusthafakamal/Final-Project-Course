@@ -78,7 +78,7 @@ const KursusPopuler = () => {
                     <span className="ms-3">
                       Silahkan daftar
                       <a
-                        href="/login"
+                        href="/register"
                         className="text-decoration-none fw-bold ms-1 "
                       >
                         disini
@@ -129,7 +129,7 @@ const KursusPopuler = () => {
                   {data.courseName}
                 </Card.Title>
                 <Card.Subtitle className="fw-bold" style={{ fontSize: "8px" }}>
-                  {data.teacher}
+                  by {data.teacher}
                 </Card.Subtitle>
               </div>
               <Card.Text
