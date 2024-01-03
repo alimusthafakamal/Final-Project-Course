@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import Riwayat from "../pages/Riwayat";
 
 const IsiRiwayat = () => {
+  const navigate = useNavigate();
   const styles = {
     mainContainer: {
       backgroundColor: "#EBF3FC",
@@ -73,18 +74,18 @@ const IsiRiwayat = () => {
     },
 
     sidebarleft: {
-      padding: "1rem",
-      width: "13rem",
-      marginRight: "10%",
+      padding: "1rem 0",
+      width: "16rem",
       fontSize: "14px",
       fontFamily: "Montserrat",
       fontWeight: "700",
+      marginLeft: "12px",
     },
 
     menuItem: {
       marginBottom: "2rem",
       cursor: "pointer",
-      fontWeight: "500",
+      fontWeight: "bold",
       color: "black",
       fontFamily: "Montserrat",
       fontSize: "14px",
@@ -102,9 +103,7 @@ const IsiRiwayat = () => {
     },
 
     sidebarright: {
-      padding: "1rem",
-      width: "20rem",
-      marginRight: "1rem",
+      width: "30rem",
       fontSize: "14px",
       fontFamily: "Montserrat",
       fontWeight: "700",
@@ -112,10 +111,11 @@ const IsiRiwayat = () => {
 
     supertitle: {
       display: "flex",
+      fontWeight: "bold",
       justifyContent: "center",
       alignItems: "center",
       paddingLeft: "10%",
-      paddingBottom: "10%",
+      paddingBottom: "12px",
     },
 
     label: {
@@ -221,14 +221,14 @@ const IsiRiwayat = () => {
             className="md-3 backlink"
             style={{ textDecoration: "none" }}
           >
-            Kembali ke Beranda{" "}
+            Kembali ke Beranda
           </a>
         </div>
         <div style={styles.header}>
           <h5 style={styles.title}>Akun</h5>
           <div style={styles.card}>
-            <div style={styles.wrap}>
-              <aside style={styles.sidebarleft}>
+            <div style={styles.wrap} className="row row-cols-md-2">
+              <aside style={styles.sidebarleft} className="col mx-5">
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
                   <a href="/akunprofil" style={{ textDecoration: "none" }}>
                     <svg
@@ -265,25 +265,33 @@ const IsiRiwayat = () => {
                 <div
                   style={{
                     ...styles.menuItem,
-                    ...styles.menuActive,
                     ...styles.borderBottom,
                   }}
                 >
-                  <svg
-                    style={styles.icons}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="currentColor"
-                    className="bi bi-cart3"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
-                  </svg>
-                  Riwayat Pembayaran
+                  <a href="/riwayat" style={{ textDecoration: "none" }}>
+                    <svg
+                      style={styles.icons}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                      className="bi bi-cart3"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                    </svg>
+                    Riwayat Pembayaran
+                  </a>
                 </div>
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
-                  <a href="/" style={{ textDecoration: "none" }}>
+                  <a
+                    className=" "
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      window.location.href = "/";
+                    }}
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                  >
                     <svg
                       style={styles.icons}
                       xmlns="http://www.w3.org/2000/svg"
@@ -302,177 +310,80 @@ const IsiRiwayat = () => {
                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
                       />
                     </svg>
-                    <button
-                      onClick={() => {
-                        localStorage.removeItem("token");
-                        window.location.href = "/";
-                      }}
-                    >
-                      Keluar
-                    </button>
+                    Keluar
                   </a>
                 </div>
               </aside>
 
               <aside>
                 <div style={styles.wrap}>
-                  <div style={styles.sidebarright}>
+                  <div style={styles.sidebarright} className="col-md-6">
                     <div style={styles.supertitle}>
                       <h4>Riwayat Pembayaran</h4>
                     </div>
-
-                    <div>
+                    <div className="row row-cols-md-2 d-flex ">
                       {/* UNTUK MENAMPILKAN ARRAY */}
                       {riwayat?.map((e) => (
-                        <div
-                          classname="card"
-                          onClick={async () => {
-                            const token = localStorage.getItem("token");
+                        <div className="d-flex">
+                          <div className="col ">
+                            <div
+                              classname="card "
+                              onClick={async () => {
+                                const token = localStorage.getItem("token");
 
-                            const response = await axios.get(
-                              `https://mooc.code69.my.id/course-detail?courseCode=${e?.courseCode}`,
-                              {
-                                headers: {
-                                  "Content-Type": "application/json",
-                                  Authorization: `Bearer ${token}`,
-                                },
-                              }
-                            );
-                            console.log("INI RESPONSE ===> ", response);
-                          }}
-                        >
-                          <img
-                            src="src\assets\course.jpg"
-                            className="card-img-top"
-                          />
-                          <div className="card-body">
-                            <h5 className="card-title">{e?.courseCategory}</h5>
-                            <p className="card-text">{e?.courseLevel}</p>
+                                const response = await axios.get(
+                                  `https://mooc.code69.my.id/course-detail?courseCode=${e?.courseCode}`,
+                                  {
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                      Authorization: `Bearer ${token}`,
+                                    },
+                                  }
+                                );
+                                console.log("INI RESPONSE ===> ", response);
+                              }}
+                            >
+                              <img
+                                src="src\assets\course.jpg"
+                                className="card-img-top"
+                              />
+                              <div className="card-body">
+                                <span className="card-title dark-blue100">
+                                  {e?.courseCategory}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="card-title">
+                                  {e?.courseName}
+                                </span>
+                                <p
+                                  className=""
+                                  style={{
+                                    fontWeight: "normal",
+                                    fontSize: "14px",
+                                  }}
+                                >
+                                  {e?.teacher}
+                                </p>
+                                <div className="row row-cols-2">
+                                  <p
+                                    className="card-text fw-bold col"
+                                    style={{
+                                      fontSize: "12px",
+                                    }}
+                                  >
+                                    {e?.courseLevel.toLowerCase()}
+                                  </p>
+                                  <p className="card-text col">
+                                    {e?.coursePrice}
+                                  </p>
+                                </div>
+                              </div>
+                              <span className="fw-bold">{e?.isPaid}</span>
+                            </div>
                           </div>
-                          <ul className="list-group list-group-flush">
-                            <li className="list-group-item">{e?.teacher}</li>
-                            <li className="list-group-item">
-                              {e?.coursePrice}
-                            </li>
-                            <li className="list-group-item">{e?.isPaid}</li>
-                          </ul>
-                          {/* <div className="card-body">
-                                    <a href="#" className="card-link">Card link</a>
-                                    <a href="#" className="card-link">Another link</a>
-                                  </div> */}
                         </div>
                       ))}
-
-                      {/* <Card className="card" >
-                                    <Card.Img className="card-img" src={KursusPopulerImage} />
-                                    <Card.Body>
-                                      <div className="d-flex align-items-center justify-content-between">
-                                      <Card.Subtitle className="dark-blue100 fw-bold">
-                                        UI/UX Design
-                                      </Card.Subtitle>
-                                      <span className="fw-bold">
-                                        <Icon
-                                          icon="ic:round-star"
-                                          width="12"
-                                          height="12"
-                                          color="#F9CC00"
-                                        ></Icon>
-                                        4.7
-                                      </span>
-                                      </div>
-                                      <Card.Title className="kursus-populer-title fw-bold">
-                                        Belajr Web Designer dengan Figma
-                                      </Card.Title>
-                                      <Card.Subtitle style={{ size: "8px" }}>
-                                        by Angela Doe
-                                      </Card.Subtitle>
-                                      <Card.Text className="d-flex justify-content-between" style={{ gap: "3px", padding: "3px 0 3px 0" }}>
-                                        <span style={{ gap: "4px" }}>
-                                          <Icon icon="mdi:badge-outline" color="#73ca5c" width="14" height="14" />
-                                          <a style={{ color:"#6148FF" }}>Intermediete Level</a>
-                                         </span>
-                                         <span style={{ gap: "4px" }}>
-                                           <Icon icon="mdi:badge-outline" color="#73ca5c" width="14" height="14" />{""}
-                                           <a >120 Menit</a>
-                                         </span>
-                                      </Card.Text>
-                                      <div>
-                                        <Icon icon="fluent:premium-20-filled" ></Icon>
-                                        <Button style={{ backgroundColor: "#489CFF", color: "" }}>
-                                          Beli Rp 249.000
-                                        </Button>
-                                      </div>
-                                    </Card.Body>
-                                  </Card>                                    
-                                </div>
-                                <div className="col-12 col-md-4 mb-3">
-                                <Card className="card">
-                                  <Card.Img
-                                    className="card-img"
-                                    variant="top"
-                                    src={"/public/KursusPopulerImage"}
-                                  />
-                                  <Card.Body>
-                                    <div className="d-flex align-items-center justify-content-between">
-                                      <Card.Subtitle className="dark-blue100 fw-bold">
-                                        UI/UX Design
-                                      </Card.Subtitle>
-                                      <span className="fw-bold">
-                                        <Icon
-                                          icon="ic:round-star"
-                                          width="12"
-                                          height="12"
-                                          color="#F9CC00"
-                                        />
-                                        4.8
-                                      </span>
-                                    </div>
-                                    <Card.Title className="kursus-populer-title fw-bold">
-                                      Belajar Web Designer dengan Figma
-                                    </Card.Title>
-                                    <Card.Subtitle style={{ size: "8px" }}>
-                                      by Angela Doe
-                                    </Card.Subtitle>
-                                    <Card.Text
-                                      className="d-flex justify-content-between"
-                                      style={{ gap: "3px", padding: "3px 0 3px 0" }}
-                                    >
-                                      <span style={{ gap: "4px" }}>
-                                        <Icon
-                                          icon="mdi:badge-outline"
-                                          color="#73CA5C"
-                                          width="14"
-                                          height="14"
-                                        />
-                                        <a style={{ color: "#6148FF" }}>Intermediate Level</a>
-                                      </span>
-                                      <span style={{ gap: "4px" }}>
-                                        <Icon
-                                          icon="mdi:badge-outline"
-                                          color="#73CA5C"
-                                          width="14"
-                                          height="14"
-                                        />
-                                        <a>5 Modul </a>
-                                      </span>
-                                      <span style={{ gap: "4px" }}>
-                                        <Icon
-                                          icon="ri:time-fill"
-                                          color="#73CA5C"
-                                          width="14"
-                                          height="14"
-                                        />
-                                        <a>60 Menit </a>
-                                      </span>
-                                    </Card.Text>
-                                    <div>
-                                      <Icon icon="fluent:premium-20-filled" />
-                                      <Button style={{ backgroundColor: "#489CFF", color: "" }}>
-                                        Beli Rp 249.000
-                                      </Button>
-                                    </div>
-                                  </Card.Body>
-                                </Card> */}
                     </div>
                   </div>
                 </div>

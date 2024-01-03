@@ -35,8 +35,6 @@ const Akun_Profil = () => {
       borderRadius: "0 10px 10px 0",
     },
     profileImagePlaceholder: {
-      justifyContent: "center",
-      marginRight: "50px",
       width: "7rem",
       marginBottom: "1rem",
       position: "relative",
@@ -81,15 +79,15 @@ const Akun_Profil = () => {
       justifyContent: "center",
       marginTop: "20px",
       display: "flex",
-      flexWrap: "wrap",
       width: "100%",
     },
 
     asideleft: {
-      paddingLeft: "2rem",
-      paddingRight: "3rem",
-      wordWrap: "break-word",
-      paddingBottom: "1rem",
+      padding: "1rem",
+      width: "15rem",
+      fontSize: "14px",
+      fontFamily: "Montserrat",
+      fontWeight: "700",
     },
 
     btnWarning: {
@@ -111,9 +109,7 @@ const Akun_Profil = () => {
       top: "0",
     },
 
-    asideright: {
-      paddingLeft: "1rem",
-    },
+    asideright: {},
 
     icons: {
       color: "#6148FF",
@@ -276,8 +272,11 @@ const Akun_Profil = () => {
         <div style={styles.header}>
           <h5 style={styles.title}>Akun</h5>
           <div style={styles.card}>
-            <div style={styles.wrap}>
-              <aside style={styles.asideleft}>
+            <div
+              style={styles.wrap}
+              className="row row-cols-md-2 justify-content-between"
+            >
+              <aside style={styles.asideleft} className="col mx-5 ">
                 <div
                   style={{
                     ...styles.menuItem,
@@ -332,7 +331,14 @@ const Akun_Profil = () => {
                   </a>
                 </div>
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
-                  <a href="/" style={{ textDecoration: "none" }}>
+                  <a
+                    className=" "
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      window.location.href = "/";
+                    }}
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                  >
                     <svg
                       style={styles.icons}
                       xmlns="http://www.w3.org/2000/svg"
@@ -351,25 +357,19 @@ const Akun_Profil = () => {
                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
                       />
                     </svg>
-                    <button
-                      className="border border-0 bg-white"
-                      onClick={() => {
-                        localStorage.removeItem("token");
-                        window.location.href = "/";
-                      }}
-                    >
-                      <span style={{ color: "#6148ff" }}>Keluar</span>
-                    </button>
+                    Keluar
                   </a>
                 </div>
               </aside>
 
               <aside>
                 <div style={styles.wrap}>
-                  <div style={styles.sidebarright}>
+                  <div style={styles.asideright} className="col">
                     <div style={styles.profileContent}>
-                      <div style={styles.profileImagePlaceholder}>
-                        {" "}
+                      <div
+                        style={styles.profileImagePlaceholder}
+                        className="justify-content-md-center"
+                      >
                         <div image style={{ width: "100%" }}>
                           <img
                             src={datauser.imageUrl}

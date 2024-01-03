@@ -178,7 +178,7 @@ const Notifications = () => {
             className="md-3 backlink"
             style={{ textDecoration: "none" }}
           >
-            Kembali ke Beranda{" "}
+            Kembali ke Beranda
           </a>
         </div>
         <div style={styles.header}>
