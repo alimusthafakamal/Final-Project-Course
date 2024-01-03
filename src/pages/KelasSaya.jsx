@@ -15,7 +15,23 @@ const KelasSaya = () => {
   const [kategori, setKategori] = useState([]);
   const [level, setLevel] = useState([]);
   const [kelas, setKelas] = useState([]);
+  const [premium, setPremium] = useState(["PREMIUM", "FREE"]);
+  const [active, setActive] = useState(false);
+
   console.log(kelas);
+  const ActiveButton = () => {
+    setActive(!active);
+  };
+
+  const fetchData = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await axios
+      .get("https://mooc.code69.my.id/course-progress/list")
+      .then((response) => {
+        setCourse(response.data?.data?.courseList);
+      })
+      .catch((error) => console.log(error.response));
+  };
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -52,6 +68,26 @@ const KelasSaya = () => {
     handleriwayatpembayaran();
   }, []);
 
+  const token = localStorage.getItem("token");
+  const FilterCourse = async (dataKategori, dataLevel, dataPremium) => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await axios
+      .get(
+        `https://mooc.code69.my.id/course-progress.list?page=1${[
+          ...dataKategori.map((e) => `&categories=${e}`),
+        ].join("")}${[...dataLevel.map((e) => `&courseLevel=${e}`)].join("")}${[
+          ...dataPremium.map((e) => `&isPremium=${e}`),
+        ].join("")}`
+      )
+      .then((response) => {
+        // console.log("response filter ===>", response);
+        setCourse(response.data?.data?.courseList);
+      })
+      .catch((error) => {
+        setCourse(null);
+      });
+  };
+
   return (
     <>
       <NavigationBar />
@@ -74,6 +110,7 @@ const KelasSaya = () => {
                 type="text"
                 className="form-control border border-0 bg-transparent "
                 placeholder="Cari Kelas...."
+                value={query}
                 onChange={({ target }) => setQuery(target.value)}
               />
               <span className="input-group-text border border-0 bg-white bg-transparent">
@@ -145,6 +182,7 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                  setPremium(["PREMIUM", "FREE"]);
                 }}
               >
                 All
@@ -154,6 +192,7 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                  setPremium(["PREMIUM", "FREE"]);
                 }}
               >
                 In Progress
@@ -163,6 +202,7 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
+                  setPremium(["PREMIUM", "FREE"]);
                 }}
               >
                 Selesai
@@ -186,12 +226,12 @@ const KelasSaya = () => {
                         <div className="col-8 d-flex align-items-center justify-content-between">
                           <Card.Subtitle
                             className="dark-blue100 fw-bold"
-                            style={{ fontSize: "10px", marginTop: "-24px" }}
+                            style={{ fontSize: "10px" }}
                           >
                             {item.courseCategory}
                           </Card.Subtitle>
                         </div>
-                        <div className="col-4 d-flex align-items-center justify-content-end">
+                        {/* <div className="col-4 d-flex align-items-center justify-content-end">
                           <span
                             className="fw-bold d-flex"
                             style={{ marginTop: "-12px" }}
@@ -204,8 +244,8 @@ const KelasSaya = () => {
                             />
                             <p style={{ fontSize: "10px" }}>4.7</p>
                           </span>
-                        </div>
-                        <div style={{ marginTop: "-12px" }}>
+                        </div> */}
+                        <div className="mt-2">
                           <Card.Title
                             className="kursus-populer-title fw-bold"
                             style={{ fontSize: "10px" }}
@@ -251,9 +291,9 @@ const KelasSaya = () => {
                               width="14"
                               height="14"
                             />{" "}
-                            <a> Price {item.coursePrice} </a>
+                            <a> Rp {item.coursePrice} </a>
                           </span>
-                          <span
+                          {/* <span
                             className="col"
                             style={{ gap: "4px", fontSize: "8px" }}
                           >
@@ -264,7 +304,7 @@ const KelasSaya = () => {
                               height="14"
                             />{" "}
                             <a>120 Menit </a>
-                          </span>
+                          </span> */}
                         </Card.Text>
                         <div className="">
                           <span
@@ -274,7 +314,7 @@ const KelasSaya = () => {
                             <Icon
                               icon="mdi:progress-check"
                               style={{ color: "#73CA5C" }}
-                              className=""
+                              className="me-1"
                               width="14"
                               height="14"
                             />

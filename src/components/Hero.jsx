@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import HeroPoster from "../../public/hero-poster.svg";
 import { useNavigate } from "react-router-dom";
-// import Modal from "react-bootstrap/Modal";
-// import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { Icon } from "@iconify/react";
 
 const Hero = () => {
   const navigate = useNavigate();
 
-  // const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   // const token = localStorage.getItem("token");
 
   // const handleorder = async (e) => {
@@ -45,18 +46,57 @@ const Hero = () => {
   //     toast.error(error.message);
   //   }
   // };
-  // const ModalHandleLogin = () => {
-  //   Authorization: `Bearer ${token}`;
-
-  //   if (token !== null) {
-  //     navigate("/topik-kelas");
-  //   } else {
-  //     handleShow;
-  //   }
-  // };
 
   return (
     <section className="hero">
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Kamu belum login...</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div centered className="d-grid justify-content-center ">
+            <span className="fw-bold">
+              Anda harus Login terlebih dahulu untuk mendapatkan fitur lengkap
+              dari Binar Course .
+            </span>
+            <span className="mt-4">
+              <div>
+                <Icon
+                  icon="solar:login-3-bold-duotone"
+                  width="100"
+                  Color="#6148ff"
+                />
+                <span className="ms-3">
+                  Silahkan login
+                  <a
+                    href="/login"
+                    className="text-decoration-none fw-bold ms-1 "
+                  >
+                    disini
+                  </a>
+                </span>
+              </div>
+              <div>
+                <Icon
+                  className="mt-3"
+                  icon="bxs:registered"
+                  width="100"
+                  Color="#6148ff"
+                />
+                <span className="ms-3">
+                  Silahkan daftar
+                  <a
+                    href="/login"
+                    className="text-decoration-none fw-bold ms-1 "
+                  >
+                    disini
+                  </a>
+                </span>
+              </div>
+            </span>
+          </div>
+        </Modal.Body>
+      </Modal>
       <div className="row d-flex align-items-center bg-dark-blue100">
         <div className="col-md ">
           <img className="hero-img img-fluid" src={HeroPoster} />
@@ -76,8 +116,13 @@ const Hero = () => {
                   radius: "10px",
                   color: "#6148ff",
                 }}
-                // onClick={ModalHandleLogin}
-                onClick={() => navigate("/topik-kelas")}
+                onClick={() => {
+                  if (localStorage.getItem("token") === null) {
+                    handleShow();
+                  } else {
+                    navigate("/kelas-saya");
+                  }
+                }}
               >
                 IKUTI KELAS
               </button>

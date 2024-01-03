@@ -69,29 +69,18 @@ const IsiUbahPassword = () => {
       justifyContent: "center",
       marginTop: "20px",
       display: "flex",
-      flexWrap: "wrap",
       width: "100%",
     },
 
-    sidebarleft: {
-      padding: "1rem",
-      width: "15rem",
-      marginRight: "15%",
+    asideleft: {
+      padding: "1rem 0",
+      width: "16rem",
       fontSize: "14px",
       fontFamily: "Montserrat",
       fontWeight: "700",
     },
 
-    asideleft: {
-      paddingLeft: "2rem",
-      paddingRight: "3rem",
-      wordWrap: "break-word",
-      paddingBottom: "1rem",
-    },
-
-    asideright: {
-      paddingLeft: "1rem",
-    },
+    asideright: {},
 
     icons: {
       color: "#6148FF",
@@ -246,8 +235,11 @@ const IsiUbahPassword = () => {
         <div style={styles.header}>
           <h5 style={styles.title}>Akun</h5>
           <div style={styles.card}>
-            <div style={styles.wrap}>
-              <aside style={styles.sidebarleft}>
+            <div
+              style={styles.wrap}
+              className="row row-cols-md-2 justify-content-between"
+            >
+              <aside style={styles.asideleft} className="col mx-5">
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
                   <a href="/akunprofil" style={{ textDecoration: "none" }}>
                     <svg
@@ -303,7 +295,14 @@ const IsiUbahPassword = () => {
                   </a>
                 </div>
                 <div style={{ ...styles.menuItem, ...styles.borderBottom }}>
-                  <a href="/" style={{ textDecoration: "none" }}>
+                  <a
+                    className=" "
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      window.location.href = "/";
+                    }}
+                    style={{ textDecoration: "none", cursor: "pointer" }}
+                  >
                     <svg
                       style={styles.icons}
                       xmlns="http://www.w3.org/2000/svg"
@@ -322,21 +321,17 @@ const IsiUbahPassword = () => {
                         d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
                       />
                     </svg>
-                    <button
-                      onClick={() => {
-                        localStorage.removeItem("token");
-                        window.location.href = "/";
-                      }}
-                    >
-                      Keluar
-                    </button>
+                    Keluar
                   </a>
                 </div>
               </aside>
 
               <aside>
-                <div style={styles.wrap}>
-                  <div style={styles.sidebarright}>
+                <div style={styles.wrap} className="justify-content-md-start">
+                  <div
+                    style={styles.asideright}
+                    className="col col-md-8 col-sm-6 "
+                  >
                     <div style={styles.supertitle}>
                       <h4>Ubah Password</h4>
                     </div>

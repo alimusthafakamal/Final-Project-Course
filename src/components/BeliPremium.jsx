@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Icon } from "@iconify/react";
 import KursusPopulerImage from "../../public/kursus-populer-image.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function BeliPremium(props) {
   const navigate = useNavigate();
+
+  const [course, setCourse] = useState({});
+  const { code } = useParams();
+
+  const token = localStorage.getItem("token");
+  const fetchData = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await axios
+      .get(`https://mooc.code69.my.id/course-detail?courseCode=${code}`)
+      .then((response) => {
+        setCourse(response.data.data);
+      })
+      .catch((error) => console.log(error.response));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [navigate]);
+
   console.log(props.code);
   const handleorder = async (e) => {
     e.preventDefault();
@@ -79,37 +98,24 @@ function BeliPremium(props) {
                   <div className="col-8 d-flex align-items-center justify-content-between">
                     <Card.Subtitle
                       className="dark-blue100 fw-bold"
-                      style={{ fontSize: "14px", marginTop: "-24px" }}
+                      style={{ fontSize: "14px" }}
                     >
-                      UI/UX Design
+                      {course.courseCategory}
                     </Card.Subtitle>
                   </div>
-                  <div className="col-4 d-flex align-items-center justify-content-end">
-                    <span
-                      className="fw-bold d-flex"
-                      style={{ marginTop: "-12px" }}
-                    >
-                      <Icon
-                        icon="ic:round-star"
-                        width="12"
-                        height="12"
-                        color="#F9CC00"
-                      />
-                      <p style={{ fontSize: "12px" }}>4.7</p>
-                    </span>
-                  </div>
-                  <div style={{ marginTop: "-12px" }}>
+
+                  <div>
                     <Card.Title
                       className="kursus-populer-title fw-bold"
-                      style={{ fontSize: "10px" }}
+                      style={{ fontSize: "12px" }}
                     >
-                      Belajar Web Designer dengan Figma
+                      {course.courseName}
                     </Card.Title>
                     <Card.Subtitle
                       className="fw-bold"
                       style={{ fontSize: "10px" }}
                     >
-                      by Angela Doe
+                      {course.teacher}
                     </Card.Subtitle>
                   </div>
                   <Card.Text
@@ -133,7 +139,7 @@ function BeliPremium(props) {
                         width="14"
                         height="14"
                       />
-                      <a style={{ color: "#6148FF" }}>Intermediate Level</a>
+                      <a style={{ color: "#6148FF" }}>{course.courseLevel}</a>
                     </span>
                     <span className="col" style={{ gap: "4px" }}>
                       <Icon
@@ -141,17 +147,8 @@ function BeliPremium(props) {
                         color="#73CA5C"
                         width="14"
                         height="14"
-                      />{" "}
-                      <a>10 Modul </a>
-                    </span>
-                    <span className="col" style={{ gap: "4px" }}>
-                      <Icon
-                        icon="ri:time-fill"
-                        color="#73CA5C"
-                        width="14"
-                        height="14"
-                      />{" "}
-                      <a>120 Menit </a>
+                      />
+                      <a>{course.numberOfModul} Modul </a>
                     </span>
                   </Card.Text>
                   <div
@@ -177,7 +174,7 @@ function BeliPremium(props) {
                       Beli
                     </span>
                     <span className="light-blue5" style={{ fontSize: "10px" }}>
-                      Rp 249.000
+                      Rp {course.coursePrice}
                     </span>
                   </div>
                 </Card.Body>

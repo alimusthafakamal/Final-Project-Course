@@ -1,18 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import UiUxDesign from "../../public/uiux-design.svg";
 import ProductManagement from "../../public/product-management.svg";
 import WebDevelopment from "../../public/web-development.svg";
 import AndroidDevelopment from "../../public/android-development.svg";
 import IOSDevelopment from "../../public/ios-development.svg";
-import DataScience from "../../public/data-science.svg";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import { Icon } from "@iconify/react";
 
 const KategoriBelajar = () => {
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <div className="kategori-belajar">
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>Kamu belum login...</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div centered className="d-grid justify-content-center ">
+            <span className="fw-bold">
+              Anda harus Login terlebih dahulu untuk mendapatkan fitur lengkap
+              dari Binar Course .
+            </span>
+            <span className="mt-4">
+              <div>
+                <Icon
+                  icon="solar:login-3-bold-duotone"
+                  width="100"
+                  Color="#6148ff"
+                />
+                <span className="ms-3">
+                  Silahkan login
+                  <a
+                    href="/login"
+                    className="text-decoration-none fw-bold ms-1 "
+                  >
+                    disini
+                  </a>
+                </span>
+              </div>
+              <div>
+                <Icon
+                  className="mt-3"
+                  icon="bxs:registered"
+                  width="100"
+                  Color="#6148ff"
+                />
+                <span className="ms-3">
+                  Silahkan daftar
+                  <a
+                    href="/login"
+                    className="text-decoration-none fw-bold ms-1 "
+                  >
+                    disini
+                  </a>
+                </span>
+              </div>
+            </span>
+          </div>
+        </Modal.Body>
+      </Modal>
       <div className="container">
         <div className="d-flex justify-content-between">
           <h2
@@ -24,8 +77,17 @@ const KategoriBelajar = () => {
             className="btn d-flex align-items-center gap-2"
             style={{ fontSize: "12px" }}
           >
-            <span className="fw-bold dark-blue100 justify-content-right">
-              Lihat Semua{" "}
+            <span
+              className="fw-bold dark-blue100 justify-content-right"
+              onClick={() => {
+                if (localStorage.getItem("token") === null) {
+                  handleShow();
+                } else {
+                  navigate("/topik-kelas");
+                }
+              }}
+            >
+              Lihat Semua
             </span>
           </button>
         </div>
@@ -39,7 +101,6 @@ const KategoriBelajar = () => {
                   border: "none",
                 }}
                 className="bg-transparent"
-                onClick={() => navigate("/detail-kelas/:id")}
               >
                 <Card.Img
                   variant="top"
@@ -61,7 +122,6 @@ const KategoriBelajar = () => {
                   border: "none",
                 }}
                 className="bg-transparent"
-                onClick={() => navigate("/detail-kelas/:id")}
               >
                 <Card.Img
                   variant="top"
@@ -83,7 +143,6 @@ const KategoriBelajar = () => {
                   border: "none",
                 }}
                 className="bg-transparent"
-                onClick={() => navigate("/detail-kelas/:id")}
               >
                 <Card.Img
                   variant="top"
@@ -105,7 +164,6 @@ const KategoriBelajar = () => {
                   border: "none",
                 }}
                 className="bg-transparent"
-                onClick={() => navigate("/detail-kelas/:id")}
               >
                 <Card.Img
                   variant="top"

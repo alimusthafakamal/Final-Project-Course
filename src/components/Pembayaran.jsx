@@ -14,7 +14,23 @@ import { toast } from "react-toastify";
 
 const Pembayaran = () => {
   const navigate = useNavigate();
+  const [course, setCourse] = useState({});
   const { code } = useParams();
+
+  const token = localStorage.getItem("token");
+  const fetchData = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await axios
+      .get(`https://mooc.code69.my.id/course-detail?courseCode=${code}`)
+      .then((response) => {
+        setCourse(response.data.data);
+      })
+      .catch((error) => console.log(error.response));
+  };
+  useEffect(() => {
+    fetchData();
+  }, [navigate]);
+
   console.log(typeof code);
   const handleorder = async (e) => {
     e.preventDefault();
@@ -68,7 +84,7 @@ const Pembayaran = () => {
               <span
                 className="d-flex fw-bold align-items-center gap-2 mt-3"
                 style={{ cursor: "pointer" }}
-                onClick={() => navigate("/detail-kelas")}
+                onClick={() => navigate("/topik-kelas")}
               >
                 <Icon icon="formkit:arrowleft" />
                 <span>kembali</span>
@@ -333,37 +349,24 @@ const Pembayaran = () => {
                     <div className="col-8 d-flex align-items-center justify-content-between">
                       <Card.Subtitle
                         className="dark-blue100 fw-bold"
-                        style={{ fontSize: "14px", marginTop: "-24px" }}
+                        style={{ fontSize: "14px" }}
                       >
-                        UI/UX Design
+                        {course.courseCategory}
                       </Card.Subtitle>
                     </div>
-                    <div className="col-4 d-flex align-items-center justify-content-end">
-                      <span
-                        className="fw-bold d-flex"
-                        style={{ marginTop: "-12px" }}
-                      >
-                        <Icon
-                          icon="ic:round-star"
-                          width="12"
-                          height="12"
-                          color="#F9CC00"
-                        />
-                        <p style={{ fontSize: "12px" }}>4.7</p>
-                      </span>
-                    </div>
-                    <div style={{ marginTop: "-12px" }}>
+
+                    <div>
                       <Card.Title
                         className="kursus-populer-title fw-bold"
-                        style={{ fontSize: "10px" }}
+                        style={{ fontSize: "12px" }}
                       >
-                        Belajar Web Designer dengan Figma
+                        {course.courseName}
                       </Card.Title>
                       <Card.Subtitle
                         className="fw-bold"
                         style={{ fontSize: "10px" }}
                       >
-                        by Angela Doe
+                        {course.teacher}
                       </Card.Subtitle>
                     </div>
                   </Card.Body>
