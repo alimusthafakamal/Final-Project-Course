@@ -108,7 +108,7 @@ const TopikKelas = () => {
                     className="fw-bold"
                     style={{ fontSize: "8px" }}
                   >
-                    {data.teacher}
+                    by {data.teacher}
                   </Card.Subtitle>
                 </div>
                 <Card.Text

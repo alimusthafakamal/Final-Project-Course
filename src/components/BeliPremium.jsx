@@ -115,7 +115,7 @@ function BeliPremium(props) {
                       className="fw-bold"
                       style={{ fontSize: "10px" }}
                     >
-                      {course.teacher}
+                      by {course.teacher}
                     </Card.Subtitle>
                   </div>
                   <Card.Text

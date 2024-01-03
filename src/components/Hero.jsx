@@ -86,7 +86,7 @@ const Hero = () => {
                 <span className="ms-3">
                   Silahkan daftar
                   <a
-                    href="/login"
+                    href="/register"
                     className="text-decoration-none fw-bold ms-1 "
                   >
                     disini

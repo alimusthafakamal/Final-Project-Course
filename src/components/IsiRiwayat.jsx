@@ -8,6 +8,7 @@ import { Card } from "react-bootstrap";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Riwayat from "../pages/Riwayat";
+import { Icon } from "@iconify/react";
 
 const IsiRiwayat = () => {
   const navigate = useNavigate();
@@ -325,9 +326,14 @@ const IsiRiwayat = () => {
                       {/* UNTUK MENAMPILKAN ARRAY */}
                       {riwayat?.map((e) => (
                         <div className="d-flex">
-                          <div className="col ">
+                          <div
+                            className="col border border-2 border-primary mb-3"
+                            style={{
+                              borderRadius: "1.3rem",
+                            }}
+                          >
                             <div
-                              classname="card "
+                              classname="card  "
                               onClick={async () => {
                                 const token = localStorage.getItem("token");
 
@@ -345,41 +351,78 @@ const IsiRiwayat = () => {
                             >
                               <img
                                 src="src\assets\course.jpg"
-                                className="card-img-top"
+                                className="card-img-top "
+                                style={{ borderRadius: "1.3rem 1.3rem 0 0" }}
                               />
-                              <div className="card-body">
-                                <span className="card-title dark-blue100">
-                                  {e?.courseCategory}
-                                </span>
-                              </div>
-                              <div>
-                                <span className="card-title">
-                                  {e?.courseName}
-                                </span>
-                                <p
-                                  className=""
-                                  style={{
-                                    fontWeight: "normal",
-                                    fontSize: "14px",
-                                  }}
-                                >
-                                  {e?.teacher}
-                                </p>
-                                <div className="row row-cols-2">
+                              <div className="p-2">
+                                <div className="card-body">
+                                  <span className="card-title dark-blue100">
+                                    {e?.courseCategory}
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className="card-title">
+                                    {e?.courseName}
+                                  </span>
                                   <p
-                                    className="card-text fw-bold col"
+                                    className=""
                                     style={{
+                                      fontWeight: "normal",
                                       fontSize: "12px",
                                     }}
                                   >
-                                    {e?.courseLevel.toLowerCase()}
+                                    by {e?.teacher}
                                   </p>
-                                  <p className="card-text col">
-                                    {e?.coursePrice}
-                                  </p>
+                                  <div className="row ">
+                                    <Card.Text
+                                      className="d-flex justify-content-between fw-bold"
+                                      style={{
+                                        gap: "3px",
+                                        padding: "3px 0 3px 0",
+                                      }}
+                                    >
+                                      <span
+                                        style={{
+                                          justifyContent: "between",
+                                          marginLeft: "10px",
+                                          fontSize: "12px",
+                                        }}
+                                      >
+                                        <Icon
+                                          icon="mdi:badge-outline"
+                                          color="#73CA5C"
+                                          width="14"
+                                          height="14"
+                                        />
+                                        <a style={{ color: "#6148FF" }}>
+                                          {e?.courseLevel.toLowerCase()}
+                                        </a>
+                                      </span>
+                                      <span
+                                        className="col ms-3"
+                                        style={{ fontSize: "12px" }}
+                                      >
+                                        <Icon
+                                          icon="solar:tag-price-bold"
+                                          color="#73CA5C"
+                                          width="14"
+                                          height="14"
+                                        />
+                                        <a> Rp {e?.coursePrice}</a>
+                                      </span>
+                                    </Card.Text>
+                                    {e?.isPaid !== "SUDAH_BAYAR" ? (
+                                      <span className="fw-bold justify-content-center d-flex text-danger mb-2 ">
+                                        BELUM LUNAS
+                                      </span>
+                                    ) : (
+                                      <span className="fw-bold justify-content-center d-flex text-success mb-2 ">
+                                        LUNAS
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
-                              <span className="fw-bold">{e?.isPaid}</span>
                             </div>
                           </div>
                         </div>
