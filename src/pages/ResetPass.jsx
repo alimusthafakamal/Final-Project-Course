@@ -5,8 +5,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function ResetPass() {
-  const [newpassword, setNewPassword] = useState("");
-  const [newrepassword, setNewRePassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newRepassword, setNewRePassword] = useState("");
   const navigate = useNavigate();
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,8 +18,8 @@ function ResetPass() {
     try {
       let data = JSON.stringify({
         resetToken: resetToken,
-        newpassword: newpassword,
-        newrepassword: newrepassword,
+        newPassword: newPassword,
+        newRePassword: newRepassword,
       });
       let config = {
         method: "put",
