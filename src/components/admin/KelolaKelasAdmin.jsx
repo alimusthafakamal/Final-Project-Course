@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import Nav from '../admin/Nav';
 import axios from 'axios';
-import { Await, Link } from 'react-router-dom';
 import { auto } from '@popperjs/core';
 
 function KelolaKelasAdmin({ Toggle }) {
@@ -18,11 +16,22 @@ function KelolaKelasAdmin({ Toggle }) {
     typePremium: "",
     courseLevel: "",
     coursePrice: 0,
+    courseAbout: "",
+    courseFor: "",
+    urlTele: "",
+  });
+  const [newSubject, setNewSubject] = useState({
+        title: "",
+        url: "",
+        chapter: "",
+        sequence: 0,
+        typePremium: ""
   });
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
   const [showEditCourseModal, setShowEditCourseModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [showSubjectCourseModal , setShowSubjectCourseModal] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("tokenAdmin");
@@ -77,9 +86,15 @@ function KelolaKelasAdmin({ Toggle }) {
     });
   };
 
+  const handleSubjectInputChange = (e) => {
+    setNewSubject({
+      ...newSubject,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const addCourse = async () => {
     try {
-
       await axios.post('https://mooc.code69.my.id/course', newCourse, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
@@ -97,20 +112,47 @@ function KelolaKelasAdmin({ Toggle }) {
         typePremium: '',
         courseLevel: '',
         coursePrice: 0,
-
+        courseAbout: '',
+        courseFor: '',
+        urlTele: '',
       });
 
       setShowAddCourseModal(false);
     } catch (error) {
       console.error("Error adding course:", error);
     }
-    console.log("add course", addCourse);
+  };
+
+  const addSubject = async (courseCode) => {
+    try {
+      await axios.post(`https://mooc.code69.my.id/subject/${courseCode}`, newSubject, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("tokenAdmin")}`,
+        },
+      });
+
+      const updatedSubjectsResponse = await axios.get('https://mooc.code69.my.id/subject');
+      console.log("Updated Subject Data", updatedSubjectsResponse.data.data);
+
+      setNewSubject({
+        title: "",
+        url: "",
+        chapter: "",
+        sequence: 0,
+        typePremium: ""
+      });
+      setShowSubjectCourseModal(true);
+
+    } catch (error) {
+      console.error("Error adding subject:", error);
+    }
   };
 
   const editCourse = async (courseCode) => {
     setSelectedCourse(courseCode);
     setShowEditCourseModal(true);
   };
+
 
   return (
     <div className="px-3">
@@ -205,6 +247,11 @@ function KelolaKelasAdmin({ Toggle }) {
                             onClick={() => deleteClass(courseItem.courseCode)}
                           >
                             Delete
+                          </button>
+                          <button
+                          className="btn btn-success mb-3"
+                          onClick={() => setShowSubjectCourseModal(true)}>
+                          Tambah Subject
                           </button>
                         </td>
                       </tr>
@@ -325,6 +372,86 @@ function KelolaKelasAdmin({ Toggle }) {
           </div>
         </div>
       )}
+      {isLoggedIn && showSubjectCourseModal && (
+        <div className="modal" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
+        <div className="modal-dialog" role="document">
+          <div className="modal-content" style={{ height: auto }}>
+            <div className="modal-header">
+              <h5 className="modal-title" >Tambah Subject</h5>
+              <button type="button" className="btn-close" onClick={() => setShowSubjectCourseModal(false)}></button>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="mb-3">
+
+                  <label htmlFor="Title" className="form-label">Tittle</label>
+                  <input type="text" className="form-control" id="title" name="title" value={newSubject.title} onChange={handleSubjectInputChange} />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="url" className="form-label">
+                    Link Youtube :
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="url"
+                    name="url"
+                    value={newSubject.url}
+                    onChange={handleSubjectInputChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="chapter" className="form-label">
+                    Chapter :
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="chapter"
+                    name="chapter"
+                    value={newSubject.chapter}
+                    onChange={handleSubjectInputChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="sequance" className="form-label">
+                    Sequance :
+                  </label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="sequance"
+                    name="sequance"
+                    value={newSubject.sequence}
+                    onChange={handleSubjectInputChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="typePremium" className="form-label">
+                    Tipe Subject :
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="typePremium"
+                    name="typePremium"
+                    value={newSubject.typePremium}
+                    onChange={handleSubjectInputChange}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" onClick={() => setShowSubjectCourseModal(false)}>Close</button>
+              <button type="button" className="btn btn-primary" onClick={addSubject}>Tambah
+              {selectedCourse ? 'Edit' : 'Tambah'} </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      ) 
+        
+      }
     </div>
   );
 }
