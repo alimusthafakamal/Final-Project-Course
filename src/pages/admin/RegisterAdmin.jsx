@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import BelajarWhite from "/belajar-white.svg";
 
 function RegisterAdmin() {
   const [nameAdmin, setNameAdmin] = useState("");
@@ -174,6 +175,12 @@ function RegisterAdmin() {
         </div>
         <div className="col-md-6 d-none d-md-block">
           <img src="/img.svg" alt="Side Image" className="img-fluid" />
+          <img
+            src={BelajarWhite}
+            width="300"
+            className="img-fluid position-absolute"
+            style={{ top: "35%",left:"15%" }}
+          />
         </div>
       </div>
     </div>
