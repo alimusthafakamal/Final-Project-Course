@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import BelajarWhite from "belajar-white.svg";
+import BelajarWhite from "../../../public/belajar-white.svg";
 
 function OtpAdmin() {
   const [otpAdmin, setOtpAdmin] = useState(new Array(6).fill(""));
