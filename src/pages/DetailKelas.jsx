@@ -10,7 +10,7 @@ import axios from "axios";
 
 const DetailKelas = () => {
   const navigate = useNavigate();
-  const { code } = useParams();
+  const { code, url, subjectCode } = useParams();
 
   const Kembali = () => {
     navigate("/topik-kelas");
@@ -19,12 +19,30 @@ const DetailKelas = () => {
   const [modalShow, setModalShow] = useState(false);
   const [course, setCourse] = useState({});
   const [video, setVideo] = useState([]);
+  const [videoData, setVideoData] = useState(null);
+
+  const urlVideo = async () => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    await axios
+      .put(
+        `https://mooc.code69.my.id/subject?subjectCode=${subjectCode}$url=${url} `
+      )
+      .then((response) => {
+        setVideoData(response.data?.data?.detail);
+      })
+      .catch((error) => console.log("error fetching video: ", error));
+  };
+  if (!videoData) {
+    console.log("tidak ada data video");
+  }
 
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
-      .get(`https://mooc.code69.my.id/course-detail?courseCode=${code}`)
+      .get(
+        `https://mooc.code69.my.id/course-detail?courseCode=${code}$url=${url} `
+      )
       .then((response) => {
         setCourse(response.data.data);
       })
@@ -200,10 +218,11 @@ const DetailKelas = () => {
                   >
                     <div className="justify-content-center d-flex">
                       <iframe
-                        className="video rounded-5 border-5 border-secondary-subtle border-bottom border-end "
+                        className="video rounded-5 border-5 border-secondary-subtle border-bottom border-end object-fit-md-scale "
                         width={700}
                         height={500}
-                        src={`https://youtube.com/embed/rRSK7n4oeew`}
+                        src={urlVideo}
+                        // src={`https://youtube.com/embed/rRSK7n4oeew`}
                         title={`youtube player`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -238,7 +257,7 @@ const DetailKelas = () => {
                 </div>
               </div>
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-lg-6 col-md-auto d-flex justify-content-center">
               <div className="materi-belajar">
                 <div className="materi-body mx-4 my-3">
                   <div className="materi-progres row d-flex justify-content-between align-items-center ">
