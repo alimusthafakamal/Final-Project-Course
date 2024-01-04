@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import BelajarWhite from "/belajar-white.svg";
 function LoginAdmin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -45,18 +45,20 @@ function LoginAdmin() {
   };
 
   return (
-    <div
-      className="container-fluid"
-      style={{
-        width: "1440px",
-        height: "950px",
-        top: "-987px",
-        left: "1575px",
-      }}
-    >
-      <div className="row align-items-center">
-        <div className="col-md-6">
-          <img src="/images/img.jpg" alt="Side Image" className="img-fluid" />
+    <div className='container-fluid' style={{ width: '1440px', height: '950px', top: '-987px', left: '1575px' }}>
+      <div className='row align-items-center'>
+        <div className='col-md-6'>
+          <img
+            src="/images/img.jpg"
+            alt='Side Image'
+            className='img-fluid'
+          />
+          <img
+            src={BelajarWhite}
+            width="300"
+            className="img-fluid position-absolute"
+            style={{ top: "35%",left:"15%" }}
+          />
         </div>
         <div className="col-md-6">
           <form
