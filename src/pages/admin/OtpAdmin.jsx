@@ -4,6 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import BelajarWhite from "belajar-white.svg";
 
 function OtpAdmin() {
   const [otpAdmin, setOtpAdmin] = useState(new Array(6).fill(""));
@@ -166,11 +167,7 @@ function OtpAdmin() {
         {/* Right Side banner */}
         <div className="col-md-5 right-sidebar">
           <div className="banner-side d-flex justify-content-center">
-            <img
-              src="src\assets\Belajar_white.png"
-              alt="Belajar"
-              className=""
-            />
+            <img src={BelajarWhite} alt="Belajar" className="" />
           </div>
         </div>
       </div>

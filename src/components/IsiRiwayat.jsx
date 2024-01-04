@@ -9,6 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Riwayat from "../pages/Riwayat";
 import { Icon } from "@iconify/react";
+import CourseJpg from "../../public/course.png";
 
 const IsiRiwayat = () => {
   const navigate = useNavigate();
@@ -350,7 +351,7 @@ const IsiRiwayat = () => {
                               }}
                             >
                               <img
-                                src="src\assets\course.jpg"
+                                src={CourseJpg}
                                 className="card-img-top "
                                 style={{ borderRadius: "1.3rem 1.3rem 0 0" }}
                               />
