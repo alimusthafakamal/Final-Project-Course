@@ -9,7 +9,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Riwayat from "../pages/Riwayat";
 import { Icon } from "@iconify/react";
-import CourseJpg from "../../public/course.png";
+import CourseJpg from "../../public/course.jpg";
 
 const IsiRiwayat = () => {
   const navigate = useNavigate();
