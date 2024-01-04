@@ -1,22 +1,25 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function ResetPass() {
-  const [resetToken, setResetToken] = useState("");
-  const [newpassword, setNewPassword] = useState("");
-  const [newrepassword, setNewRePassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newRepassword, setNewRePassword] = useState("");
+  const navigate = useNavigate();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const resetToken = searchParams.get("resetToken");
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
       let data = JSON.stringify({
-        resetToken,
-        newpassword,
-        newrepassword,
+        resetToken: resetToken,
+        newPassword: newPassword,
+        newRePassword: newRepassword,
       });
       let config = {
         method: "put",
@@ -30,6 +33,7 @@ function ResetPass() {
       const response = await axios.request(config);
       if (response.status == 200) {
         console.log(response.data);
+        navigate("/login");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -40,6 +44,7 @@ function ResetPass() {
     }
   };
   console.log("resetToken", resetToken);
+
   return (
     <div
       className="container-fluid"

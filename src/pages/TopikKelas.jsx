@@ -49,7 +49,6 @@ const TopikKelas = () => {
       })
       .catch((error) => {
         setCourse(null);
-        console.log("ERROR FILTER", error.response);
       });
   };
 
@@ -79,12 +78,12 @@ const TopikKelas = () => {
                 <div className="col-8 d-flex align-items-center justify-content-between">
                   <Card.Subtitle
                     className="dark-blue100 fw-bold"
-                    style={{ fontSize: "10px", marginTop: "-24px" }}
+                    style={{ fontSize: "10px" }}
                   >
                     {data.courseCategory}
                   </Card.Subtitle>
                 </div>
-                <div className="col-4 d-flex align-items-center justify-content-end">
+                {/* <div className="col-4 d-flex align-items-center justify-content-end">
                   <span
                     className="fw-bold d-flex"
                     style={{ marginTop: "-12px" }}
@@ -97,8 +96,8 @@ const TopikKelas = () => {
                     />
                     <p style={{ fontSize: "10px" }}>4.7</p>
                   </span>
-                </div>
-                <div style={{ marginTop: "-12px" }}>
+                </div> */}
+                <div className="mt-1">
                   <Card.Title
                     className="kursus-populer-title fw-bold"
                     style={{ fontSize: "10px" }}
@@ -109,7 +108,7 @@ const TopikKelas = () => {
                     className="fw-bold"
                     style={{ fontSize: "8px" }}
                   >
-                    {data.teacher}
+                    by {data.teacher}
                   </Card.Subtitle>
                 </div>
                 <Card.Text
@@ -139,9 +138,9 @@ const TopikKelas = () => {
                       width="14"
                       height="14"
                     />{" "}
-                    <a>{data.numberOfModule}</a>
+                    <a>{data.numberOfModule} Modul</a>
                   </span>
-                  <span className="col" style={{ gap: "4px", fontSize: "8px" }}>
+                  {/* <span className="col" style={{ gap: "4px", fontSize: "8px" }}>
                     <Icon
                       icon="ri:time-fill"
                       color="#73CA5C"
@@ -149,7 +148,7 @@ const TopikKelas = () => {
                       height="14"
                     />{" "}
                     <a>{data.courseAbout} </a>
-                  </span>
+                  </span> */}
                 </Card.Text>
                 {data.typePremium === "PREMIUM" ? (
                   <div
@@ -288,9 +287,9 @@ const TopikKelas = () => {
               <button
                 className="btn-kategori-header-1 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
                   setPremium(["PREMIUM", "FREE"]);
+                  ActiveButton;
                 }}
               >
                 All
@@ -298,9 +297,9 @@ const TopikKelas = () => {
               <button
                 className="btn-kategori-header-2 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM"]);
                   setPremium(["PREMIUM"]);
+                  ActiveButton;
                 }}
               >
                 Kelas Premium
@@ -308,9 +307,9 @@ const TopikKelas = () => {
               <button
                 className="btn-kategori-header-3 col btn btn-light px-5 rounded-4 text-secondary"
                 onClick={() => {
-                  ActiveButton;
                   FilterCourse(kategori, level, ["FREE"]);
                   setPremium(["FREE"]);
+                  ActiveButton;
                 }}
               >
                 Kelas Gratis

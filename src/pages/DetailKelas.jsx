@@ -13,7 +13,7 @@ const DetailKelas = () => {
   const { code } = useParams();
 
   const Kembali = () => {
-    navigate("/");
+    navigate("/topik-kelas");
   };
 
   const [modalShow, setModalShow] = useState(false);
@@ -74,13 +74,14 @@ const DetailKelas = () => {
   }, []);
   console.log(video);
   // console.log(video.subjects[0]);
+
   return (
     <>
       <NavigationBar />
       <BeliPremium
-        show={modalShow}
         onHide={() => setModalShow(false)}
         code={code}
+        show={modalShow}
       />
       <div className="detail-kelas">
         <Container>
@@ -110,20 +111,9 @@ const DetailKelas = () => {
                         {course.courseCategory}
                       </div>
                     </div>
-                    <div className="col-md-6 align-items-center d-flex justify-content-end">
-                      <span className="fw-bold d-flex" style={{}}>
-                        <Icon
-                          icon="ic:round-star"
-                          width="14"
-                          height="14"
-                          color="#F9CC00"
-                        />
-                        <p style={{ fontSize: "14px" }}>5.0</p>
-                      </span>
-                    </div>
                     <div className="deets">
                       <Card.Title
-                        className="kursus-populer-title fw-bold"
+                        className="kursus-populer-title fw-bold mt-3"
                         style={{ fontSize: "14px" }}
                       >
                         {course.courseName}
@@ -132,7 +122,7 @@ const DetailKelas = () => {
                         className="fw-bold"
                         style={{ fontSize: "10px" }}
                       >
-                        {course.teacher}
+                        by {course.teacher}
                       </Card.Subtitle>
                     </div>
                     <div
@@ -165,7 +155,7 @@ const DetailKelas = () => {
                           width="14"
                           height="14"
                         />{" "}
-                        <a>Modul 6 </a>
+                        <a>6 Modul</a>
                       </span>
                       <span
                         className="col-3"
@@ -204,54 +194,45 @@ const DetailKelas = () => {
                   </div>
                 </Card>
                 <div className=" col-6">
-                  <div className="video d-grid ms-2 mt-5">
-                    <iframe
-                      className="video"
-                      src={`https://youtube.com/embed/rRSK7n4oeew`}
-                      title={`youtube player`}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                    {/* // controls
-                      // src={`https://youtu.be/rRSK7n4oeew?si=L2QBHr3agTAH5LFY`}
-                      // className="play-video object-fit-cover border rounded my-4"
-                      // style={{ background: "#000000D9" }} */}
-
-                    {/* <div className="justify-content-center align-items-center">
-                        <button className="btn btn-primary rounded-pill d-flex align-items-center gap-1">
-                          <PlayCircleIcon className="icon text-white" />
-                        </button>
-                      </div> */}
-
-                    <div className="desc">
+                  <div
+                    className="video d-grid ms-2 "
+                    style={{ marginTop: "100px" }}
+                  >
+                    <div className="justify-content-center d-flex">
+                      <iframe
+                        className="video rounded-5 border-5 border-secondary-subtle border-bottom border-end "
+                        width={700}
+                        height={500}
+                        src={`https://youtube.com/embed/rRSK7n4oeew`}
+                        title={`youtube player`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <div className="desc-tentang mt-5">
                       <span
                         className="col-6 fw-bold"
-                        style={{ fontSize: "20px", lineHeight: "14px" }}
+                        style={{ fontSize: "20px" }}
                       >
                         Tentang Kelas
                       </span>
-                      <p className="" style={{ fontSize: "14px" }}>
+                      <p
+                        className="mt-2 "
+                        style={{ fontSize: "14px", textIndent: "300x" }}
+                      >
                         {course.courseAbout}
                       </p>
-                      <span
-                        className="col-6 fw-bold"
-                        style={{ fontSize: "20px", lineHeight: "50px" }}
-                      >
-                        Kelas ini Ditujukan Untuk
-                      </span>
-                      <ol
-                        className="list-group-numbered ps-2"
-                        style={{ fontSize: "14px" }}
-                      >
-                        <li className="list-group-item mb-2">
-                          {course.courseFor?.substr(0, 17)}
-                          {course.courseFor?.substr(0, 17)}
-                        </li>
-                        <li className="list-group-item mb-2">
-                          {course.courseFor?.substr(18, 15)}
-                          {course.courseFor?.substr(18, 15)}
-                        </li>
-                      </ol>
+                      <div className="desc-for mt-5">
+                        <span
+                          className="col-6 fw-bold"
+                          style={{ fontSize: "20px" }}
+                        >
+                          Kelas ini Ditujukan Untuk
+                        </span>
+                        <p className="mt-2" style={{ fontSize: "14px" }}>
+                          <span className="mb-2">{course.courseFor}</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -300,7 +281,9 @@ const DetailKelas = () => {
                       <div>
                         <ul className="list-group list-group-numbered list-group-flush gap-0 row-gap-3  ">
                           <div className="header-chapter d-flex justify-content-between">
-                            <div className="intro-chapter">Chapter 1</div>
+                            <div className="intro-chapter">
+                              Chapter 1 - Pendahuluan
+                            </div>
                             <div className="durasi-chapter">60 menit</div>
                           </div>
                           <li className="list-group-item row d-flex align-items-center list-materi">
@@ -312,7 +295,7 @@ const DetailKelas = () => {
                               width="18"
                               height="18"
                               className="col "
-                              style={{ color: "#73CA5C" }}
+                              style={{ color: "#6148ff" }}
                             />
                           </li>
                           <li className="list-group-item row d-flex align-items-center list-materi">
@@ -409,16 +392,6 @@ const DetailKelas = () => {
                           </li>
                           <li className="list-group-item row d-flex align-items-center list-materi">
                             <span className="col-10">membuat components </span>
-                            <Icon
-                              icon="bxs:lock"
-                              width="16"
-                              height="20"
-                              className="col "
-                              style={{ color: "#D9D9D9" }}
-                            />
-                          </li>
-                          <li className="list-group-item row d-flex align-items-center list-materi underline">
-                            <span className="col-10">membuat assets </span>
                             <Icon
                               icon="bxs:lock"
                               width="16"
