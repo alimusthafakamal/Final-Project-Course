@@ -9,7 +9,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const KelasSaya = () => {
-  const [course, setCourse] = useState([]);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("");
   const [kategori, setKategori] = useState([]);
@@ -17,10 +16,11 @@ const KelasSaya = () => {
   const [kelas, setKelas] = useState([]);
   const [premium, setPremium] = useState(["PREMIUM", "FREE"]);
   const [active, setActive] = useState(false);
+  const [done, setDone] = useState(["100%", ""]);
 
   console.log(kelas);
   const ActiveButton = () => {
-    setActive(!active);
+    setActive(active);
   };
 
   const fetchData = async () => {
@@ -28,7 +28,7 @@ const KelasSaya = () => {
     await axios
       .get("https://mooc.code69.my.id/course-progress/list")
       .then((response) => {
-        setCourse(response.data?.data?.courseList);
+        setKelas(response.data?.data?.courseList);
       })
       .catch((error) => console.log(error.response));
   };
@@ -38,7 +38,6 @@ const KelasSaya = () => {
     const handleriwayatpembayaran = async () => {
       try {
         const token = localStorage.getItem("token");
-        console.log(token);
         let config = {
           method: "get",
           url: `https://mooc.code69.my.id/course-progress/list`,
@@ -73,7 +72,7 @@ const KelasSaya = () => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     await axios
       .get(
-        `https://mooc.code69.my.id/course-progress.list?page=1${[
+        `https://mooc.code69.my.id/course-progress/list?page=1${[
           ...dataKategori.map((e) => `&categories=${e}`),
         ].join("")}${[...dataLevel.map((e) => `&courseLevel=${e}`)].join("")}${[
           ...dataPremium.map((e) => `&isPremium=${e}`),
@@ -81,10 +80,10 @@ const KelasSaya = () => {
       )
       .then((response) => {
         // console.log("response filter ===>", response);
-        setCourse(response.data?.data?.courseList);
+        setKelas(response.data?.data?.courseList);
       })
       .catch((error) => {
-        setCourse(null);
+        setKelas(null);
       });
   };
 
@@ -168,13 +167,13 @@ const KelasSaya = () => {
               // LOGIC FETCH SEMUA DATA
               // }}
               buttonHapusFilter={() => {
-                console.log("RUN THIS");
                 setKategori([]);
                 setLevel([]);
                 fetchData();
               }}
             />
           </div>
+
           <div className="">
             <div className=" row kategori-header d-flex gap-5 fw-bold">
               <button
@@ -182,7 +181,7 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
-                  setPremium(["PREMIUM", "FREE"]);
+                  setDone("100%", "");
                 }}
               >
                 All
@@ -192,7 +191,7 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
-                  setPremium(["PREMIUM", "FREE"]);
+                  setDone("");
                 }}
               >
                 In Progress
@@ -202,36 +201,43 @@ const KelasSaya = () => {
                 onClick={() => {
                   ActiveButton;
                   FilterCourse(kategori, level, ["PREMIUM", "FREE"]);
-                  setPremium(["PREMIUM", "FREE"]);
+                  setDone("100%");
                 }}
               >
                 Selesai
               </button>
             </div>
-
             <div className="listing row row-cols-2 mt-4 align-items-center">
               {kelas &&
-                kelas.map((item, index) => (
-                  <div className="col d-flex gap-4 mb-4">
-                    <Card
-                      className="card border border-0  "
-                      style={{ borderRadius: "1.3rem" }}
-                      key={index}
-                      onClick={() =>
-                        navigate(`/detail-kelas/${item.courseCode}`)
-                      }
-                    >
-                      <Card.Img className="card-img" src={KursusPopulerImage} />
-                      <Card.Body className="row">
-                        <div className="col-8 d-flex align-items-center justify-content-between">
-                          <Card.Subtitle
-                            className="dark-blue100 fw-bold"
-                            style={{ fontSize: "10px" }}
-                          >
-                            {item.courseCategory}
-                          </Card.Subtitle>
-                        </div>
-                        {/* <div className="col-4 d-flex align-items-center justify-content-end">
+                kelas
+                  .filter((item) =>
+                    item.courseName.toLowerCase().includes(query.toLowerCase())
+                  )
+                  .map((item, index) =>
+                    kelas !== null ? (
+                      <div className="col d-flex gap-4 mb-4">
+                        <Card
+                          className="card border border-0  "
+                          style={{ borderRadius: "1.3rem" }}
+                          key={index}
+                          onClick={() =>
+                            navigate(`/detail-kelas/${item.courseCode}`)
+                          }
+                        >
+                          <Card.Img
+                            className="card-img"
+                            src={KursusPopulerImage}
+                          />
+                          <Card.Body className="row">
+                            <div className="col-8 d-flex align-items-center justify-content-between">
+                              <Card.Subtitle
+                                className="dark-blue100 fw-bold"
+                                style={{ fontSize: "10px" }}
+                              >
+                                {item.courseCategory}
+                              </Card.Subtitle>
+                            </div>
+                            {/* <div className="col-4 d-flex align-items-center justify-content-end">
                           <span
                             className="fw-bold d-flex"
                             style={{ marginTop: "-12px" }}
@@ -245,55 +251,55 @@ const KelasSaya = () => {
                             <p style={{ fontSize: "10px" }}>4.7</p>
                           </span>
                         </div> */}
-                        <div className="mt-2">
-                          <Card.Title
-                            className="kursus-populer-title fw-bold"
-                            style={{ fontSize: "10px" }}
-                          >
-                            {item.courseName}
-                          </Card.Title>
-                          <Card.Subtitle
-                            className="fw-bold"
-                            style={{ fontSize: "8px" }}
-                          >
-                            by {item.teacher}
-                          </Card.Subtitle>
-                        </div>
-                        <Card.Text
-                          className="d-flex justify-content-between fw-bold"
-                          style={{ gap: "3px", padding: "3px 0 3px 0" }}
-                        >
-                          <span
-                            className="col-4"
-                            style={{
-                              gap: "4px",
-                              marginLeft: "10px",
-                              fontSize: "8px",
-                            }}
-                          >
-                            <Icon
-                              icon="mdi:badge-outline"
-                              color="#73CA5C"
-                              width="14"
-                              height="14"
-                            />
-                            <a style={{ color: "#6148FF" }}>
-                              {item.courseLevel}
-                            </a>
-                          </span>
-                          <span
-                            className="col"
-                            style={{ gap: "4px", fontSize: "8px" }}
-                          >
-                            <Icon
-                              icon="clarity:book-line"
-                              color="#73CA5C"
-                              width="14"
-                              height="14"
-                            />{" "}
-                            <a> Rp {item.coursePrice} </a>
-                          </span>
-                          {/* <span
+                            <div className="mt-2">
+                              <Card.Title
+                                className="kursus-populer-title fw-bold"
+                                style={{ fontSize: "10px" }}
+                              >
+                                {item.courseName}
+                              </Card.Title>
+                              <Card.Subtitle
+                                className="fw-bold"
+                                style={{ fontSize: "8px" }}
+                              >
+                                by {item.teacher}
+                              </Card.Subtitle>
+                            </div>
+                            <Card.Text
+                              className="d-flex justify-content-between fw-bold"
+                              style={{ gap: "3px", padding: "3px 0 3px 0" }}
+                            >
+                              <span
+                                className="col-4"
+                                style={{
+                                  gap: "4px",
+                                  marginLeft: "10px",
+                                  fontSize: "8px",
+                                }}
+                              >
+                                <Icon
+                                  icon="mdi:badge-outline"
+                                  color="#73CA5C"
+                                  width="14"
+                                  height="14"
+                                />
+                                <a style={{ color: "#6148FF" }}>
+                                  {item.courseLevel}
+                                </a>
+                              </span>
+                              <span
+                                className="col"
+                                style={{ gap: "4px", fontSize: "8px" }}
+                              >
+                                <Icon
+                                  icon="clarity:book-line"
+                                  color="#73CA5C"
+                                  width="14"
+                                  height="14"
+                                />{" "}
+                                <a> Rp {item.coursePrice} </a>
+                              </span>
+                              {/* <span
                             className="col"
                             style={{ gap: "4px", fontSize: "8px" }}
                           >
@@ -305,45 +311,63 @@ const KelasSaya = () => {
                             />{" "}
                             <a>120 Menit </a>
                           </span> */}
-                        </Card.Text>
-                        <div className="">
-                          <span
-                            className="d-flex"
-                            style={{ marginTop: "-12px" }}
-                          >
-                            <Icon
-                              icon="mdi:progress-check"
-                              style={{ color: "#73CA5C" }}
-                              className="me-1"
-                              width="14"
-                              height="14"
-                            />
-                            <div className="col-8 w-50">
-                              <div
-                                className="progress rounded-pill"
-                                role="progressbar"
-                                aria-label="Example with label"
-                                aria-valuenow="60"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                                style={{ background: "#D9D9D9" }}
+                            </Card.Text>
+                            <div className="">
+                              <span
+                                className="d-flex"
+                                style={{ marginTop: "-12px" }}
                               >
-                                <div
-                                  className="progress-bar overflow-visible align-items-start rounded-pill bg-dark-blue100"
-                                  style={{ width: "60%", fontSize: "6px" }}
-                                >
-                                  <span className="ms-1">
-                                    {item.progressBar}
-                                  </span>
+                                <Icon
+                                  icon="mdi:progress-check"
+                                  style={{ color: "#73CA5C" }}
+                                  className="me-1"
+                                  width="14"
+                                  height="14"
+                                />
+                                <div className="col-8 w-50">
+                                  <div
+                                    className="progress rounded-pill"
+                                    role="progressbar"
+                                    aria-label="Example with label"
+                                    aria-valuenow="60"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    style={{ background: "#D9D9D9" }}
+                                  >
+                                    {item.progressBar !== "100%" ? (
+                                      <div
+                                        className="progress-bar overflow-visible align-items-start rounded-pill bg-dark-blue100"
+                                        style={{
+                                          fontSize: "6px",
+                                        }}
+                                        width={item.progressBar}
+                                      >
+                                        <span className="ms-1">
+                                          {item.progressBar}
+                                        </span>
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className="progress-bar overflow-visible align-items-start rounded-pill "
+                                        style={{
+                                          fontSize: "6px",
+                                        }}
+                                        width="100%"
+                                      >
+                                        <span className="ms-1">SELESAI</span>
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
-                              </div>
+                              </span>
                             </div>
-                          </span>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                ))}
+                          </Card.Body>
+                        </Card>
+                      </div>
+                    ) : (
+                      <div>Data tidak ditemukan</div>
+                    )
+                  )}
             </div>
           </div>
         </div>
